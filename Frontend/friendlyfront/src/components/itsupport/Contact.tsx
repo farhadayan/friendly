@@ -26,7 +26,7 @@ interface EmailStatus {
 
 export default function Contact() {
   const location = useLocation();
-  // Extract website source from URL path
+  // Extract website source from URL 
   // Example: /guidance/contact → "guidance"
   //          /itsupport/contact → "itsupport"
   const getWebsiteSource = useCallback((): string => {
