@@ -1,0 +1,29 @@
+body.theme-itsupport {
+  --primary: #3c3c3c;
+  --accent: #6b7280;
+  --header-height: 90px;
+  --header-bg: #111827;
+  --header-text: #fff;
+  --body-bg: #fbfbfc;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--body-bg);
+  color: var(--text);
+}
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+  transition: .3s ease;
+}
