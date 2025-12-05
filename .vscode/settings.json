@@ -1,0 +1,3 @@
+{
+  "python.analysis.extraPaths": ["./Backend/test_module_package"]
+}
