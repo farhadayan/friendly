@@ -20,7 +20,7 @@ export interface SiteConfig {
 export const sites: Record<SiteKey, SiteConfig> = {
     software: {
         name: 'Digital Software Solutions',
-        logo: process.env.PUBLIC_URL + '/logos/software.png',
+        logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
         primaryColor: '#757575',
 
         navLinks: [
@@ -36,13 +36,13 @@ export const sites: Record<SiteKey, SiteConfig> = {
         headerHeight: 120,
         headerTextColor: '#FFFFFF',
         headerBgShade: '#616161',
-        logoWidth: 80,
-        logoHeight: 80,
+        logoWidth: 180,
+        logoHeight: 180,
         sidebarColor: '#616161',
     },
     guidance: {
         name: 'Student Admission Guidance',
-        logo: process.env.PUBLIC_URL + '/logos/guidance.png',
+        logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
         primaryColor: '#757575', // blue
 
         navLinks: [
@@ -54,23 +54,23 @@ export const sites: Record<SiteKey, SiteConfig> = {
         ],
         heroTitle: 'Study and Build Your Future in Denmark',
         heroSubtitle: 'Guidance for admission, visa, and job opportunities.',
-        
+
         headerHeight: 80,
         headerTextColor: '#FFFFFF',
         headerBgShade: 'cadetblue',
-        logoWidth: 80,
-        logoHeight: 80,
+        logoWidth: 180,
+        logoHeight: 180,
         sidebarColor: 'cadetblue',
     },
 
     itsupport: {
         name: 'IT Support Solutions',
-        logo: process.env.PUBLIC_URL + '/logos/itfriendly.png',
+        logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
         primaryColor: '#3c3c3c', // teal
         navLinks: [
             { label: 'Home', href: 'home', icon: 'Home' },
             { label: 'Services', href: 'services', icon: 'Computer' },
-            { label: 'Web Development', href: 'webdevelop', icon: 'Code' },
+            // { label: 'Web Development', href: 'webdevelop', icon: 'Code' },
             { label: 'Contact', href: 'contact', icon: 'Mail' },
             { label: 'About Us', href: 'about', icon: 'Info' },
         ],
@@ -79,15 +79,15 @@ export const sites: Record<SiteKey, SiteConfig> = {
 
         headerHeight: 90,
         headerTextColor: '#FFFFFF',
-        headerBgShade: '#616161',
-        logoWidth: 80,
-        logoHeight: 80,
-        sidebarColor: '#616161',
+        headerBgShade: 'cadetblue',
+        logoWidth: 180,
+        logoHeight: 180,
+        sidebarColor: 'white',
     },
 
     flowsupport: {
         name: 'Flow & Hygiene Support Services',
-        logo: '/logos/flowsupport.png',
+        logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
         primaryColor: '#0D9488', // blue
         navLinks: [
             { label: 'Home', href: 'home', icon: 'Home' },
@@ -97,5 +97,12 @@ export const sites: Record<SiteKey, SiteConfig> = {
         ],
         heroTitle: 'Restaurant & Facility Hygiene Operations',
         heroSubtitle: 'Professional dishwashing, cleaning, and back-of-house flow support.',
+        
+        headerHeight: 90,
+        headerTextColor: '#FFFFFF',
+        headerBgShade: 'cadetblue',
+        logoWidth: 180,
+        logoHeight: 180,
+        sidebarColor: 'white',
     },
 };

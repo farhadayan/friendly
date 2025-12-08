@@ -53,6 +53,12 @@ export default function ITSupport() {
 
     {
       icon: <StorageIcon color="primary" fontSize="large" />,
+      title: "Server Setup",
+      description:
+        "Server setup & configuration completed. Server ready for deployment. Server configured and operational."
+    },
+    {
+      icon: <StorageIcon color="primary" fontSize="large" />,
       title: "Data Recovery",
       description:
         "Emergency recovery for hard drives, SSDs, USB drives, and cloud storage with a high success rate.",
@@ -66,7 +72,7 @@ export default function ITSupport() {
   ];
 
   const benefits = [
-    "Certified and experienced IT professionals",
+    "Educated and experienced IT professionals",
     "Fast response times (average < 15 minutes)",
     "Affordable pricing with flexible plans",
     "Remote and onsite support availability",

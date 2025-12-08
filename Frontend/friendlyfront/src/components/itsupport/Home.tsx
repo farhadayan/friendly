@@ -38,7 +38,7 @@ export default function Home() {
       icon: <ComputerIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Desktop & Laptop Support",
       description:
-        "Hardware repairs, OS installation, virus removal, and performance optimization for all devices.",
+        "OS installation, Network setup,  c virus removal, and performance optimization for all devices.",
     },
     {
       icon: <NetworkIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
@@ -54,9 +54,9 @@ export default function Home() {
     },
     {
       icon: <SecurityIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Cybersecurity",
+      title: "Server Setup",
       description:
-        "Antivirus, firewalls, endpoint protection, and real-time threat monitoring.",
+        "Firewalls, Active deirectory setup and monitoring.",
     },
     {
       icon: <StorageIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
@@ -73,7 +73,7 @@ export default function Home() {
   ];
 
   const features = [
-    "Certified IT specialists with years of experience",
+    "Skilled and educated IT specialists with years of experience",
     "Lightning-fast response times (average under 15 minutes)",
     "Affordable pricing, no hidden fees",
     "Remote and onsite support availability",
@@ -82,31 +82,50 @@ export default function Home() {
   ];
 
   return (
-    <Box sx={{ overflow: "hidden" }}>
+    <Box sx={{
+      overflow: "hidden", background: "transparent"
+    }}>
+
       {/* Hero Section */}
+
       <Box
         sx={{
-          background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-          color: "white",
-          py: { xs: 6, md: 12 },
-          textAlign: "center",
-          position: "relative",
+          flex: 1,
+          m: 0,
+          p: 0,
+          px: 0,
+          py: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Container maxWidth="lg">
+
+        <Box
+          sx={{
+            flex: 1,
+            m: 0,
+            p: { xs: 3, md: 5 },
+            backdropFilter: "blur(10px)",
+            background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
+            height: "500px"
+
+          }}
+        >
           <Typography
             variant="h1"
             sx={{
               fontWeight: "bold",
-              mb: 3,
-              fontSize: { xs: "2.5rem", md: "3.5rem", lg: "4rem" },
+              mb: 4,
+              textAlign: "center",
+              fontSize: { xs: "2.2rem", md: "3rem", lg: "3.5rem" }
             }}
           >
-            Reliable IT Support{" "}
+            Reliable IT Help Desk
             <Box
               component="span"
               sx={{
-                background: "linear-gradient(45deg, #ffd700, #ffed4e)",
+                background: "var(--header-bg)",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 color: "transparent",
@@ -114,7 +133,7 @@ export default function Home() {
                 fontWeight: "bold",
               }}
             >
-              Anytime You Need It
+              Anytime You Need
             </Box>
           </Typography>
 
@@ -123,16 +142,14 @@ export default function Home() {
             component="p"
             sx={{
               mb: 4,
-              maxWidth: "800px",
-              mx: "auto",
+              textAlign: "center",
               opacity: 0.9,
               fontSize: { xs: "1.1rem", md: "1.4rem" },
               lineHeight: 1.6,
             }}
           >
-            From home users to growing businesses, we provide fast, affordable,
-            and professional IT support. Available 24/7 to keep your technology
-            running smoothly.
+            From startups to established enterprises, we deliver fast, affordable
+            and professional IT support. Available 24/7 to keep your systems running smoothly.
           </Typography>
 
           <Box
@@ -142,17 +159,18 @@ export default function Home() {
               justifyContent: "center",
               flexWrap: "wrap",
               flexDirection: isMobile ? "column" : "row",
-              alignItems: isMobile ? "center" : "flex-start",
+              alignItems: "center",
             }}
           >
             <Button
               variant="contained"
               size="large"
               component={Link}
-              to="/contact"
+              to="/itsupport/contact"
               sx={{
                 backgroundColor: "white",
-                color: "#1e40af",
+                borderColor: "#000",
+                color: "#0A0A0A",
                 px: 4,
                 py: 1.5,
                 fontSize: "1.1rem",
@@ -168,22 +186,24 @@ export default function Home() {
             >
               Get Support Now
             </Button>
+
             <Button
               variant="outlined"
               size="large"
               component={Link}
-              to="/services/itsupport"
+              to="/itsupport/services"
               sx={{
-                borderColor: "white",
-                color: "white",
+                backgroundColor: "white",
+                borderColor: "#000",
+                color: "#0A0A0A",
                 px: 4,
                 py: 1.5,
                 fontSize: "1.1rem",
                 minWidth: isMobile ? "200px" : "auto",
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderColor: "white",
+                  backgroundColor: "#f8fafc",
                   transform: "translateY(-2px)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
                 },
                 transition: "all 0.3s ease",
               }}
@@ -191,8 +211,26 @@ export default function Home() {
               Explore Services
             </Button>
           </Box>
-        </Container>
+        </Box>
+
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src="/logos/111.jpg"
+            alt="IT Support Illustration"
+            style={{ width: "100%", maxHeight: "500px" }}
+          />
+        </Box>
       </Box>
+
+
+
 
       {/* Services Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -214,9 +252,9 @@ export default function Home() {
           secure, and running without interruption.
         </Typography>
 
-        <Grid spacing={3}>
+        <Grid container spacing={3}>
           {services.map((service, index) => (
-            <Grid key={index} size= {{xs:12, sm:6, md:4}}>
+            <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
               <Card
                 sx={{
                   height: "100%",
@@ -246,7 +284,7 @@ export default function Home() {
       <Box sx={{ backgroundColor: "#f8fafc", py: 8 }}>
         <Container maxWidth="lg">
           <Grid spacing={6} alignItems="center">
-            <Grid size={{xs:12, md:6}}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Typography variant="h3" fontWeight="bold" gutterBottom>
                 Why Choose Us for IT Support?
               </Typography>
@@ -272,7 +310,7 @@ export default function Home() {
 
             </Grid>
 
-            <Grid size={{xs:12, md:6}}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Paper
                 sx={{
                   p: 4,
@@ -330,7 +368,7 @@ export default function Home() {
           sx={{ mb: 4, maxWidth: "600px", mx: "auto" }}
         >
           Don’t let IT issues slow you down. Get fast, professional help from our
-          certified team today.
+          expert team today.
         </Typography>
 
         <Box
@@ -346,13 +384,13 @@ export default function Home() {
             variant="contained"
             size="large"
             component={Link}
-            to="/contact"
+            to="/itsupport/contact"
             startIcon={<PhoneIcon />}
             sx={{
               px: 4,
               py: 1.5,
               background:
-                    "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
+                "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
               fontSize: "1.1rem",
               minWidth: isMobile ? "200px" : "auto",
             }}
@@ -363,7 +401,7 @@ export default function Home() {
             variant="outlined"
             size="large"
             component={Link}
-            to="/services/itsupport"
+            to="/itsupport/services"
             startIcon={<BuildIcon />}
             sx={{
               px: 4,
@@ -376,6 +414,6 @@ export default function Home() {
           </Button>
         </Box>
       </Container>
-    </Box>
+    </Box >
   );
 }

@@ -43,16 +43,16 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
       variant="permanent"
       open={open}
       sx={{
-        width: open ? 250 : 56,
+        width: open ? 240 : 56,
         flexShrink: 0,
 
         '& .MuiDrawer-paper': {
           height: `calc(100vh - ${siteConfig.headerHeight || 64}px)`,
           marginTop: `${siteConfig.headerHeight || 64}px`,
-          width: open ? 250 : 56,
+          width: open ? 240 : 56,
           boxSizing: 'border-box',
           backgroundColor: siteConfig.sidebarColor || siteConfig.primaryColor,
-          color: 'white',
+          color: 'black',
           transition: 'width 0.3s ease-in-out',
           overflowX: 'hidden',
         },
@@ -73,13 +73,13 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
               Menu
             </Typography>
-            <IconButton onClick={onClose} sx={{ color: 'white' }} size="small">
+            <IconButton onClick={onClose} sx={{ color: 'black' }} size="small">
               <CloseIcon />
             </IconButton>
           </>
         ) : (
           <Tooltip title="Expand Menu" placement="right" arrow>
-            <IconButton onClick={onClose} sx={{ color: 'white' }} size="small">
+            <IconButton onClick={onClose} sx={{ color: 'black' }} size="small">
               <MenuIcon />
             </IconButton>
           </Tooltip>

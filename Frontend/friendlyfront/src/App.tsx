@@ -26,7 +26,7 @@ import GuideContact from './components/guidance/GuideContact';
 import Home from './components/itsupport/Home';
 import About from './components/itsupport/About';
 import ItSupport from './components/itsupport/ItSupport';
-import WebDevelop from './components/itsupport/WebDevelop';
+import WebDevelop from './components/softwaresolution/WebDevelop';
 import Contact from './components/itsupport/Contact';
 
 import SwHome from './components/softwaresolution/SwHome';
@@ -55,6 +55,7 @@ function AppRoutes() {
       <Route path="/software/home" element={<SwHome />} />
       <Route path="/software/about" element={<SwAbout />} />
       <Route path="/software/services" element={<SwServices />} />
+      <Route path="/software/webdevelop" element={<WebDevelop />} />
       <Route path="/software/facilities" element={<SwServices />} />
       <Route path="/software/contact" element={<SwContact />} />
 
@@ -69,7 +70,6 @@ function AppRoutes() {
       <Route path="/itsupport/home" element={<Home />} />
       <Route path="/itsupport/about" element={<About />} />
       <Route path="/itsupport/services" element={<ItSupport />} />
-      <Route path="/itsupport/webdevelop" element={<WebDevelop />} />
       <Route path="/itsupport/contact" element={<Contact />} />
 
       {/* Flow Support */}
@@ -86,7 +86,7 @@ function AppRoutes() {
 }
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const handleSidebarToggle = () => setIsSidebarOpen(!isSidebarOpen);
 
   const sidebarOpenWidth = 250;

@@ -1,27 +1,19 @@
 
-import React, { useState, useContext, useEffect } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import React, { useEffect } from 'react';
+
 
 import {
   Box,
-  IconButton,
   Typography,
-  TextField,
-  InputAdornment,
   AppBar,
   Toolbar
 } from "@mui/material";
-import { Search as SearchIcon } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
-//import SidebarMenu from "./SidebarMenu";
+
 import { SiteConfig, sites } from '../siteConfig';
 
 export default function Header() {
-  //const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  //const { site } = useContext(ThemeContext);
-  const location = useLocation();
+    const location = useLocation();
 
   // Determine current site key
   const path = location.pathname.split('/')[1] as keyof typeof sites;
@@ -34,16 +26,6 @@ export default function Header() {
     document.body.style.setProperty('--header-text', siteConfig.headerTextColor || '#fff');
     document.body.style.paddingTop = `${siteConfig.headerHeight || 64}px`;
   }, [siteConfig]);
-
-  //const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      
-      setSearchQuery('');
-    }
-  };
 
   return (
     <>
@@ -65,7 +47,7 @@ export default function Header() {
           {/* Left Section: Logo and Site Name */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Link
-              to={`/${path || 'software'}/home`}
+              to={`/${path || 'itsupport'}/home`}
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}
             >
               <img
@@ -95,90 +77,31 @@ export default function Header() {
             </Link>
           </Box>
 
-          {/* Center Section: Search Box */}
-          <Box
-            component="form"
-            onSubmit={handleSearch}
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
-              mx: 4,
-              flex: 1,
-              maxWidth: 400
-            }}
-          >
-            <TextField
-              size="small"
-              placeholder="Search services..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              sx={{
-                width: '100%',
-                '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'white',
-                  borderRadius: 2,
-                  '& fieldset': { borderColor: 'transparent' },
-                  '&:hover fieldset': { borderColor: siteConfig.primaryColor },
-                  '&.Mui-focused fieldset': { borderColor: siteConfig.primaryColor },
-                },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon sx={{ color: 'text.secondary' }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
-
-          {/* Right Section */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <IconButton
-              sx={{ display: { xs: 'flex', md: 'none' }, color: 'var(--header-text)' }}
-              onClick={() => console.log('Open mobile search')}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: { xs: 1, sm: 2, md: 6 }}}>
+            <Link to={`/${path || 'itsupport'}/contact`}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}
             >
-              <SearchIcon />
-            </IconButton>
+
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+                  color: 'var(--header-text)',
+                  '&:hover': {
+                    color: 'var(--accent)',
+                    transition: 'color 0.2s ease'
+                  }
+                }}
+              >
+                Contact
+              </Typography>
+            </Link>
           </Box>
         </Toolbar>
 
-        {/* Mobile Search Bar */}
-        <Box
-          sx={{
-            display: { xs: 'flex', md: 'none' },
-            p: 1,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <TextField
-            size="small"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            sx={{
-              width: '95%',
-              '& .MuiOutlinedInput-root': {
-                backgroundColor: 'white',
-                borderRadius: 2,
-                '& fieldset': { borderColor: 'transparent' },
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: 'text.secondary' }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Box>
-      </AppBar>
 
-      {/* Sidebar Menu */}
-      {/* <SidebarMenu open={isSidebarOpen} onClose={toggleSidebar} /> */}
+      </AppBar>
     </>
   );
 }

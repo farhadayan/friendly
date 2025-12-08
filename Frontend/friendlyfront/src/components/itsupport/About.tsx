@@ -5,7 +5,7 @@ import {
   Container,
   Typography,
   Card,
-  CardContent,
+
   Avatar,
   Button,
   useTheme,
@@ -20,18 +20,25 @@ export default function About() {
 
   const team = [
     {
-      name: "Alice Johnson",
-      role: "Lead IT Specialist",
-      avatar: "/images/team/alice.jpg",
+      name: "Georg Hansen",
+      role: "IT Manager",
+      avatar: "/images/team/sophia.jpg",
       description:
-        "Expert in network solutions and cybersecurity with over 10 years of experience.",
+        "Expert in IT management and architect solutions over 10 years of experoence..",
     },
     {
-      name: "Michael Smith",
-      role: "Cloud Solutions Architect",
+      name: "Abarat Hossain",
+      role: "IT Specialist",
+      avatar: "/images/team/alice.jpg",
+      description:
+        "Expert in laptop and desktop solutions over 6 years of experience.",
+    },
+    {
+      name: "F. Ahmed",
+      role: "Cloud Solutions",
       avatar: "/images/team/michael.jpg",
       description:
-        "Helps businesses migrate and manage their cloud environments efficiently.",
+        "Helps businesses migrate and manage their cloud environments efficiently. Skilled on server installation and operational",
     },
     {
       name: "Sophia Lee",
@@ -40,6 +47,21 @@ export default function About() {
       description:
         "Passionate about helping clients troubleshoot issues quickly and effectively.",
     },
+    {
+      name: "Shamima Nasrin",
+      role: "IT Support Technician",
+      avatar: "/images/team/sophia.jpg",
+      description:
+        "Passionate about helping clients troubleshoot issues quickly and effectively.",
+    },
+    {
+      name: "Faiza Ahmed",
+      role: "IT Support Technician",
+      avatar: "/images/team/sophia.jpg",
+      description:
+        "Passionate about helping clients troubleshoot issues quickly and effectively.",
+    }
+
   ];
 
   return (
@@ -83,14 +105,15 @@ export default function About() {
 
       {/* Mission & Vision Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Grid spacing={4}>
-          <Grid size={{xs:12, md:6}}>
+        <Grid container spacing={4}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card
               sx={{
                 p: 4,
                 height: "100%",
                 borderRadius: 2,
-                boxShadow: 3,
+                boxShadow: 3
+
               }}
             >
               <Typography variant="h5" fontWeight="bold" gutterBottom>
@@ -103,7 +126,7 @@ export default function About() {
               </Typography>
             </Card>
           </Grid>
-          <Grid size={{xs:12, md:6}}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Card
               sx={{
                 p: 4,
@@ -127,7 +150,7 @@ export default function About() {
 
       {/* Team Section */}
       <Box sx={{ backgroundColor: "#f8fafc", py: 8 }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" >
           <Typography
             variant="h3"
             fontWeight="bold"
@@ -136,9 +159,9 @@ export default function About() {
           >
             Meet Our Team
           </Typography>
-          <Grid spacing={4}>
+          <Grid container spacing={4} >
             {team.map((member, index) => (
-              <Grid key={index} size={{xs:12, sm:6, md:4}}>
+              <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
                 <Card
                   sx={{
                     textAlign: "center",
@@ -197,10 +220,12 @@ export default function About() {
           variant="contained"
           size="large"
           component={Link}
-          to="/contact"
+          to="/itsupport/contact"
           startIcon={<RocketIcon />}
-          sx={{ px: 4, py: 1.5, background:
-                    "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)" }}
+          sx={{
+            px: 4, py: 1.5, background:
+              "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)"
+          }}
         >
           Contact Us Today
         </Button>

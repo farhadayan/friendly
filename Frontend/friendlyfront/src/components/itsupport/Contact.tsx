@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { countryCodes } from "../../dummy-data/country_codes";
 import { useLocation } from "react-router-dom";
+import PhoneInTalkRoundedIcon from "@mui/icons-material/PhoneInTalkRounded";
+import { Box, Card, Container, Stack, Typography } from "@mui/material";
 
 interface FormData {
   clientfname: string;
@@ -28,7 +30,7 @@ export default function Contact() {
   const location = useLocation();
   // Extract website source from URL 
   // Example: /guidance/contact → "guidance"
-  //          /itsupport/contact → "itsupport"
+
   const getWebsiteSource = useCallback((): string => {
     const pathnameLower = location.pathname.toLowerCase(); // Use location.pathname directly
     const segments = pathnameLower.split('/').filter(segment => segment);
@@ -62,7 +64,7 @@ export default function Contact() {
     }
   };
 
-  // Initialize form state with memoized initial website source
+  // Initialize form state with memorized initial website source
   const initialState = useMemo((): FormData => ({
     clientfname: "",
     clientlname: "",
@@ -108,9 +110,6 @@ export default function Contact() {
   useEffect(() => {
     const checkEmail = async () => {
       const email = form.email.trim();
-
-
-
 
       if (!email || !email.includes('@') || !email.includes('.')) {
         return;
@@ -186,7 +185,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!emailStatus.valid || emailStatus.checking) {
       setMessage("Please enter a valid email address");
       return;
@@ -287,11 +286,10 @@ export default function Contact() {
       alignItems: "center" as const,
       justifyContent: "center" as const,
       minHeight: "100vh",
-      background: form.website_source === 'itsupport' ? "linear-gradient(45deg, #48bb78, #fff)" :
-        form.website_source === 'software' ? "linear-gradient(45deg, #ed8936, #fff)" :
-          "linear-gradient(45deg, cadetblue, #fff)",
+      background: "linear-gradient(0deg, #f6f6f6 0%, #e0f2fe 100%)",
       padding: "20px"
     },
+
     title: {
       color: form.website_source === 'itsupport' ? "#22543d" :
         form.website_source === 'software' ? "#7b341e" : "#1E3A8A",
@@ -371,9 +369,56 @@ export default function Contact() {
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>{pageTitle}</h1>
+    // <div style={styles.container}>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        background: "linear-gradient(to bottom, #e8f3ff, #ffffff)",
+        paddingTop: 8,
+      }}
+    >
+      {/* Title Section */}
+           <Stack
+        direction="column"
+        spacing={1}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Stack direction="row" alignItems="center" spacing={1.2}>
+          <PhoneInTalkRoundedIcon
+            sx={{ color: "#0D6EFD", fontSize: 26 }}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+              color: "#0D6EFD",
+              letterSpacing: "0.5px",
+            }}
+          >
+            +45 4222 8426
+          </Typography>
+        </Stack>
 
+        <Typography
+          variant="body1"
+          sx={{ color: "#444", fontSize: "15px" }}
+        >
+          Need quick assistance? Reach our support line.
+        </Typography>
+
+        <Typography
+          variant="body2"
+          sx={{ color: "#666", fontSize: "14px" }}
+        >
+          24/7 IT support — fast, reliable, and always here to help.
+        </Typography>
+      </Stack>
+      <br></br>
       {/* Status Messages */}
       {message && (
         <div style={{
@@ -581,6 +626,6 @@ export default function Contact() {
             cursor: not-allowed;
           }
         `}</style>
-    </div>
+    </Box>
   );
 }
