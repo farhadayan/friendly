@@ -33,6 +33,7 @@ import SwHome from './components/softwaresolution/SwHome';
 import SwAbout from './components/softwaresolution/SwAbout';
 import SwServices from './components/softwaresolution/SwServices';
 import SwContact from './components/softwaresolution/SwContact';
+import Footer from './components/Footer';
 
 function AppRoutes() {
   const { setSite } = useContext(ThemeContext);
@@ -77,9 +78,10 @@ function AppRoutes() {
       <Route path="/flowsupport/services" element={<FlowServices />} />
       <Route path="/flowsupport/about" element={<FlowAbout />} />
       <Route path="/flowsupport/contact" element={<FlowContact />} />
-      <Route path="/flowsupport" element={<Flow />} />
-      <Route path="/guidance" element={<AdmissionSupport />} />
-      <Route path="/itsupport" element={<ItSupport />} />
+
+      <Route path="/flowsupport" element={<FlowHome />} />
+      <Route path="/guidance" element={< GuideHome />} />
+      <Route path="/itsupport" element={<Home />} />
       <Route path="/software" element={<SwHome />} />
     </Routes>
   );
@@ -113,6 +115,7 @@ function App() {
         >
           <AppRoutes />
         </Box>
+        <Footer/>
       </BrowserRouter>
     </ThemeProvider>
   );
