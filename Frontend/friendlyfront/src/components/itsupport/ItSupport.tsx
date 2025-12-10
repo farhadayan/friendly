@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  
+
   Button,
   Accordion,
   AccordionSummary,
@@ -72,8 +72,8 @@ export default function ITSupport() {
   ];
 
   const benefits = [
-    "Educated and experienced IT professionals",
-    "Fast response times (average < 15 minutes)",
+    "Skilled & experienced IT professionals",
+    "Fast response times (average < 30 minutes)",
     "Affordable pricing with flexible plans",
     "Remote and onsite support availability",
     "Proactive monitoring and maintenance",
@@ -87,7 +87,7 @@ export default function ITSupport() {
     },
     {
       q: "How fast is your emergency response?",
-      a: "Our average response time is under 15 minutes, with 24/7 coverage for emergencies.",
+      a: "Our average response time is under 30 minutes, with 24/7 coverage for emergencies.",
     },
     {
       q: "Can you help with cloud migration?",
@@ -100,29 +100,33 @@ export default function ITSupport() {
   ];
 
   return (
-    <Box sx={{ overflow: "hidden" }}>
+    <Box sx={{ overflow: "hidden", background: "transparent" }}>
       {/* Hero Section */}
       <Box
         sx={{
-          background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-          color: "white",
-          py: { xs: 6, md: 10 },
+          background: `
+            linear-gradient(90deg, #f8fafc 0%, transparent 25%),
+            linear-gradient(270deg, #f8fafc 0%, transparent 25%),
+            linear-gradient(180deg, cadetblue 0%, transparent 80%)
+          `,
+
+          backdropFilter: "blur(10px)",
+          py: { xs: 2, md: 6 },
           textAlign: "center",
         }}>
         <Container maxWidth="lg">
           <Typography
             variant="h2"
             fontWeight="bold"
-            sx={{ mb: 2, fontSize: { xs: "2.2rem", md: "3rem" } }}
+            sx={{ mb: 2, fontSize: { xs: "2.2rem", md: "2.5rem" } }}
           >
-            IT Support Services
+            IT Help Desk
           </Typography>
           <Typography
             variant="h6"
             sx={{ maxWidth: "800px", mx: "auto", opacity: 0.9 }}
           >
-            Reliable, affordable, and expert IT solutions for homes and
-            businesses. From device repairs to advanced cybersecurity, we’ve got
+            Reliable, affordable, and IT support for businesses. From device repairs to advanced maintenance, we’ve got
             you covered 24/7.
           </Typography>
         </Container>
@@ -130,7 +134,7 @@ export default function ITSupport() {
 
       {/* Services Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h3" textAlign="center" fontWeight="bold" gutterBottom>
+        {/* <Typography variant="h3" textAlign="center" fontWeight="bold" gutterBottom>
           Our Services
         </Typography>
         <Typography
@@ -141,7 +145,7 @@ export default function ITSupport() {
         >
           Explore our comprehensive IT solutions designed to keep your
           technology running smoothly.
-        </Typography>
+        </Typography> */}
 
         <Grid container spacing={3}>
           {services.map((service, index) => (
@@ -169,56 +173,51 @@ export default function ITSupport() {
       </Container>
 
       {/* Why Choose Us Section */}
-      <Box sx={{ backgroundColor: "#f8fafc", py: 8 }}>
+      <Box sx={{ backgroundColor: "transparent", py: 8 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={6} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h4" fontWeight="bold" gutterBottom>
-                Why Choose Our IT Support?
+          <Box sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+            gap: 6
+          }}>
+
+            {/* Left side: Text */}
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h3" fontWeight="bold" sx={{ mb: 4 }}>
+                Why Choose Us
               </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                We provide reliable, customer-first IT solutions with guaranteed
-                satisfaction.
-              </Typography>
+
               <List dense>
                 {benefits.map((benefit, index) => (
-                  <ListItem key={index} sx={{ px: 0 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
+                  <ListItem key={index} sx={{ px: 0, py: 1 }}>
+                    <ListItemIcon sx={{ minWidth: 40 }}>
                       <CheckCircleIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary={benefit} />
                   </ListItem>
                 ))}
               </List>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Card
-                sx={{
-                  p: 4,
-                  background:
-                    "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-                  color: "white",
-                  borderRadius: 2,
+            </Box>
+
+            {/* Right side: Image */}
+            <Box sx={{
+              flex: 1,
+              display: { xs: "none", md: "block" } // Hide image on mobile if needed
+            }}>
+              <img
+                src="/logos/ithelp1.jpg"
+                alt="Make us diff"
+                style={{
+                  width: "100%",
+                  maxWidth: "600px",
+                  height: "auto",
+                  borderRadius: "12px",
+                  background: "linear-gradient(90deg, transparent 0%, cadetblue 50%)"
                 }}
-              >
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Need Emergency IT Help?
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2, opacity: 0.9 }}>
-                  Call our 24/7 emergency hotline and get immediate assistance
-                  from certified IT professionals.
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                  <PhoneIcon fontSize="large" />
-                  <Box>
-                    <Typography variant="h6" fontWeight="bold">
-                      (555) 123-HELP
-                    </Typography>
-                  </Box>
-                </Box>
-              </Card>
-            </Grid>
-          </Grid>
+              />
+            </Box>
+          </Box>
         </Container>
       </Box>
 
@@ -242,7 +241,7 @@ export default function ITSupport() {
       </Container>
 
       {/* CTA Section */}
-      <Box sx={{ background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)", color: "white", py: 8, textAlign: "center" }}>
+      {/* <Box sx={{ background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)", color: "white", py: 8, textAlign: "center" }}>
         <Container maxWidth="md">
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             Ready to Get Expert IT Support?
@@ -271,7 +270,7 @@ export default function ITSupport() {
             Contact Us Now
           </Button>
         </Container>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

@@ -7,18 +7,20 @@ import {
   Button,
   Card,
   CardContent,
-  Paper,
+
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Chip,
+
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+
 import {
   CheckCircle as CheckCircleIcon,
   Security as SecurityIcon,
+  Code as SoftwareIcon,
   Cloud as CloudIcon,
   Computer as ComputerIcon,
   Phone as PhoneIcon,
@@ -27,6 +29,7 @@ import {
   NetworkCheck as NetworkIcon,
   Storage as StorageIcon,
 } from "@mui/icons-material";
+
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -36,48 +39,30 @@ export default function Home() {
   const services = [
     {
       icon: <ComputerIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Desktop & Laptop Support",
+      title: "IT Help Desk",
+      link: "/itsupport/itservices",
       description:
-        "OS installation, Network setup,  c virus removal, and performance optimization for all devices.",
+        "Keep your business running smoothly with expert hardware, networking, and cybersecurity support.",
     },
     {
-      icon: <NetworkIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Network Solutions",
-      description:
-        "Wi-Fi setup, troubleshooting, firewall configuration, and VPN support for secure connectivity.",
-    },
-    {
-      icon: <CloudIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Cloud Services",
-      description:
-        "Cloud migration, Microsoft 365, Google Workspace, and secure online backups.",
-    },
-    {
-      icon: <SecurityIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Server Setup",
-      description:
-        "Firewalls, Active deirectory setup and monitoring.",
+      icon: <SoftwareIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
+      title: "Software Solutions",
+      link: "/itsupport/swservices",
+      description: "Scalable, efficient, and custom-built applications designed around your business needs.",
     },
     {
       icon: <StorageIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "Data Recovery",
-      description:
-        "Emergency recovery for hard drives, SSDs, and cloud storage.",
-    },
-    {
-      icon: <SupportIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
-      title: "24/7 IT Support",
-      description:
-        "Always-on helpdesk for urgent issues. Remote and onsite support available.",
-    },
+      title: "Data Engineering",
+      description: "Turn raw data into actionable insights with clean pipelines, optimized databases, and structured reporting systems.",
+    }
   ];
 
+
   const features = [
-    "Skilled and educated IT specialists with years of experience",
-    "Lightning-fast response times (average under 15 minutes)",
+    "Skilled and experienced IT specialists",
+    "Lightning-fast response times (average under 30 minutes)",
     "Affordable pricing, no hidden fees",
     "Remote and onsite support availability",
-    "Proactive monitoring & maintenance",
     "No long-term contracts required",
   ];
 
@@ -105,10 +90,11 @@ export default function Home() {
           sx={{
             flex: 1,
             m: 0,
-            p: { xs: 3, md: 5 },
+            p: { xs: 0, md: 4 },
             backdropFilter: "blur(10px)",
             background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
-            height: "500px"
+            minHeight: "500px",
+            maxHeight: "500px"
 
           }}
         >
@@ -118,10 +104,10 @@ export default function Home() {
               fontWeight: "bold",
               mb: 4,
               textAlign: "center",
-              fontSize: { xs: "2.2rem", md: "3rem", lg: "3.5rem" }
+              fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
             }}
           >
-            Reliable IT Help Desk
+            Reliable IT Solutions
             <Box
               component="span"
               sx={{
@@ -141,15 +127,16 @@ export default function Home() {
             variant="h5"
             component="p"
             sx={{
+
               mb: 4,
               textAlign: "center",
               opacity: 0.9,
-              fontSize: { xs: "1.1rem", md: "1.4rem" },
+              fontSize: { xs: "0.8rem", md: "1.4rem" },
               lineHeight: 1.6,
             }}
           >
             From startups to established enterprises, we deliver fast, affordable
-            and professional IT support. Available 24/7 to keep your systems running smoothly.
+            and professional IT solutions. Available 24/7 to keep your systems running smoothly.
           </Typography>
 
           <Box
@@ -173,9 +160,9 @@ export default function Home() {
                 color: "#0A0A0A",
                 px: 4,
                 py: 1.5,
-                fontSize: "1.1rem",
+                fontSize: isMobile ? "0.9rem" : "1.1rem",
                 fontWeight: "bold",
-                minWidth: isMobile ? "200px" : "auto",
+                minWidth: isMobile ? "120px" : "auto",
                 "&:hover": {
                   backgroundColor: "#f8fafc",
                   transform: "translateY(-2px)",
@@ -191,14 +178,14 @@ export default function Home() {
               variant="outlined"
               size="large"
               component={Link}
-              to="/itsupport/services"
+              to="/itsupport/itservices"
               sx={{
                 backgroundColor: "white",
                 borderColor: "#000",
                 color: "#0A0A0A",
                 px: 4,
                 py: 1.5,
-                fontSize: "1.1rem",
+                fontSize: isMobile ? "0.9rem" : "1.1rem",
                 minWidth: isMobile ? "200px" : "auto",
                 "&:hover": {
                   backgroundColor: "#f8fafc",
@@ -216,79 +203,107 @@ export default function Home() {
         <Box
           sx={{
             flex: 1,
-            display: "flex",
+            //display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            display: { xs: "none", md: "flex" }
           }}
         >
           <img
-            src="/logos/111.jpg"
+            src="/logos/home.jpg"
             alt="IT Support Illustration"
-            style={{ width: "100%", maxHeight: "500px" }}
+            style={{ width: "100%", minHeight: "500px", maxHeight: "500px", objectFit: "cover" }}
           />
         </Box>
       </Box>
 
-
-
-
       {/* Services Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="lg" sx={{ py: 5 }}>
         <Typography
           variant="h2"
           textAlign="center"
           fontWeight="bold"
-          sx={{ mb: 2 }}
+
+          sx={{
+            fontSize: isMobile ? "1.2rem" : "2.5rem",
+            mb: 2
+          }}
         >
-          IT Support Services
+          Our Services
         </Typography>
         <Typography
           variant="h6"
           color="text.secondary"
           textAlign="center"
-          sx={{ mb: 6, maxWidth: "600px", mx: "auto" }}
+          sx={{
+            mb: 6, maxWidth: "600px", mx: "auto",
+            fontSize: isMobile ? "0.9rem" : "1.1rem",
+          }}
         >
-          Everything you need to keep your business and home systems safe,
+          Everything you need to keep your business systems safe,
           secure, and running without interruption.
         </Typography>
 
         <Grid container spacing={3}>
           {services.map((service, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Card
-                sx={{
-                  height: "100%",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-8px)",
-                    boxShadow: "0 12px 20px rgba(0,0,0,0.1)",
-                  },
-                }}
+              <Link
+                to={service.link ?? "/"}
+                style={{ textDecoration: "none" }}
               >
-                <CardContent sx={{ p: 3, textAlign: "center", height: "100%" }}>
-                  <Box sx={{ mb: 2 }}>{service.icon}</Box>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
-                    {service.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {service.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+                <Card
+
+                  elevation={4}
+                  sx={{
+                    borderRadius: 4,
+                    height: "100%",
+                    transition: "all 0.3s ease",
+                    textDecoration: "none",
+                    "&:hover": {
+                      transform: "translateY(-8px)",
+                      boxShadow: "0 12px 20px rgba(0,0,0,0.1)",
+                    },
+                  }}
+
+                >
+                  <CardContent sx={{ p: 3, textAlign: "center", height: "100%" }}>
+                    <Box sx={{ mb: 2 }}>{service.icon}</Box>
+                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {service.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))}
         </Grid>
       </Container>
 
       {/* Why Choose Us Section */}
-      <Box sx={{ backgroundColor: "#f8fafc", py: 8 }}>
+      <Box sx={{ backgroundColor: "transparent", py: 8 }}>
         <Container maxWidth="lg">
           <Grid spacing={6} alignItems="center">
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Typography variant="h3" fontWeight="bold" gutterBottom>
-                Why Choose Us for IT Support?
+            <Grid size={{
+              xs: 12, md: 6
+            }}>
+              <Typography variant="h3" fontWeight="bold" gutterBottom
+                sx={{
+                  fontWeight: "bold",
+                  mb: isMobile ? 2 : 4,
+                  textAlign: "center",
+                  fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
+                }}
+              >
+                Why Choose Us ?
               </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+              <Typography variant="h6" color="text.secondary" sx={{
+                mb: 4,
+                fontSize: { xs: "0.9rem", md: "3rem", lg: "3.5rem" }
+
+              }}>
                 We focus on reliability, affordability, and fast response times
                 so you never face IT challenges alone.
               </Typography>
@@ -306,52 +321,6 @@ export default function Home() {
                   </ListItem>
                 ))}
               </List>
-
-
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Paper
-                sx={{
-                  p: 4,
-                  background:
-                    "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-                  color: "white",
-                  borderRadius: 2,
-                  height: "100%",
-                }}
-              >
-                <Typography variant="h5" fontWeight="bold" gutterBottom>
-                  Emergency IT Help
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
-                  Facing downtime or a critical IT issue? Our emergency hotline
-                  connects you directly with certified experts.
-                </Typography>
-
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
-                >
-                  <PhoneIcon sx={{ fontSize: 40 }} />
-                  <Box>
-                    <Typography variant="h6" fontWeight="bold">
-                      Call Now
-                    </Typography>
-                    <Typography variant="h5" fontWeight="bold">
-                      (555) 123-HELP
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Chip
-                  label="24/7 Emergency Line"
-                  sx={{
-                    backgroundColor: "rgba(255,255,255,0.2)",
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                />
-              </Paper>
             </Grid>
           </Grid>
         </Container>
@@ -359,13 +328,23 @@ export default function Home() {
 
       {/* CTA Section */}
       <Container maxWidth="lg" sx={{ py: 8, textAlign: "center" }}>
-        <Typography variant="h3" fontWeight="bold" gutterBottom>
+        <Typography variant="h3" fontWeight="bold" gutterBottom
+          sx={{
+            fontWeight: "bold",
+            mb: isMobile ? 2 : 4,
+            textAlign: "center",
+            fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
+          }}
+        >
           Ready for Expert IT Support?
         </Typography>
         <Typography
           variant="h6"
           color="text.secondary"
-          sx={{ mb: 4, maxWidth: "600px", mx: "auto" }}
+          sx={{
+            mb: 4, maxWidth: "600px", mx: "auto",
+            fontSize: { xs: "0.9rem", md: "3rem", lg: "3.5rem" }
+          }}
         >
           Don’t let IT issues slow you down. Get fast, professional help from our
           expert team today.
@@ -391,7 +370,7 @@ export default function Home() {
               py: 1.5,
               background:
                 "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-              fontSize: "1.1rem",
+              fontSize: isMobile ? "0.9rem" : "1.1rem",
               minWidth: isMobile ? "200px" : "auto",
             }}
           >
@@ -401,12 +380,12 @@ export default function Home() {
             variant="outlined"
             size="large"
             component={Link}
-            to="/itsupport/services"
+            to="/itsupport/itservices"
             startIcon={<BuildIcon />}
             sx={{
               px: 4,
               py: 1.5,
-              fontSize: "1.1rem",
+              fontSize: isMobile ? "0.9rem" : "1.1rem",
               minWidth: isMobile ? "200px" : "auto",
             }}
           >

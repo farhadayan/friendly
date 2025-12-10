@@ -9,9 +9,6 @@ import { Routes, Route, BrowserRouter, Navigate, useLocation } from "react-route
 import Header from './components/Header';
 import SidebarMenu from './components/SidebarMenu';
 
-import Flow from './components/Flow';
-import AdmissionSupport from './components/AdmissionSupport';
-
 import FlowHome from './components/flowsupport/FlowHome';
 import FlowServices from './components/flowsupport/FlowServices';
 import FlowAbout from './components/flowsupport/FlowAbout';
@@ -31,9 +28,10 @@ import Contact from './components/itsupport/Contact';
 
 import SwHome from './components/softwaresolution/SwHome';
 import SwAbout from './components/softwaresolution/SwAbout';
-import SwServices from './components/softwaresolution/SwServices';
+import SwServices from './components/itsupport/SwServices';
 import SwContact from './components/softwaresolution/SwContact';
 import Footer from './components/Footer';
+import Dataengineering from './components/itsupport/Dataengineering';
 
 function AppRoutes() {
   const { setSite } = useContext(ThemeContext);
@@ -55,7 +53,6 @@ function AppRoutes() {
       {/* Software Solution */}
       <Route path="/software/home" element={<SwHome />} />
       <Route path="/software/about" element={<SwAbout />} />
-      <Route path="/software/services" element={<SwServices />} />
       <Route path="/software/webdevelop" element={<WebDevelop />} />
       <Route path="/software/facilities" element={<SwServices />} />
       <Route path="/software/contact" element={<SwContact />} />
@@ -70,7 +67,9 @@ function AppRoutes() {
       {/* IT Support */}
       <Route path="/itsupport/home" element={<Home />} />
       <Route path="/itsupport/about" element={<About />} />
-      <Route path="/itsupport/services" element={<ItSupport />} />
+      <Route path="/itsupport/itservices" element={<ItSupport />} />
+      <Route path="/itsupport/swservices" element={<SwServices />} />
+      <Route path="/itsupport/dataservices" element={<Dataengineering />} />
       <Route path="/itsupport/contact" element={<Contact />} />
 
       {/* Flow Support */}
@@ -83,6 +82,11 @@ function AppRoutes() {
       <Route path="/guidance" element={< GuideHome />} />
       <Route path="/itsupport" element={<Home />} />
       <Route path="/software" element={<SwHome />} />
+
+      {/* Individual Services */}
+      {/* <Route path="/itsupport/services" element={<ItSupport />} /> */}
+      {/* <Route path="/services/software-solutions" element={<SoftwareSolutions />} />
+      <Route path="/services/data-engineering" element={<DataEngineering />} /> */}
     </Routes>
   );
 }
@@ -108,14 +112,15 @@ function App() {
             transition: 'margin-left 0.3s ease-in-out',
             ml: isSidebarOpen ? `${sidebarOpenWidth}px` : `${sidebarClosedWidth}px`, // sidebar widths
             //paddingTop: 'var(--header-height, 64px)',
-            px: 3,
+            px: 2,
+            pr: 0,
             backgroundColor: 'var(--body-bg, #f7f7f7)',
             minHeight: '100vh',
           }}
         >
           <AppRoutes />
         </Box>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

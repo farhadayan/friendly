@@ -64,13 +64,14 @@ export const sites: Record<SiteKey, SiteConfig> = {
     },
 
     itsupport: {
-        name: 'IT Support Solutions',
-        logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
-        primaryColor: '#3c3c3c', // teal
+        name: 'Where Technology Meets Reliability',
+        logo: process.env.PUBLIC_URL + '/logos/nordisk.png',
+        primaryColor: '#3c3c3c', 
         navLinks: [
             { label: 'Home', href: 'home', icon: 'Home' },
-            { label: 'Services', href: 'services', icon: 'Computer' },
-            // { label: 'Web Development', href: 'webdevelop', icon: 'Code' },
+            { label: 'IT Support', href: 'itservices', icon: 'Computer' },
+            { label: 'Software Solutions', href: 'swservices', icon: 'Code' },
+            { label: 'Data Engineering', href: 'dataservices', icon: 'Storage' },
             { label: 'Contact', href: 'contact', icon: 'Mail' },
             { label: 'About Us', href: 'about', icon: 'Info' },
         ],
@@ -80,8 +81,9 @@ export const sites: Record<SiteKey, SiteConfig> = {
         headerHeight: 90,
         headerTextColor: '#FFFFFF',
         headerBgShade: 'cadetblue',
-        logoWidth: 180,
-        logoHeight: 180,
+        logoWidth: 85,
+        logoHeight: 85,
+        
         sidebarColor: 'white',
     },
 
@@ -97,7 +99,7 @@ export const sites: Record<SiteKey, SiteConfig> = {
         ],
         heroTitle: 'Restaurant & Facility Hygiene Operations',
         heroSubtitle: 'Professional dishwashing, cleaning, and back-of-house flow support.',
-        
+
         headerHeight: 90,
         headerTextColor: '#FFFFFF',
         headerBgShade: 'cadetblue',

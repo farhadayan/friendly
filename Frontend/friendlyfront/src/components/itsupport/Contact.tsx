@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { countryCodes } from "../../dummy-data/country_codes";
 import { useLocation } from "react-router-dom";
-import PhoneInTalkRoundedIcon from "@mui/icons-material/PhoneInTalkRounded";
-import { Box, Card, Container, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 interface FormData {
   clientfname: string;
@@ -78,6 +77,7 @@ export default function Contact() {
   const [form, setForm] = useState<FormData>(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
+
 
   const [emailStatus, setEmailStatus] = useState<EmailStatus>({
     checking: false,
@@ -364,8 +364,7 @@ export default function Contact() {
   const getButtonColor = () => {
     if (emailStatus.exists) return "#28a745";
     return form.website_source === 'itsupport' ? "#48bb78" :
-      form.website_source === 'software' ? "#ed8936" :
-        "#2575fc";
+      form.website_source === 'software' ? "#ed8936" : "#2575fc";
   };
 
   return (
@@ -382,34 +381,60 @@ export default function Contact() {
       }}
     >
       {/* Title Section */}
-           <Stack
+      <Stack
         direction="column"
         spacing={1}
         alignItems="center"
         justifyContent="center"
       >
         <Stack direction="row" alignItems="center" spacing={1.2}>
-          <PhoneInTalkRoundedIcon
-            sx={{ color: "#0D6EFD", fontSize: 26 }}
-          />
           <Typography
             variant="h6"
+            sx={{
+              fontWeight: 600,
+              letterSpacing: "0.5px"
+            }}
+          >
+
+            Have a project in mind? Need IT help?
+            We’re here to assist you.
+          </Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing={1.2}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 400,
+              fontSize: "15px",
+              color: "#3b82f6",
+              letterSpacing: "0.5px",
+            }}
+          >
+            📞 Phone: +45 4222 8426 |{" "} 📧 Email: farhadayan@gmail.com
+
+          </Typography>
+        </Stack>
+        <Typography
+          variant="h6"
+          sx={{ color: "#444", fontSize: "18px" }}
+        >
+          Business Hours
+        </Typography>
+        <Stack direction="row" alignItems="center" spacing={1.2}>
+          <Typography
+
             sx={{
               fontWeight: 600,
               color: "#0D6EFD",
               letterSpacing: "0.5px",
             }}
           >
-            +45 4222 8426
+            Mon–Fri: 8:00 AM – 4:00 PM<br />
+            Emergency IT Support: 24/7
+
           </Typography>
         </Stack>
 
-        <Typography
-          variant="body1"
-          sx={{ color: "#444", fontSize: "15px" }}
-        >
-          Need quick assistance? Reach our support line.
-        </Typography>
 
         <Typography
           variant="body2"
@@ -420,20 +445,22 @@ export default function Contact() {
       </Stack>
       <br></br>
       {/* Status Messages */}
-      {message && (
-        <div style={{
-          backgroundColor: message.includes('Thank you') ? "#d4edda" : "#f8d7da",
-          color: message.includes('Thank you') ? "#155724" : "#721c24",
-          padding: "10px 20px",
-          borderRadius: "8px",
-          marginBottom: "20px",
-          maxWidth: "400px",
-          textAlign: "center" as const,
-          width: "100%"
-        }}>
-          {message}
-        </div>
-      )}
+      {
+        message && (
+          <div style={{
+            backgroundColor: message.includes('Thank you') ? "#d4edda" : "#f8d7da",
+            color: message.includes('Thank you') ? "#155724" : "#721c24",
+            padding: "10px 20px",
+            borderRadius: "8px",
+            marginBottom: "20px",
+            maxWidth: "400px",
+            textAlign: "center" as const,
+            width: "100%"
+          }}>
+            {message}
+          </div>
+        )
+      }
 
       <form onSubmit={handleSubmit} style={styles.form}>
         {/* Email Field */}
@@ -604,7 +631,7 @@ export default function Contact() {
           ) : emailStatus.exists ? (
             'Submit Additional Query'
           ) : (
-            'Submit Registration'
+            'Submit Query'
           )}
         </button>
       </form>
@@ -626,6 +653,6 @@ export default function Contact() {
             cursor: not-allowed;
           }
         `}</style>
-    </Box>
+    </Box >
   );
 }

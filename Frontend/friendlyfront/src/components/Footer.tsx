@@ -15,9 +15,23 @@ import {
 
 export default function Footer() {
   return (
-    <Box sx={{ backgroundColor: "var(--header-bg)", color: "white", py: 2 }}>
+    <Box sx={{
+      background: "linear-gradient(90deg, #fff 0%, cadetblue 30%)",
+      color: "white",
+      py: 2,
+    }}>
       <Container maxWidth="lg">
-        <Grid container alignItems="center" justifyContent="space-between">
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            flexDirection: { xs: "column", md: "row" },
+            textAlign: { xs: "center", md: "right" },
+            gap: { xs: 2, md: 0 },
+          }}
+
+        >
           {/* Social Icons on the Left */}
           <Grid>
             <Box sx={{ display: "flex", gap: 1 }}>
@@ -58,7 +72,7 @@ export default function Footer() {
               align="right"
               sx={{
                 fontWeight: 300,
-                fontSize: "0.75rem",
+                fontSize: { xs: "0.6rem", md: "0.85rem" },
                 lineHeight: 1.4
               }}
             >

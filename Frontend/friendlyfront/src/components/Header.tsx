@@ -1,7 +1,5 @@
 
 import React, { useEffect } from 'react';
-
-
 import {
   Box,
   Typography,
@@ -9,11 +7,10 @@ import {
   Toolbar
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
-
 import { SiteConfig, sites } from '../siteConfig';
 
 export default function Header() {
-    const location = useLocation();
+  const location = useLocation();
 
   // Determine current site key
   const path = location.pathname.split('/')[1] as keyof typeof sites;
@@ -31,12 +28,16 @@ export default function Header() {
     <>
       <AppBar
         sx={{
+
           backgroundColor: 'var(--header-bg)',
           color: 'var(--header-text)',
           height: siteConfig.headerHeight || 64,
           boxShadow: 'none',
           borderBottom: '1px solid #e2e8f0',
-          transition: 'all 0.3s ease'
+          transition: 'all 0.3s ease',
+          '& *': {
+            fontSize: { xs: 12, md: 24 }
+          }
         }}
       >
         <Toolbar sx={{
@@ -54,8 +55,8 @@ export default function Header() {
                 src={siteConfig.logo}
                 alt="Logo"
                 style={{
-                  width: siteConfig.logoWidth || 60,
-                  height: siteConfig.logoHeight || 60,
+                  width: siteConfig.logoWidth || 80,
+                  height: siteConfig.logoHeight || 80,
                   objectFit: 'contain',
                   borderRadius: '4px'
                 }}
@@ -66,10 +67,6 @@ export default function Header() {
                   fontWeight: "bold",
                   fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
                   color: 'var(--header-text)',
-                  '&:hover': {
-                    color: 'var(--accent)',
-                    transition: 'color 0.2s ease'
-                  }
                 }}
               >
                 {siteConfig.name}
@@ -77,7 +74,7 @@ export default function Header() {
             </Link>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: { xs: 1, sm: 2, md: 6 }}}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: { xs: 1, sm: 2, md: 6 } }}>
             <Link to={`/${path || 'itsupport'}/contact`}
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}
             >

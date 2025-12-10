@@ -21,6 +21,7 @@ import {
   Menu as MenuIcon,
   Devices as DevicesIcon,
   Checklist as ChecklistIcon,
+  Storage as StorageIcon,
   Business as BusinessIcon
 } from '@mui/icons-material';
 import { SiteConfig, sites } from '../siteConfig';
@@ -134,7 +135,8 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                           link.icon === 'Mail' ? <MailIcon /> :
                             link.icon === 'Devices' ? <DevicesIcon /> :
                               link.icon === 'Checklist' ? <ChecklistIcon /> :
-                                link.icon === 'Business' ? <BusinessIcon /> : null}
+                                link.icon === 'Storage' ? <StorageIcon /> :
+                                  link.icon === 'Business' ? <BusinessIcon /> : null}
                 </ListItemIcon>
                 <ListItemText primary={open ? link.label : ''} />
               </ListItem>

@@ -10,14 +10,30 @@ import {
   Button,
   useTheme,
   useMediaQuery,
+  List,
+
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
-import { Rocket as RocketIcon } from "@mui/icons-material";
+import {
+  Rocket as RocketIcon,
+  CheckCircle as CheckCircleIcon,
+} from "@mui/icons-material";
+
 import { Link } from "react-router-dom";
 
 export default function About() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const why = [
+    "End-to-End Tech Services — one partner for IT, software, and data",
+    "Startup Friendly Pricing — high quality without corporate prices",
+    "Experienced Team — skilled in modern tools and technologies",
+    "Fast Response Times — support when you need it",
+    "Flexible Solutions — we adapt to your business needs"
+  ]
   const team = [
     {
       name: "Georg Hansen",
@@ -69,9 +85,12 @@ export default function About() {
       {/* Hero Section */}
       <Box
         sx={{
-          background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)",
-          color: "white",
-          py: { xs: 6, md: 12 },
+          background: `
+            linear-gradient(90deg, #f8fafc 0%, transparent 25%),
+            linear-gradient(270deg, #f8fafc 0%, transparent 25%),
+            linear-gradient(180deg, cadetblue 0%, transparent 90%)
+          `,
+          py: { xs: 4, md: 8 },
           textAlign: "center",
         }}
       >
@@ -84,7 +103,7 @@ export default function About() {
               fontSize: { xs: "2rem", md: "3rem" },
             }}
           >
-            About Friendly IT Support
+            Nordisk Support
           </Typography>
           <Typography
             variant="h6"
@@ -95,10 +114,10 @@ export default function About() {
               lineHeight: 1.6,
             }}
           >
-            Friendly IT Support has been providing professional IT services to
-            homes and businesses for over a decade. Our mission is simple: keep
-            your technology running smoothly so you can focus on what matters
-            most.
+            deliver professional IT services that drive business efficiency. 
+            Our core purpose is to eliminate technology as a barrier, providing 
+            robust and proactive support that allows you to dedicate your energy to 
+            what matters most—your vision and your bottom line
           </Typography>
         </Container>
       </Box>
@@ -139,7 +158,7 @@ export default function About() {
                 Our Vision
               </Typography>
               <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                To be the most trusted IT support partner for businesses and
+                To be the most trusted IT solution partner for businesses and
                 individuals, delivering innovative solutions, expert guidance,
                 and exceptional customer service.
               </Typography>
@@ -149,71 +168,66 @@ export default function About() {
       </Container>
 
       {/* Team Section */}
-      <Box sx={{ backgroundColor: "#f8fafc", py: 8 }}>
-        <Container maxWidth="lg" >
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            textAlign="center"
-            sx={{ mb: 6 }}
-          >
-            Meet Our Team
-          </Typography>
-          <Grid container spacing={4} >
-            {team.map((member, index) => (
-              <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
-                <Card
-                  sx={{
-                    textAlign: "center",
-                    p: 3,
-                    borderRadius: 2,
-                    height: "100%",
-                    transition: "all 0.3s ease",
-                    "&:hover": {
-                      transform: "translateY(-6px)",
-                      boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-                    },
-                  }}
-                >
-                  <Avatar
-                    src={member.avatar}
-                    alt={member.name}
-                    sx={{
-                      width: 100,
-                      height: 100,
-                      mx: "auto",
-                      mb: 2,
-                    }}
-                  />
-                  <Typography variant="h6" fontWeight="bold">
-                    {member.name}
-                  </Typography>
-                  <Typography
-                    variant="subtitle2"
-                    color="text.secondary"
-                    sx={{ mb: 2 }}
-                  >
-                    {member.role}
-                  </Typography>
-                  <Typography variant="body2">{member.description}</Typography>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+      <Box sx={{ backgroundColor: "transparent", py: 8 }}>
+        <Container maxWidth="lg">
+          <Box sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: "center",
+            gap: 6
+          }}>
+
+            {/* Left side: Text */}
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h3" fontWeight="bold" sx={{ mb: 4 }}>
+                What Makes Us Different
+              </Typography>
+
+              <List dense>
+                {why.map((benefit, index) => (
+                  <ListItem key={index} sx={{ px: 0, py: 1 }}>
+                    <ListItemIcon sx={{ minWidth: 40 }}>
+                      <CheckCircleIcon color="primary" />
+                    </ListItemIcon>
+                    <ListItemText primary={benefit} />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+
+            {/* Right side: Image */}
+            <Box sx={{
+              flex: 1,
+              display: { xs: "none", md: "block" } // Hide image on mobile if needed
+            }}>
+              <img
+                src="/logos/whyus.png"
+                alt="Make us diff"
+                style={{
+                  width: "100%",
+                  maxWidth: "600px",
+                  height: "auto",
+                  borderRadius: "12px",
+                  background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)"
+                }}
+              />
+            </Box>
+
+          </Box>
         </Container>
       </Box>
 
       {/* Call to Action */}
       <Container maxWidth="lg" sx={{ py: 8, textAlign: "center" }}>
         <Typography variant="h4" fontWeight="bold" gutterBottom>
-          Work With Friendly IT Support
+          Work With Nordisk Support
         </Typography>
         <Typography
           variant="body1"
           color="text.secondary"
           sx={{ mb: 4, maxWidth: "600px", mx: "auto" }}
         >
-          Ready to get professional IT support for your home or business? Our
+          Ready to get professional support for your business? Our
           experts are standing by to help you with fast and reliable solutions.
         </Typography>
         <Button
