@@ -32,6 +32,7 @@ import SwServices from './components/itsupport/SwServices';
 import SwContact from './components/softwaresolution/SwContact';
 import Footer from './components/Footer';
 import Dataengineering from './components/itsupport/Dataengineering';
+import Chat from './components/itsupport/chat';
 
 function AppRoutes() {
   const { setSite } = useContext(ThemeContext);

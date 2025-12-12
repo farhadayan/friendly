@@ -238,7 +238,7 @@ export default function About() {
           startIcon={<RocketIcon />}
           sx={{
             px: 4, py: 1.5, background:
-              "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)"
+              "linear-gradient(135deg, transparent 0%, #1e40af 100%)"
           }}
         >
           Contact Us Today

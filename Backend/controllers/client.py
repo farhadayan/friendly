@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, Query, Depends
+from fastapi import APIRouter, HTTPException, Query, Depends, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, field_validator
 from typing import Optional, List
 import logging
@@ -87,6 +88,8 @@ class ClientsListResponse(BaseModel):
     has_more: bool
     timestamp: str
 
+
+
 @router.get("/check-email/{email}", response_model=dict)
 async def check_email_exists(
     email: EmailStr,
@@ -140,6 +143,31 @@ async def get_clients(
     except Exception as e:
         logger.error(f"Error getting clients: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@router.post("/chat")
+async def chat(request:Request):
+    """Chat endpoint using OpenAI client"""
+    
+    from app import client  # Import the OpenAI client from app.py
+    try:
+        data=await request.json()
+        user_message = data.get("message","")
+        if not user_message:
+            raise HTTPException(status_code=400, detail="Message is required")
+        
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": user_message}]
+        )
+        reply = response.choices[0].message.content
+        return reply
+    
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
 
 @router.post("/client", response_model=ClientResponse)
 async def create_client(client: ClientRequest):

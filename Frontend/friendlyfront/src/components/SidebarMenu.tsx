@@ -25,6 +25,7 @@ import {
   Business as BusinessIcon
 } from '@mui/icons-material';
 import { SiteConfig, sites } from '../siteConfig';
+import Chat from './itsupport/chat';
 
 interface SidebarMenuProps {
   open: boolean;
@@ -144,6 +145,8 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
           );
         })}
       </List>
+      <Chat />
+
     </Drawer>
   );
 }

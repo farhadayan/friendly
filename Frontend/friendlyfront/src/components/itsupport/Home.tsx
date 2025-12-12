@@ -104,7 +104,7 @@ export default function Home() {
               fontWeight: "bold",
               mb: 4,
               textAlign: "center",
-              fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
+              fontSize: { xs: "1.2rem", md: "2.5rem", lg: "3.0rem" }
             }}
           >
             Reliable IT Solutions
@@ -131,7 +131,7 @@ export default function Home() {
               mb: 4,
               textAlign: "center",
               opacity: 0.9,
-              fontSize: { xs: "0.8rem", md: "1.4rem" },
+              fontSize: { xs: "0.8rem", md: "1.2rem" },
               lineHeight: 1.6,
             }}
           >
@@ -294,14 +294,14 @@ export default function Home() {
                   fontWeight: "bold",
                   mb: isMobile ? 2 : 4,
                   textAlign: "center",
-                  fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
+                  fontSize: { xs: "1.2rem", md: "2.5rem", lg: "3.0rem" }
                 }}
               >
                 Why Choose Us ?
               </Typography>
               <Typography variant="h6" color="text.secondary" sx={{
                 mb: 4,
-                fontSize: { xs: "0.9rem", md: "3rem", lg: "3.5rem" }
+                fontSize: { xs: "0.9rem", md: "1.1rem", lg: "1.2rem" }
 
               }}>
                 We focus on reliability, affordability, and fast response times
@@ -328,12 +328,12 @@ export default function Home() {
 
       {/* CTA Section */}
       <Container maxWidth="lg" sx={{ py: 8, textAlign: "center" }}>
-        <Typography variant="h3" fontWeight="bold" gutterBottom
+        <Typography variant="h1" fontWeight="bold" gutterBottom
           sx={{
             fontWeight: "bold",
             mb: isMobile ? 2 : 4,
             textAlign: "center",
-            fontSize: { xs: "1.2rem", md: "3rem", lg: "3.5rem" }
+            fontSize: { xs: "1.2rem", md: "2.0rem", lg: "2.5rem" }
           }}
         >
           Ready for Expert IT Support?
@@ -343,7 +343,7 @@ export default function Home() {
           color="text.secondary"
           sx={{
             mb: 4, maxWidth: "600px", mx: "auto",
-            fontSize: { xs: "0.9rem", md: "3rem", lg: "3.5rem" }
+            fontSize: { xs: "0.8rem", lg: "1.2rem" }
           }}
         >
           Don’t let IT issues slow you down. Get fast, professional help from our

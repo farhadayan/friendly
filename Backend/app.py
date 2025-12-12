@@ -1,7 +1,9 @@
 # app.py - Update startup event
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
+from openai import OpenAI
+
 import uvicorn
 from controllers.client import router as client_router
 from dotenv import load_dotenv
@@ -12,6 +14,14 @@ import traceback
 from datetime import datetime  # Add this import
 
 load_dotenv()
+api_key = os.getenv("openai_api_key")
+
+if not api_key:
+    raise ValueError("Please set the environment variable 'openai_api_key' with your OpenAI API key.")
+
+# Initialize OpenAI client
+client = OpenAI(api_key=api_key)
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -23,7 +33,7 @@ logger = logging.getLogger(__name__)
 
 
 # Create FastAPI app
-app = FastAPI(title="Friendly Guidance API", version="1.0.0")
+app = FastAPI(title="Nordisk Support API", version="1.0.0")
 
 # Global exception handler
 @app.exception_handler(Exception)
@@ -107,7 +117,7 @@ async def debug_databases():
 # Health check endpoint
 @app.get("/")
 async def root():
-    return {"message": "Friendly Guidance API is running", "status": "healthy"}
+    return {"message": "Nordisk Support API is running", "status": "healthy"}
 
 @app.get("/health")
 async def health_check():

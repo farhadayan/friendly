@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx" // React 18 JSX transform
   },
-  "include": ["src"], // only include your src folder
+  "include": ["src", "src/services/chatService.ts"], // only include your src folder
   "exclude": ["node_modules", "build", "dist"] // exclude build outputs
 }
