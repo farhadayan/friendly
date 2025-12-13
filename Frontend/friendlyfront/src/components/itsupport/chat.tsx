@@ -66,7 +66,6 @@ const Chat: React.FC = () => {
       };
       setMessages((prev) => [...prev, botMessage]);
 
-
       const updateBotMessage = (id: string, text: string) => {
         setMessages(prev =>
           prev.map(msg =>
@@ -76,7 +75,6 @@ const Chat: React.FC = () => {
       };
 
       let botText = "";   // safe variable
-
 
       while (true) {
         const { value, done } = await reader.read();
@@ -251,9 +249,14 @@ export default Chat;
 // Add this CSS to your global styles or a CSS module
 const styles = `
 .chat-container {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
   display: flex;
+  right: 20px;
+  bottom: 20px;
   flex-direction: column;
-  height: 350px;
+  height: 400px;
   max-width: 300px;
   margin: 0 auto;
   border-radius: 8px;
@@ -271,16 +274,16 @@ const styles = `
 }
 
 .avatar-img-small {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 28px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .chat-toggle-button {
   position: fixed;
-  right: 25px;
-  bottom: 25px;
+  right: 24px;
+  bottom: 24px;
   background: linear-gradient(90deg, #D3D3D3 25%, #1e40af 70%);
   color: white;
   width: 60px;
@@ -290,7 +293,7 @@ const styles = `
   font-size: 28px;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .minimize-btn {
@@ -303,27 +306,17 @@ const styles = `
   padding: 8px;
 }
 
-.chat-container {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 420px;
-  height: 600px;
-  z-index: 999;
-}
-
-
 /* Chat Header */
 .chat-header {
-  background: Grey;
-  color: #d3d3d3;
+  background:  cadetblue;
+  color: #fff;
   padding: 5px 8px;
 }
 
 .header-content {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 16px;
 }
 
 .bot-avatar {
@@ -350,7 +343,7 @@ const styles = `
 }
 
 .status.typing {
-  color: #0A0A0A;
+  color: #fff;
   font-weight: 400;
 }
 
@@ -402,7 +395,7 @@ const styles = `
 }
 
 .user-avatar {
-  background: #0084ff;
+  background: cadetblue;
   color: white;
 }
 
@@ -421,7 +414,7 @@ const styles = `
 }
 
 .user-bubble {
-  background: #0084ff;
+  background: cadetblue;
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -497,8 +490,8 @@ const styles = `
 .chat-input {
   flex: 1;
   border: 1px solid #e9edef;
-  border-radius: 14px;
-  padding: 4px 8px;
+  border-radius: 6px;
+  padding: 2px 8px;
   font-size: 13px;
   resize: none;
   min-height: 40px;
@@ -524,7 +517,7 @@ const styles = `
   width: 24px;
   height:24px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #667eea 20%, cadetblue 100%);
   color: white;
   border: none;
   display: flex;

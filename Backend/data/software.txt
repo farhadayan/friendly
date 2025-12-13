@@ -1,0 +1,20 @@
+We develop custom web applications using React, Angular, Vue.js, Node.js, Python, and Java Spring.
+Mobile app development for iOS (Swift) and Android (Kotlin/Java).
+Our software development lifecycle follows Agile methodology with 2-week sprints.
+DevOps services include CI/CD pipeline setup, containerization with Docker.
+Quality assurance includes unit testing, integration testing, and automated UI testing.
+We offer UI/UX design services including wireframing, prototyping, and user testing.
+Software maintenance plans include bug fixes, security updates, and performance optimization.
+Our development team is experienced in microservices architecture and serverless computing.
+API development and integration with third-party services.
+Legacy system modernization and migration to modern platforms.
+E-commerce solutions including payment gateway integration and shopping cart development.
+CRM and ERP customizations for Hopex.
+We use Azure, Jira for project management based on client preference.
+Code repository management with Git, including branching strategies and code reviews.
+Technical documentation including API documentation, user manuals, and deployment guides.
+Performance testing and load testing for high-traffic applications.
+Accessibility compliance (WCAG 2.1) for all public-facing applications.
+Multi-language and localization support for global applications.
+Cloud deployment on AWS, Azure, or Google Cloud Platform.
+Post-launch support includes 30 days of free bug fixes and 24/7 monitoring.

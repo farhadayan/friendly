@@ -1,6 +1,4 @@
-export async function sendChatMessage(
-    message: string
-): Promise<ReadableStream<Uint8Array>> {
+export async function sendChatMessage(message: string): Promise<ReadableStream<Uint8Array>> {
     const response = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: {
@@ -10,8 +8,9 @@ export async function sendChatMessage(
     });
 
     if (!response.ok || !response.body) {
-        throw new Error("Unable to connect to backend");
+        const text = await response.text();
+        throw new Error(`Error ${response.status}: ${text}`);
     }
-
     return response.body;
+
 }

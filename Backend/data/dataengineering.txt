@@ -1,0 +1,19 @@
+Data engineering services include ETL pipeline design, data warehouse implementation, and data lake architecture.
+We specialize in building scalable data platforms using cloud technologies like Azure, and Google Cloud.
+Common tools we work with: Apache Spark, Kafka, Airflow, dbt, Snowflake, and Databricks.
+Our data engineers are certified in AWS Data Analytics, Azure Data Engineering, and Google Cloud Data Engineering.
+Typical data pipeline implementation takes 4-8 weeks depending on complexity.
+We offer both batch and real-time data processing solutions.
+Data security compliance includes GDPR requirements.
+Our data quality framework includes automated testing, monitoring, and data lineage tracking.
+Standard data modeling approaches include dimensional modeling and data vault 2.0.
+We provide 24/7 monitoring and alerting for all data pipelines.
+Data migration projects include assessment, planning, execution, and validation phases.
+We offer data governance consulting including policy creation and implementation.
+Our team can handle data volumes from gigabytes to petabytes.
+Automated data backup and disaster recovery are included in all engagements.
+We use Terraform and CloudFormation for infrastructure as code in data projects.
+Data catalog and metadata management solutions are available.
+We provide training on data engineering best practices for client teams.
+Performance optimization includes query tuning, partitioning, and indexing strategies.
+Data integration services include API development, web scraping, and third-party system connections.

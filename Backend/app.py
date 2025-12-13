@@ -30,8 +30,6 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-
-
 # Create FastAPI app
 app = FastAPI(title="Nordisk Support API", version="1.0.0")
 
@@ -90,7 +88,7 @@ async def shutdown_event():
     except Exception as e:
         logger.error(f"Error closing MySQL pools: {e}")
 
-# Add to app.py
+# Debug endpoint to check database configurations
 @app.get("/debug/databases")
 async def debug_databases():
     """Debug endpoint to check database status"""

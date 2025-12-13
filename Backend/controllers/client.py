@@ -6,7 +6,7 @@ import logging
 from models.client_model import ClientModel
 from services.client_service import ClientService
 from datetime import datetime
-
+from rag_engine import search_all_sources
 
 # Import from client_service properly
 try:
@@ -155,13 +155,39 @@ async def chat(request:Request):
         user_message = data.get("message","")
         if not user_message:
             raise HTTPException(status_code=400, detail="Message is required")
+
+        # ---- RAG Search ----
+        # Use search_all_sources instead of get_best_match
+        match = search_all_sources(user_message, threshold=0.65)
         
+        if match:
+        
+            return match["text"]
+            # {
+            #         match["text"],
+            #         match["source"],
+            #         round(match["score"], 2)
+            #     }
+            
+            
+        # Fallback to GPT
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_message}]
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant for Nordisk Support Solutions."},
+                {"role": "user", "content": user_message}
+                ],
+            max_tokens=100,
+            temperature=0.7
         )
         reply = response.choices[0].message.content
+        
         return reply
+        # {
+        #     "reply": reply,
+        #     "source": "gpt",
+        #     "confidence": 1.0
+        # }
     
     except HTTPException as e:
         raise e

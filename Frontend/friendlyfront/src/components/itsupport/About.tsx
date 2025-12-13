@@ -114,9 +114,9 @@ export default function About() {
               lineHeight: 1.6,
             }}
           >
-            deliver professional IT services that drive business efficiency. 
-            Our core purpose is to eliminate technology as a barrier, providing 
-            robust and proactive support that allows you to dedicate your energy to 
+            deliver professional IT services that drive business efficiency.
+            Our core purpose is to eliminate technology as a barrier, providing
+            robust and proactive support that allows you to dedicate your energy to
             what matters most—your vision and your bottom line
           </Typography>
         </Container>

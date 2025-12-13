@@ -1,0 +1,18 @@
+IT support tiers: Level 1 (basic troubleshooting), Level 2 (technical resolution), Level 3 (expert/developer).
+Remote support is available via secure VPN connection with screen sharing capabilities.
+On-site support can be arranged with 24-hour notice for non-emergency issues.
+Common issues we resolve: network connectivity, software installation, hardware troubleshooting, and email configuration.
+We support Microsoft 365, Google Workspace, and various collaboration tools.
+Network services include router configuration, firewall setup, and VPN implementation.
+Our IT support SLA guarantees 99.9% uptime for managed services.
+Password reset requests are processed within 30 minutes during business hours.
+Hardware procurement services include vendor selection, purchase, and configuration.
+We offer cybersecurity services including antivirus deployment, threat monitoring, and security audits.
+Backup solutions include daily incremental backups and weekly full backups with 30-day retention.
+Disaster recovery plan includes RTO (Recovery Time Objective) of 4 hours and RPO (Recovery Point Objective) of 1 hour.
+Mobile device management for company phones and tablets is available.
+Printer and peripheral setup and troubleshooting included.
+License management for software applications and compliance monitoring.
+IT asset tracking and inventory management services.
+User training on security best practices and software usage.
+IT documentation services including network diagrams and system architecture.
