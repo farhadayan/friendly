@@ -1,12 +1,12 @@
 from fastapi import APIRouter, HTTPException, Query, Depends, Request
-from fastapi.responses import StreamingResponse
+#from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, field_validator
 from typing import Optional, List
 import logging
 from models.client_model import ClientModel
 from services.client_service import ClientService
 from datetime import datetime
-from rag_engine import search_all_sources
+from rag_engine import search_all_sources, search_all_sources_debug
 
 # Import from client_service properly
 try:
@@ -159,17 +159,12 @@ async def chat(request:Request):
         # ---- RAG Search ----
         # Use search_all_sources instead of get_best_match
         match = search_all_sources(user_message, threshold=0.65)
-        
+        #debug_result = search_all_sources_debug(user_message, threshold=0.65)
+        # print("mmmmmmmmmmmmmmmmmmm:",debug_result)
         if match:
-        
-            return match["text"]
-            # {
-            #         match["text"],
-            #         match["source"],
-            #         round(match["score"], 2)
-            #     }
             
-            
+            return str(match["text"]).strip().replace("\n"," ").strip('"')
+
         # Fallback to GPT
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -177,11 +172,11 @@ async def chat(request:Request):
                 {"role": "system", "content": "You are a helpful assistant for Nordisk Support Solutions."},
                 {"role": "user", "content": user_message}
                 ],
-            max_tokens=100,
+            max_tokens=300,
             temperature=0.7
         )
-        reply = response.choices[0].message.content
-        
+        reply = str(response.choices[0].message.content).strip().strip('"')
+                
         return reply
         # {
         #     "reply": reply,

@@ -15,7 +15,7 @@ const Chat: React.FC = () => {
     {
       id: "1",
       sender: "bot",
-      text: "Hello! How can I assist you today?",
+      text: 'Hello! How can I assist you today?',
       timestamp: new Date(),
     },
   ]);
@@ -32,6 +32,80 @@ const Chat: React.FC = () => {
         chatContainerRef.current.scrollHeight;
     }
   }, [messages, isTyping]);
+
+  // const handleSend = async () => {
+  //   if (!input.trim() || isLoading) return;
+
+  //   const userMessage: ChatMessage = {
+  //     id: Date.now().toString(),
+  //     sender: "user",
+  //     text: input.trim(),
+  //     timestamp: new Date(),
+  //   };
+
+  //   // Add user message immediately
+  //   setMessages((prev) => [...prev, userMessage]);
+  //   const userInput = input;
+  //   setInput("");
+  //   setIsLoading(true);
+  //   setIsTyping(true);
+
+  //   try {
+  //     // Get plain text response (NOT stream)
+  //     const replyText = await sendChatMessage(userInput);
+  //    // const stream = await sendChatMessage(userInput);
+  //    // const reader = stream.getReader();
+  //     const decoder = new TextDecoder();
+
+
+  //     // Create empty bot message
+  //     const botMessageId = (Date.now() + 1).toString();
+  //     const botMessage: ChatMessage = {
+  //       id: botMessageId,
+  //       sender: "bot",
+  //       text: replyText,
+  //       timestamp: new Date(),
+  //     };
+  //     setMessages((prev) => [...prev, botMessage]);
+
+  //     const updateBotMessage = (id: string, text: string) => {
+  //       setMessages(prev =>
+  //         prev.map(msg =>
+  //           msg.id === id ? { ...msg, text } : msg
+  //         )
+  //       );
+  //     };
+
+  //     let botText = "";   // safe variable
+
+  //     while (true) {
+  //       const { value, done } = await reader.read();
+  //       if (done) break;
+
+  //       const chunk = decoder.decode(value);
+  //       console.log("Received chunkkkkkkkkkkk:", chunk);
+  //       botText += chunk;
+
+  //       // Update bot message incrementally
+  //       updateBotMessage(botMessageId, botText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Chat error:", error);
+  //     setMessages((prev) => [
+  //       ...prev,
+  //       {
+  //         id: Date.now().toString(),
+  //         sender: "bot",
+  //         text: "Sorry, I encountered an error. Please try again.",
+  //         timestamp: new Date(),
+  //       },
+  //     ]);
+  //   } finally {
+  //     setIsLoading(false);
+  //     setIsTyping(false);
+  //   }
+  // };
+
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -51,41 +125,21 @@ const Chat: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const stream = await sendChatMessage(userInput);
-      const reader = stream.getReader();
-      const decoder = new TextDecoder();
+      // Get plain text response - NO STREAMING, NO READER
+      const replyText = await sendChatMessage(userInput);
 
+      console.log("Received response:", replyText); // Debug log
 
-      // Create empty bot message
-      const botMessageId = (Date.now() + 1).toString();
+      // Create bot message with the complete text
       const botMessage: ChatMessage = {
-        id: botMessageId,
+        id: (Date.now() + 1).toString(),
         sender: "bot",
-        text: "",
+        text: replyText,
         timestamp: new Date(),
       };
+
       setMessages((prev) => [...prev, botMessage]);
 
-      const updateBotMessage = (id: string, text: string) => {
-        setMessages(prev =>
-          prev.map(msg =>
-            msg.id === id ? { ...msg, text } : msg
-          )
-        );
-      };
-
-      let botText = "";   // safe variable
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        botText += chunk;
-
-        // Update bot message incrementally
-        updateBotMessage(botMessageId, botText);
-      }
     } catch (error) {
       console.error("Chat error:", error);
       setMessages((prev) => [
@@ -102,6 +156,7 @@ const Chat: React.FC = () => {
       setIsTyping(false);
     }
   };
+
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {

@@ -1,16 +1,13 @@
-Nordisk Support Solutions is a leading IT solutuions company founded in 2025.
-Our headquarters are located at Copenhagen, Denmark.
-The company specializes in IT infrastructure, data engineering, and software development.
-Our mission is to empower businesses through innovative technology solutions.
-Core values: Integrity, Innovation, Customer Focus, and Sustainability.
-We serve clients across Europe and North America.
-Company size: 10-50 employees with offices in 5 countries.
-Standard business hours are Monday-Friday 8:30-16:30 CET.
-Emergency support is available 24/7 for critical systems.
-All technicians are skilled and educated in respective fields.
-Our response time SLA for critical issues is 30 minutes.
-For billing inquiries, email billing@nordisksupport.se or call +45 4222 8426.
-New client onboarding typically takes 3-5 business days.
+Name: Nordisk Support
+Company Size: 10 to 50 employees.
+Offices or branch: 5 countries.
+Founded: 2025.
+HQ or head quarter: Copenhagen, Denmark.
+Core Services: IT support, data engineering, software development.
+What are your opening hours? Our opening hours are Monday to Friday, 8:30 to 16:30.
+What time does Nordisk Support open? We are open Monday to Friday from 8:30 to 16:30.
+When is the support desk available? The support desk is available Monday to Friday, 8:30 to 16:30.
+Emergency support: available 24/7 for critical systems.
+Billing: email billing@nordisksupport.com or call +45 4222 8426.
 We provide free initial consultations for all new prospects.
-Company newsletter is published quarterly with tech tips and updates.
 Nordisk celebrates its company anniversary every October 15th.

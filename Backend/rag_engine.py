@@ -5,7 +5,6 @@ from openai import OpenAI
 
 # ------------------ CONFIG ------------------
 EMB_MODEL = "text-embedding-3-small"
-
 DATA_DIR = "data"
 STORE_DIR = "embeddings"
 
@@ -25,9 +24,10 @@ client = OpenAI(api_key=API_KEY)
 
 # ------------------ UTILS ------------------
 def embed(text: str):
+    text_lower = text.lower().strip()
     resp = client.embeddings.create(
         model=EMB_MODEL,
-        input=text
+        input=text_lower
     )
     return resp.data[0].embedding
 
@@ -82,7 +82,7 @@ EMBEDDING_STORES = {
 }
 
 # ------------------ SEARCH ------------------
-def search_all_sources(query: str, threshold=0.7):
+def search_all_sources(query: str, threshold=0.6):
     q_emb = embed(query)
 
     best = {
@@ -105,3 +105,26 @@ def search_all_sources(query: str, threshold=0.7):
         return best
     return None
 
+
+def search_all_sources_debug(query: str, threshold=0.55, top_k=5):
+    q_emb = embed(query)
+    all_results = []
+    for source, store in EMBEDDING_STORES.items():
+        for item in store:
+            score = cosine(q_emb, item["embedding"])
+            all_results.append({
+                "source": source,
+                "text": item["text"],
+                "score": score
+            })
+    # Sort and get top matches
+    all_results.sort(key=lambda x: x["score"], reverse=True)
+    print(f"=== DEBUG: Top {top_k} matches for query: '{query}' ===")
+    for i, res in enumerate(all_results[:top_k]):
+        print(f"[{i+1}] Score: {res['score']:.3f} | Source: '{res['source']}'")
+        print(f"    Text: {res['text'][:200]}")
+        print("-" * 50)
+    # Return the best if above threshold
+    if all_results and all_results[0]['score'] >= threshold:
+        return all_results[0]
+    return None
