@@ -14,7 +14,7 @@ export default function Header() {
 
   // Determine current site key
   const path = location.pathname.split('/')[1] as keyof typeof sites;
-  const siteConfig: SiteConfig = sites[path] || sites.software;
+  const siteConfig: SiteConfig = sites[path] || sites.itsupport; // default site
 
   // Apply dynamic CSS variables to body
   useEffect(() => {

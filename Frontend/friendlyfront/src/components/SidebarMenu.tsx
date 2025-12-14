@@ -35,7 +35,7 @@ interface SidebarMenuProps {
 export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   const location = useLocation();
   const path = location.pathname.split('/')[1] as keyof typeof sites;
-  const siteConfig: SiteConfig = sites[path] || sites.software; // default site
+  const siteConfig: SiteConfig = sites[path] || sites.itsupport; // default site
 
   const isActivePath = (linkPath: string) => location.pathname === linkPath;
 

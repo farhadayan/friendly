@@ -9,12 +9,12 @@ interface ThemeContextType {
 }
 
 export const ThemeContext = createContext<ThemeContextType>({
-  site: 'software',
+  site: 'itsupport',
   setSite: () => { },
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [site, setSite] = useState<SiteKey>('software');
+  const [site, setSite] = useState<SiteKey>('itsupport');
 
   useEffect(() => {
     // Remove previous theme classes
