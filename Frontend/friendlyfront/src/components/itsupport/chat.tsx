@@ -308,8 +308,6 @@ const styles = `
   right: 22px;
   bottom: 22px;
   display: flex;
-  right: 20px;
-  bottom: 20px;
   flex-direction: column;
   height: 400px;
   max-width: 300px;

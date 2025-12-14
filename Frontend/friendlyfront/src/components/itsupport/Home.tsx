@@ -53,6 +53,7 @@ export default function Home() {
     {
       icon: <StorageIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Data Engineering",
+      link: "/itsupport/dataservices",
       description: "Turn raw data into actionable insights with clean pipelines, optimized databases, and structured reporting systems.",
     }
   ];

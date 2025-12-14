@@ -61,17 +61,29 @@ export default function Header() {
                   borderRadius: '4px'
                 }}
               />
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: "bold",
-                  fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
-                  color: 'var(--header-text)',
-                }}
-              >
-                {siteConfig.name}
-              </Typography>
             </Link>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.2rem' },
+                color: 'var(--header-text)',
+              }}
+            >
+              {siteConfig.name}
+            </Typography>
+          </Box>
+          <Box sx={{ alignItems: "center" }} >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.7rem' },
+                color: '#1e40af',
+              }}
+            >
+              Nordisk Support
+            </Typography>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: { xs: 1, sm: 2, md: 6 } }}>
