@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   Drawer,
@@ -9,7 +9,9 @@ import {
   IconButton,
   Box,
   Tooltip,
-  Typography
+  Typography,
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 import {
   Close as CloseIcon,
@@ -38,38 +40,56 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   const siteConfig: SiteConfig = sites[path] || sites.itsupport; // default site
   const isActivePath = (linkPath: string) => location.pathname === linkPath;
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const effectiveOpen = isMobile ? false : open;
+
   return (
     <Drawer
       anchor="left"
       variant="permanent"
-      open={open}
+      open={effectiveOpen}
       sx={{
-        width: open ? 240 : 56,
+        width: isMobile ? 56 : (open ? 240 : 56),
         flexShrink: 0,
 
         '& .MuiDrawer-paper': {
           height: `calc(100vh - ${siteConfig.headerHeight || 64}px)`,
           marginTop: `${siteConfig.headerHeight || 64}px`,
-          width: open ? 240 : 56,
+          width: isMobile ? 56 : (open ? 240 : 56),
           boxSizing: 'border-box',
           backgroundColor: siteConfig.sidebarColor || siteConfig.primaryColor,
           color: 'black',
           transition: 'width 0.3s ease-in-out',
           overflowX: 'hidden',
+
+          // On mobile, disable hover effects and keep it always at 56px
+          ...(isMobile && {
+            width: '56px !important',
+            minWidth: '56px !important',
+            maxWidth: '56px !important',
+
+          }),
         },
       }}
     >
       {/* Header / Toggle */}
       <Box
         sx={{
-          p: open ? 2 : 1,
+          p: effectiveOpen ? 2 : 1,
           display: 'flex',
-          justifyContent: open ? 'space-between' : 'center',
-          alignItems: 'center'
+          justifyContent: effectiveOpen ? 'space-between' : 'center',
+          alignItems: 'center',
 
+          // Hide toggle button on mobile
+          ...(isMobile && {
+            display: 'none',
+          })
         }}
       >
-        {open ? (
+
+        {effectiveOpen ? (
           <>
             <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
               Menu

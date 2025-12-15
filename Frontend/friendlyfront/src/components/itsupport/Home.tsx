@@ -68,9 +68,7 @@ export default function Home() {
   ];
 
   return (
-    <Box sx={{
-      overflow: "hidden", background: "transparent"
-    }}>
+    <Box sx={{ overflow: "hidden", background: "transparent" }}>
 
       {/* Hero Section */}
 
@@ -91,11 +89,15 @@ export default function Home() {
           sx={{
             flex: 1,
             m: 0,
-            p: { xs: 0, md: 4 },
+            p: { xs: 3, md: 4 },
             backdropFilter: "blur(10px)",
             background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
-            minHeight: "500px",
-            maxHeight: "500px"
+            minHeight: isMobile ? "auto" : "500px",
+            maxHeight: isMobile ? "auto" : "500px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
 
           }}
         >
@@ -205,7 +207,6 @@ export default function Home() {
         <Box
           sx={{
             flex: 1,
-            //display: "flex",
             alignItems: "center",
             justifyContent: "center",
             display: { xs: "none", md: "flex" }
@@ -238,7 +239,7 @@ export default function Home() {
           color="text.secondary"
           textAlign="center"
           sx={{
-            mb: 6, maxWidth: "600px", mx: "auto",
+            mb: isMobile ? 2 : 6, maxWidth: "600px", mx: "auto",
             fontSize: isMobile ? "0.9rem" : "1.1rem",
           }}
         >
@@ -246,7 +247,7 @@ export default function Home() {
           secure, and running without interruption.
         </Typography>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={isMobile ? 1 : 3}>
           {services.map((service, index) => (
             <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
               <Link
@@ -254,7 +255,6 @@ export default function Home() {
                 style={{ textDecoration: "none" }}
               >
                 <Card
-
                   elevation={4}
                   sx={{
                     borderRadius: 4,
@@ -266,11 +266,12 @@ export default function Home() {
                       boxShadow: "0 12px 20px rgba(0,0,0,0.1)",
                     },
                   }}
-
                 >
-                  <CardContent sx={{ p: 3, textAlign: "center", height: "100%" }}>
-                    <Box sx={{ mb: 2 }}>{service.icon}</Box>
-                    <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  <CardContent sx={{ p: isMobile ? 1 : 3, textAlign: "center", height: "100%" }}>
+                    <Box sx={{ mb: isMobile ? 0 : 2 }}>{service.icon}</Box>
+                    <Typography variant="h6" fontWeight="bold"
+                      sx={{ fontSize: { xs: "1.0rem", md: "2.5rem", lg: "3.0rem" } }}
+                    >
                       {service.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -285,7 +286,7 @@ export default function Home() {
       </Container>
 
       {/* Why Choose Us Section */}
-      <Box sx={{ backgroundColor: "transparent", py: 8 }}>
+      <Box sx={{ backgroundColor: "transparent", py: isMobile ? 1 : 8 }}>
         <Container maxWidth="lg">
           <Grid spacing={6} alignItems="center">
             <Grid size={{
@@ -302,7 +303,7 @@ export default function Home() {
                 Why Choose Us ?
               </Typography>
               <Typography variant="h6" color="text.secondary" sx={{
-                mb: 4,
+                mb: isMobile ? 0 : 4,
                 fontSize: { xs: "0.9rem", md: "1.1rem", lg: "1.2rem" }
 
               }}>

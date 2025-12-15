@@ -66,6 +66,7 @@ export default function Header() {
             <Typography
               variant="h6"
               sx={{
+                display: { xs: 'none', sm: 'block' },
                 fontWeight: "bold",
                 fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.2rem' },
                 color: 'var(--header-text)',
