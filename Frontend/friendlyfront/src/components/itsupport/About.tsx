@@ -234,7 +234,7 @@ export default function About() {
           variant="contained"
           size="large"
           component={Link}
-          to="/itsupport/contact"
+          to="/contact"
           startIcon={<RocketIcon />}
           sx={{
             px: 4, py: 1.5, background:

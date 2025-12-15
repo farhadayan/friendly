@@ -99,15 +99,13 @@ export default function Header() {
                   fontWeight: "bold",
                   fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
                   color: 'var(--header-text)',
-                  '&:hover': {
-                    color: 'var(--accent)',
-                    transition: 'color 0.2s ease'
-                  }
+
                 }}
               >
                 Contact
               </Typography>
             </Link>
+
           </Box>
         </Toolbar>
 

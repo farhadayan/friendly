@@ -40,20 +40,20 @@ export default function Home() {
     {
       icon: <ComputerIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "IT Help Desk",
-      link: "/itsupport/itservices",
+      link: "/itservices",
       description:
         "Keep your business running smoothly with expert hardware, networking, and cybersecurity support.",
     },
     {
       icon: <SoftwareIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Software Solutions",
-      link: "/itsupport/swservices",
+      link: "/swservices",
       description: "Scalable, efficient, and custom-built applications designed around your business needs.",
     },
     {
       icon: <StorageIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Data Engineering",
-      link: "/itsupport/dataservices",
+      link: "/dataservices",
       description: "Turn raw data into actionable insights with clean pipelines, optimized databases, and structured reporting systems.",
     }
   ];
@@ -154,7 +154,7 @@ export default function Home() {
               variant="contained"
               size="large"
               component={Link}
-              to="/itsupport/contact"
+              to="/contact"
               sx={{
                 backgroundColor: "white",
                 borderColor: "#000",
@@ -179,7 +179,7 @@ export default function Home() {
               variant="outlined"
               size="large"
               component={Link}
-              to="/itsupport/itservices"
+              to="/itservices"
               sx={{
                 backgroundColor: "white",
                 borderColor: "#000",
@@ -364,7 +364,7 @@ export default function Home() {
             variant="contained"
             size="large"
             component={Link}
-            to="/itsupport/contact"
+            to="/contact"
             startIcon={<PhoneIcon />}
             sx={{
               px: 4,
@@ -381,7 +381,7 @@ export default function Home() {
             variant="outlined"
             size="large"
             component={Link}
-            to="/itsupport/itservices"
+            to="/itservices"
             startIcon={<BuildIcon />}
             sx={{
               px: 4,
