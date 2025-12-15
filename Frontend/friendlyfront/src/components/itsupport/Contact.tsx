@@ -1,7 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { countryCodes } from "../../dummy-data/country_codes";
 import { useLocation } from "react-router-dom";
-import { Box, Stack, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box, Stack, Typography, useTheme, useMediaQuery, Container,
+  List, ListItem, ListItemIcon, ListItemText,
+  Grid,
+  Card
+} from "@mui/material";
+import {
+
+  CheckCircle as CheckCircleIcon,
+} from "@mui/icons-material";
 
 interface FormData {
   clientfname: string;
@@ -87,6 +96,27 @@ export default function Contact() {
 
   const [showAllFields, setShowAllFields] = useState(true);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const contacts = [
+    {
+      name: "Customer Care",
+      role: "",
+      avatar: "/images/team/sophia.jpg",
+      email: "customercare@nordisksupport.com",
+    },
+    {
+      name: "Sales Inquiries",
+      role: "",
+      avatar: "/images/team/alice.jpg",
+      email: "sales@nordisksupport.com",
+    },
+    {
+      name: "Technical Support",
+      role: "",
+      avatar: "/images/team/michael.jpg",
+      email: "techteam@nordisksupport.com",
+    }
+
+  ];
 
   // Update website source when component mounts or URL changes
   useEffect(() => {
@@ -172,108 +202,108 @@ export default function Contact() {
     };
   }, [form.email, form.website_source]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value } = e.target;
 
-    if (name === "email") {
-      setEmailStatus({ checking: false, exists: null, valid: false });
-      setShowAllFields(true);
-    }
+  //   if (name === "email") {
+  //     setEmailStatus({ checking: false, exists: null, valid: false });
+  //     setShowAllFields(true);
+  //   }
 
-    setForm({ ...form, [name]: value });
-  };
+  //   setForm({ ...form, [name]: value });
+  // };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    if (!emailStatus.valid || emailStatus.checking) {
-      setMessage("Please enter a valid email address");
-      return;
-    }
+  //   if (!emailStatus.valid || emailStatus.checking) {
+  //     setMessage("Please enter a valid email address");
+  //     return;
+  //   }
 
-    setIsSubmitting(true);
-    setMessage('');
+  //   setIsSubmitting(true);
+  //   setMessage('');
 
-    try {
-      // Determine what data to send
-      const dataToSend = emailStatus.exists
-        ? {
-          email: form.email,
-          query: form.query,
-          website_source: form.website_source
-        }
-        : { ...form };
+  //   try {
+  //     // Determine what data to send
+  //     const dataToSend = emailStatus.exists
+  //       ? {
+  //         email: form.email,
+  //         query: form.query,
+  //         website_source: form.website_source
+  //       }
+  //       : { ...form };
 
-      const res = await fetch("http://127.0.0.1:5000/api/client", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dataToSend)
-      });
+  //     const res = await fetch("http://127.0.0.1:5000/api/client", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(dataToSend)
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      if (res.ok) {
-        const successMessage = emailStatus.exists
-          ? "Thank you! Your additional query has been submitted."
-          : "Thank you! Your registration is complete.";
+  //     if (res.ok) {
+  //       const successMessage = emailStatus.exists
+  //         ? "Thank you! Your additional query has been submitted."
+  //         : "Thank you! Your registration is complete.";
 
-        setMessage(successMessage);
+  //       setMessage(successMessage);
 
-        if (emailStatus.exists) {
-          setForm({
-            ...form,
-            query: ""
-          });
-        } else {
-          setForm({
-            ...initialState,
-            website_source: form.website_source // Preserve website source
-          });
-          setEmailStatus({ checking: false, exists: null, valid: false });
-          setShowAllFields(true);
-        }
+  //       if (emailStatus.exists) {
+  //         setForm({
+  //           ...form,
+  //           query: ""
+  //         });
+  //       } else {
+  //         setForm({
+  //           ...initialState,
+  //           website_source: form.website_source // Preserve website source
+  //         });
+  //         setEmailStatus({ checking: false, exists: null, valid: false });
+  //         setShowAllFields(true);
+  //       }
 
-        setTimeout(() => setMessage(''), 5000);
-      } else {
-        // Handle FastAPI validation errors
-        let errorMessage = 'Something went wrong. Please try again.';
+  //       setTimeout(() => setMessage(''), 5000);
+  //     } else {
+  //       // Handle FastAPI validation errors
+  //       let errorMessage = 'Something went wrong. Please try again.';
 
-        if (data.detail) {
-          // FastAPI returns validation errors in detail
-          if (Array.isArray(data.detail)) {
-            // Multiple validation errors
-            errorMessage = data.detail.map((err: any) =>
-              `${err.loc ? err.loc.join('.') + ': ' : ''}${err.msg}`
-            ).join(', ');
-          } else if (typeof data.detail === 'string') {
-            // Single error message
-            errorMessage = data.detail;
-          } else if (data.detail.message) {
-            // Error object with message property
-            errorMessage = data.detail.message;
-          }
-        } else if (data.error) {
-          errorMessage = data.error;
-        } else if (data.message) {
-          errorMessage = data.message;
-        }
-        setEmailStatus({
-          checking: false,
-          exists: null,
-          valid: false,
-          error: errorMessage
-        });
-      }
+  //       if (data.detail) {
+  //         // FastAPI returns validation errors in detail
+  //         if (Array.isArray(data.detail)) {
+  //           // Multiple validation errors
+  //           errorMessage = data.detail.map((err: any) =>
+  //             `${err.loc ? err.loc.join('.') + ': ' : ''}${err.msg}`
+  //           ).join(', ');
+  //         } else if (typeof data.detail === 'string') {
+  //           // Single error message
+  //           errorMessage = data.detail;
+  //         } else if (data.detail.message) {
+  //           // Error object with message property
+  //           errorMessage = data.detail.message;
+  //         }
+  //       } else if (data.error) {
+  //         errorMessage = data.error;
+  //       } else if (data.message) {
+  //         errorMessage = data.message;
+  //       }
+  //       setEmailStatus({
+  //         checking: false,
+  //         exists: null,
+  //         valid: false,
+  //         error: errorMessage
+  //       });
+  //     }
 
-    } catch (err) {
-      console.error("Submission error:", err);
-      setMessage('Network error. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //   } catch (err) {
+  //     console.error("Submission error:", err);
+  //     setMessage('Network error. Please try again.');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   // Get page title based on website source
   const pageTitle = getPageTitle(form.website_source);
@@ -352,6 +382,7 @@ export default function Contact() {
     }
   };
 
+
   // Determine border color based on email status
   const getEmailBorderColor = () => {
     if (emailStatus.exists) return "#28a745";
@@ -361,298 +392,459 @@ export default function Contact() {
   };
 
   // Determine button color based on website source
-  const getButtonColor = () => {
-    if (emailStatus.exists) return "#28a745";
-    return form.website_source === 'itsupport' ? "#48bb78" :
-      form.website_source === 'software' ? "#ed8936" : "#2575fc";
-  };
+  // const getButtonColor = () => {
+  //   if (emailStatus.exists) return "#28a745";
+  //   return form.website_source === 'itsupport' ? "#48bb78" :
+  //     form.website_source === 'software' ? "#ed8936" : "#2575fc";
+  // };
 
   return (
-    // <div style={styles.container}>
-    <Box
-      sx={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        background: "linear-gradient(to bottom, #e8f3ff, #ffffff)",
-        paddingTop: 8,
-      }}
-    >
-      {/* Title Section */}
-      <Stack
-        direction="column"
-        spacing={1}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Stack direction="row" alignItems="center" spacing={1.2}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 600,
-              letterSpacing: "0.5px"
-            }}
-          >
+    <Box sx={{ py: 6 }}  >
+      <Box sx={{ pb: 8, textAlign: "center" }}>
+        <Container maxWidth="md">
+          <Stack spacing={2}>
 
-            Have a project in mind? Need IT help?
-            We’re here to assist you.
-          </Typography>
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={1.2}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 400,
-              fontSize: "15px",
-              color: "#3b82f6",
-              letterSpacing: "0.5px",
-            }}
-          >
-            📞 Phone: +45  123 (-HELP)|{" "} 📧 Email: customercare@nordisksupport.com
-
-          </Typography>
-        </Stack>
-        <Typography
-          variant="h6"
-          sx={{ color: "#444", fontSize: "18px" }}
-        >
-          Business Hours
-        </Typography>
-        <Stack direction="row" alignItems="center" spacing={1.2}>
-          <Typography
-
-            sx={{
-              fontWeight: 600,
-              color: "#0D6EFD",
-              letterSpacing: "0.5px",
-            }}
-          >
-            Mon–Fri: 8:00 AM – 4:00 PM<br />
-            Emergency IT Support: 24/7
-
-          </Typography>
-        </Stack>
-
-
-        <Typography
-          variant="body2"
-          sx={{ color: "#666", fontSize: "14px" }}
-        >
-          24/7 IT support — fast, reliable, and always here to help.
-        </Typography>
-      </Stack>
-      <br></br>
-      {/* Status Messages */}
-      {
-        message && (
-          <div style={{
-            backgroundColor: message.includes('Thank you') ? "#d4edda" : "#f8d7da",
-            color: message.includes('Thank you') ? "#155724" : "#721c24",
-            padding: "10px 20px",
-            borderRadius: "8px",
-            marginBottom: "20px",
-            maxWidth: "400px",
-            textAlign: "center" as const,
-            width: "100%"
-          }}>
-            {message}
-          </div>
-        )
-      }
-
-      <form onSubmit={handleSubmit} style={styles.form}>
-        {/* Email Field */}
-        <div>
-          <input
-            style={{
-              ...styles.input,
-              borderColor: getEmailBorderColor(),
-              borderWidth: "2px"
-            }}
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            disabled={isSubmitting}
-          />
-
-          {/* Email Status Indicator */}
-          <div style={styles.statusIndicator}>
-            {emailStatus.checking && (
-              <>
-                <span style={{ color: "#6c757d" }}>Checking email...</span>
-                <div style={{
-                  width: "12px",
-                  height: "12px",
-                  border: "2px solid #f3f3f3",
-                  borderTop: "2px solid #3498db",
-                  borderRadius: "50%",
-                  animation: "spin 1s linear infinite"
-                }} />
-              </>
-            )}
-
-            {!emailStatus.checking && emailStatus.exists === true && (
-              <span style={{ color: "#28a745" }}>
-                ✓ Welcome back! Your details are saved.
-              </span>
-            )}
-
-            {!emailStatus.checking && emailStatus.exists === false && emailStatus.valid && (
-              <span style={{ color: "#17a2b8" }}>
-                New user - please fill in your details
-              </span>
-            )}
-
-            {!emailStatus.checking && !emailStatus.valid && form.email && (
-              <span style={{ color: "#dc3545" }}>
-                Please enter a valid email address
-              </span>
-            )}
-
-            {emailStatus.error && (
-              <span style={{ color: "#dc3545", fontSize: "0.8rem" }}>
-                {emailStatus.error}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Personal Info Fields (Conditional) */}
-        {showAllFields ? (
-          <>
-            <input
-              style={styles.input}
-              type="text"
-              name="clientfname"
-              placeholder="First Name"
-              value={form.clientfname}
-              onChange={handleChange}
-              disabled={isSubmitting || emailStatus.exists === true}
-              required={emailStatus.exists === false}
-            />
-
-            <input
-              style={styles.input}
-              type="text"
-              name="clientlname"
-              placeholder="Last Name"
-              value={form.clientlname}
-              onChange={handleChange}
-              disabled={isSubmitting || emailStatus.exists === true}
-              required={emailStatus.exists === false}
-            />
-
-            <select
-              style={styles.input}
-              name="countrycode"
-              value={form.countrycode}
-              onChange={handleChange}
-              disabled={isSubmitting || emailStatus.exists === true}
-              required={emailStatus.exists === false}
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 600 }}
             >
-              {countryCodes.map((country: CountryCode) => (
-                <option key={country.name} value={country.code}>
-                  {country.name} ({country.code})
-                </option>
-              ))}
-            </select>
+              Have a project in mind? Need IT help?
+            </Typography>
 
-            <input
-              style={styles.input}
-              type="text"
-              name="mobile"
-              placeholder="Mobile Number"
-              value={form.mobile}
-              onChange={handleChange}
-              disabled={isSubmitting || emailStatus.exists === true}
-              required={emailStatus.exists === false}
-            />
-          </>
-        ) : (
-          <div style={{
-            backgroundColor: "#f8f9fa",
-            padding: "10px",
-            borderRadius: "8px",
-            textAlign: "center" as const,
-            color: "#6c757d",
-            fontSize: "0.9rem"
-          }}>
-            Your personal details are already saved in our system.
-          </div>
-        )}
+            <Typography sx={{ fontSize: "15px", color: "#555" }}>
+              We’re here to assist you.
+            </Typography>
 
-        {/* Query Field (Always Visible) */}
-        <textarea
-          style={styles.textarea}
-          name="query"
-          placeholder={emailStatus.exists ?
-            "What additional help do you need?" :
-            `Your ${form.website_source === 'itsupport' ? 'IT support' :
-              form.website_source === 'software' ? 'software' : 'guidance'} query`}
-          value={form.query}
-          onChange={handleChange}
-          required
-          disabled={isSubmitting}
-        />
+            <Typography
+              sx={{ fontWeight: 600 }}
+            >
+              Mon–Fri: 8:00 AM – 4:00 PM
+            </Typography>
 
-        {/* Hidden website source field */}
-        <input type="hidden" name="website_source" value={form.website_source} />
+            <Typography
+              variant="body2"
+              sx={{ color: "#666" }}
+            >
+              24/7 IT support — fast, reliable, and always here to help.
+            </Typography>
 
-        {/* Submit Button */}
-        <button
-          style={{
-            ...styles.button,
-            backgroundColor: getButtonColor(),
-            opacity: isSubmitting ? 0.7 : 1,
-            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-          }}
-          type="submit"
-          disabled={isSubmitting || emailStatus.checking || !emailStatus.valid}
+          </Stack>
+        </Container>
+      </Box>
+      <Container maxWidth="lg">
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          spacing={4}
+          alignItems="flex-start"
+          justifyContent="space-between"
         >
-          {isSubmitting ? (
-            <>
-              <span>Sending...</span>
-              <div style={{
-                display: 'inline-block',
-                marginLeft: '8px',
-                width: '12px',
-                height: '12px',
-                border: '2px solid rgba(255,255,255,0.3)',
-                borderTop: '2px solid white',
-                borderRadius: '50%',
-                animation: 'spin 1s linear infinite'
-              }} />
-            </>
-          ) : emailStatus.exists ? (
-            'Submit Additional Query'
-          ) : (
-            'Submit Query'
-          )}
-        </button>
-      </form>
+          {/* Left: Contact Info */}
+          <Stack spacing={4} flex={1}>
+            <Container maxWidth="md" sx={{ py: 2 }}>
+              {contacts.map((item) => (
+                <Grid sx={{ px: 0, py: 1 }}>
+                  <Card sx={{
+                    minWidth: 30,
+                    height: '100%',
+                    p: 2,
+                    boxShadow: 3,
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 4
+                  }}>
+                    <Box key={item.email}>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: 600, mb: 0.5 }}
+                      >
+                        {item.name}
+                      </Typography>
 
-      {/* Add CSS for spinner animation */}
-      <style>{`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          
-          input:focus, textarea:focus, select:focus {
-            border-color: #4299e1 !important;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
-          }
-          
-          input:disabled, textarea:disabled, select:disabled {
-            background-color: #f7fafc;
-            cursor: not-allowed;
-          }
-        `}</style>
+                      <Typography
+                        component="a"
+                        href={`mailto:${item.email}`}
+                        sx={{
+                          fontSize: "15px",
+                          color: "#3b82f6",
+                          textDecoration: "none",
+                          "&:hover": { textDecoration: "underline" },
+                        }}
+                      >
+                        {item.email}
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Grid>
+              ))}
+            </Container>
+          </Stack>
+
+          {/* Right: Image */}
+          <Box
+            sx={{
+              flex: 1,
+              
+              display: { xs: "none", md: "block" }, // hide on mobile
+            }}
+          >
+            <img
+              src="/logos/contact.webp"
+              alt="contact"
+              style={{
+                width: "100%",
+                maxWidth: "600px",
+                height: "auto",
+                borderRadius: "12px",
+                marginTop: "10px",
+                background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
+              }}
+            />
+          </Box>
+        </Stack>
+      </Container>
+
     </Box >
+
+
+    // <div style={styles.container}>
+    // <Box
+    //   sx={{
+    //     minHeight: "100vh",
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     alignItems: "center",
+    //     justifyContent: "flex-start",
+    //     background: "#ffffff",
+    //     paddingTop: 8,
+    //   }}
+    // >
+
+    //   {/* Team Section */}
+    //   <Box sx={{ backgroundColor: "transparent", py: 8 }}>
+    //     <Container maxWidth="lg">
+    //       <Box sx={{
+    //         display: "flex",
+    //         flexDirection: { xs: "column", md: "row" },
+    //         alignItems: "center",
+    //         gap: 6
+    //       }}>
+
+    //         <Box sx={{ flex: 1 }}>
+    //           <Container maxWidth="lg" sx={{ py: 8 }}>
+    //             {contact.map((team, index) => (
+    //               <Grid key={index} sx={{ px: 0, py: 1 }}>
+    //                 <Card sx={{ minWidth: 40, height: '100%', p: 2, boxShadow: 3, borderRadius: 2, display: 'flex', alignItems: 'center', gap: 2  }}>
+
+    //                   <Typography  >
+    //                     {team.name}<br />
+    //                     {team.email}
+    //                   </Typography>
+
+    //                 </Card>
+
+    //               </Grid>
+    //             ))}
+
+
+    //           </Container>
+
+    //         </Box>
+
+    //         {/* Right side: Image */}
+    //         <Box sx={{
+    //           flex: 1,
+    //           display: { xs: "none", md: "block" } // Hide image on mobile if needed
+    //         }}>
+    //           <img
+    //             src="/logos/contact.webp"
+    //             alt="Make us diff"
+    //             style={{
+    //               width: "100%",
+    //               maxWidth: "600px",
+    //               height: "auto",
+    //               borderRadius: "12px",
+    //               background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)"
+    //             }}
+    //           />
+    //         </Box>
+
+    //       </Box>
+    //     </Container>
+    //   </Box>
+    //   {/* Title Section */}
+    //   <Stack
+    //     direction="column"
+    //     spacing={1}
+    //     alignItems="center"
+    //     justifyContent="center"
+    //   >
+    //     <Stack direction="row" alignItems="center" spacing={1.2}>
+    //       <Typography
+    //         variant="h6"
+    //         sx={{
+    //           fontWeight: 600,
+    //           letterSpacing: "0.5px"
+    //         }}
+    //       >
+
+    //         Have a project in mind? Need IT help?
+    //         We’re here to assist you.
+    //       </Typography>
+    //     </Stack>
+    //     <Stack direction="row" alignItems="center" spacing={1.2}>
+    //       <Typography
+    //         variant="h6"
+    //         sx={{
+    //           fontWeight: 400,
+    //           fontSize: "15px",
+    //           color: "#3b82f6",
+    //           letterSpacing: "0.5px",
+    //         }}
+    //       >
+
+
+    //       </Typography>
+    //     </Stack>
+    //     <Typography
+    //       variant="h6"
+    //       sx={{ color: "#444", fontSize: "18px" }}
+    //     >
+    //       Business Hours
+    //     </Typography>
+    //     <Stack direction="row" alignItems="center" spacing={1.2}>
+    //       <Typography
+
+    //         sx={{
+    //           fontWeight: 600,
+    //           color: "#0D6EFD",
+    //           letterSpacing: "0.5px",
+    //         }}
+    //       >
+    //         Mon–Fri: 8:00 AM – 4:00 PM<br />
+
+
+    //       </Typography>
+    //     </Stack>
+
+
+    //     <Typography
+    //       variant="body2"
+    //       sx={{ color: "#666", fontSize: "14px" }}
+    //     >
+    //       24/7 IT support — fast, reliable, and always here to help.
+    //     </Typography>
+    //   </Stack>
+    //   <br></br>
+    //   {/* Status Messages */}
+    //   {/* {
+    //     message && (
+    //       <div style={{
+    //         backgroundColor: message.includes('Thank you') ? "#d4edda" : "#f8d7da",
+    //         color: message.includes('Thank you') ? "#155724" : "#721c24",
+    //         padding: "10px 20px",
+    //         borderRadius: "8px",
+    //         marginBottom: "20px",
+    //         maxWidth: "400px",
+    //         textAlign: "center" as const,
+    //         width: "100%"
+    //       }}>
+    //         {message}
+    //       </div>
+    //     )
+    //   } */}
+
+    //   {/* <form onSubmit={handleSubmit} style={styles.form}>
+
+    //     <div>
+    //       <input
+    //         style={{
+    //           ...styles.input,
+    //           borderColor: getEmailBorderColor(),
+    //           borderWidth: "2px"
+    //         }}
+    //         type="email"
+    //         name="email"
+    //         placeholder="Email"
+    //         value={form.email}
+    //         onChange={handleChange}
+    //         required
+    //         disabled={isSubmitting}
+    //       />
+
+
+    //       <div style={styles.statusIndicator}>
+    //         {emailStatus.checking && (
+    //           <>
+    //             <span style={{ color: "#6c757d" }}>Checking email...</span>
+    //             <div style={{
+    //               width: "12px",
+    //               height: "12px",
+    //               border: "2px solid #f3f3f3",
+    //               borderTop: "2px solid #3498db",
+    //               borderRadius: "50%",
+    //               animation: "spin 1s linear infinite"
+    //             }} />
+    //           </>
+    //         )}
+
+    //         {!emailStatus.checking && emailStatus.exists === true && (
+    //           <span style={{ color: "#28a745" }}>
+    //             ✓ Welcome back! Your details are saved.
+    //           </span>
+    //         )}
+
+    //         {!emailStatus.checking && emailStatus.exists === false && emailStatus.valid && (
+    //           <span style={{ color: "#17a2b8" }}>
+    //             New user - please fill in your details
+    //           </span>
+    //         )}
+
+    //         {!emailStatus.checking && !emailStatus.valid && form.email && (
+    //           <span style={{ color: "#dc3545" }}>
+    //             Please enter a valid email address
+    //           </span>
+    //         )}
+
+    //         {emailStatus.error && (
+    //           <span style={{ color: "#dc3545", fontSize: "0.8rem" }}>
+    //             {emailStatus.error}
+    //           </span>
+    //         )}
+    //       </div>
+    //     </div>
+
+
+    //     {showAllFields ? (
+    //       <>
+    //         <input
+    //           style={styles.input}
+    //           type="text"
+    //           name="clientfname"
+    //           placeholder="First Name"
+    //           value={form.clientfname}
+    //           onChange={handleChange}
+    //           disabled={isSubmitting || emailStatus.exists === true}
+    //           required={emailStatus.exists === false}
+    //         />
+
+    //         <input
+    //           style={styles.input}
+    //           type="text"
+    //           name="clientlname"
+    //           placeholder="Last Name"
+    //           value={form.clientlname}
+    //           onChange={handleChange}
+    //           disabled={isSubmitting || emailStatus.exists === true}
+    //           required={emailStatus.exists === false}
+    //         />
+
+    //         <select
+    //           style={styles.input}
+    //           name="countrycode"
+    //           value={form.countrycode}
+    //           onChange={handleChange}
+    //           disabled={isSubmitting || emailStatus.exists === true}
+    //           required={emailStatus.exists === false}
+    //         >
+    //           {countryCodes.map((country: CountryCode) => (
+    //             <option key={country.name} value={country.code}>
+    //               {country.name} ({country.code})
+    //             </option>
+    //           ))}
+    //         </select>
+
+    //         <input
+    //           style={styles.input}
+    //           type="text"
+    //           name="mobile"
+    //           placeholder="Mobile Number"
+    //           value={form.mobile}
+    //           onChange={handleChange}
+    //           disabled={isSubmitting || emailStatus.exists === true}
+    //           required={emailStatus.exists === false}
+    //         />
+    //       </>
+    //     ) : (
+    //       <div style={{
+    //         backgroundColor: "#f8f9fa",
+    //         padding: "10px",
+    //         borderRadius: "8px",
+    //         textAlign: "center" as const,
+    //         color: "#6c757d",
+    //         fontSize: "0.9rem"
+    //       }}>
+    //         Your personal details are already saved in our system.
+    //       </div>
+    //     )}
+
+
+    //     <textarea
+    //       style={styles.textarea}
+    //       name="query"
+    //       placeholder={emailStatus.exists ?
+    //         "What additional help do you need?" :
+    //         `Your ${form.website_source === 'itsupport' ? 'IT support' :
+    //           form.website_source === 'software' ? 'software' : 'guidance'} query`}
+    //       value={form.query}
+    //       onChange={handleChange}
+    //       required
+    //       disabled={isSubmitting}
+    //     />
+
+
+    //     <input type="hidden" name="website_source" value={form.website_source} />
+
+
+    //     <button
+    //       style={{
+    //         ...styles.button,
+    //         backgroundColor: getButtonColor(),
+    //         opacity: isSubmitting ? 0.7 : 1,
+    //         cursor: isSubmitting ? 'not-allowed' : 'pointer',
+    //       }}
+    //       type="submit"
+    //       disabled={isSubmitting || emailStatus.checking || !emailStatus.valid}
+    //     >
+    //       {isSubmitting ? (
+    //         <>
+    //           <span>Sending...</span>
+    //           <div style={{
+    //             display: 'inline-block',
+    //             marginLeft: '8px',
+    //             width: '12px',
+    //             height: '12px',
+    //             border: '2px solid rgba(255,255,255,0.3)',
+    //             borderTop: '2px solid white',
+    //             borderRadius: '50%',
+    //             animation: 'spin 1s linear infinite'
+    //           }} />
+    //         </>
+    //       ) : emailStatus.exists ? (
+    //         'Submit Additional Query'
+    //       ) : (
+    //         'Submit Query'
+    //       )}
+    //     </button>
+    //   </form> */}
+
+    //   {/* Add CSS for spinner animation */}
+    //   <style>{`
+    //       @keyframes spin {
+    //         0% { transform: rotate(0deg); }
+    //         100% { transform: rotate(360deg); }
+    //       }
+
+    //       input:focus, textarea:focus, select:focus {
+    //         border-color: #4299e1 !important;
+    //         box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+    //       }
+
+    //       input:disabled, textarea:disabled, select:disabled {
+    //         background-color: #f7fafc;
+    //         cursor: not-allowed;
+    //       }
+    //     `}</style>
+    // </Box >
   );
 }
