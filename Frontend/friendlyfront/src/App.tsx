@@ -41,6 +41,9 @@ function AppRoutes() {
   // Update site based on path
   useEffect(() => {
     const path = location.pathname.split('/')[1];
+    // if (path === "software" || path === "guidance" || path === "itsupport" || path === "flowsupport") {
+    //   setSite(path);
+    // }
     if (path === "software" || path === "guidance" || path === "itsupport" || path === "flowsupport") {
       setSite(path);
     }
@@ -49,7 +52,7 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Root redirect */}
-      <Route path="/" element={<Navigate to="/software/home" replace />} />
+      <Route path="/" element={<Navigate to="home" replace />} />
 
       {/* Software Solution */}
       <Route path="/software/home" element={<SwHome />} />
@@ -66,12 +69,12 @@ function AppRoutes() {
       <Route path="/guidance/contact" element={<GuideContact />} />
 
       {/* IT Support */}
-      <Route path="/itsupport/home" element={<Home />} />
-      <Route path="/itsupport/about" element={<About />} />
-      <Route path="/itsupport/itservices" element={<ItSupport />} />
-      <Route path="/itsupport/swservices" element={<SwServices />} />
-      <Route path="/itsupport/dataservices" element={<Dataengineering />} />
-      <Route path="/itsupport/contact" element={<Contact />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/itservices" element={<ItSupport />} />
+      <Route path="/swservices" element={<SwServices />} />
+      <Route path="/dataservices" element={<Dataengineering />} />
+      <Route path="/contact" element={<Contact />} />
 
       {/* Flow Support */}
       <Route path="/flowsupport/home" element={<FlowHome />} />
@@ -81,7 +84,7 @@ function AppRoutes() {
 
       <Route path="/flowsupport" element={<FlowHome />} />
       <Route path="/guidance" element={< GuideHome />} />
-      <Route path="/itsupport" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/software" element={<SwHome />} />
 
       {/* Individual Services */}

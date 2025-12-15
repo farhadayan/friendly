@@ -48,7 +48,8 @@ export default function Header() {
           {/* Left Section: Logo and Site Name */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Link
-              to={`/${path || 'itsupport'}/home`}
+              //to={`/${path || 'itsupport'}/home`}
+              to="/home"
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}
             >
               <img
@@ -87,7 +88,8 @@ export default function Header() {
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mr: { xs: 1, sm: 2, md: 6 } }}>
-            <Link to={`/${path || 'itsupport'}/contact`}
+            {/* <Link to={`/${path || 'itsupport'}/contact`} */}
+            <Link to="/contact"
               style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '16px' }}
             >
 

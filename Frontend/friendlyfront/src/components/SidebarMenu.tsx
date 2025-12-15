@@ -36,7 +36,6 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
   const location = useLocation();
   const path = location.pathname.split('/')[1] as keyof typeof sites;
   const siteConfig: SiteConfig = sites[path] || sites.itsupport; // default site
-
   const isActivePath = (linkPath: string) => location.pathname === linkPath;
 
   return (
@@ -91,7 +90,8 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
       {/* Menu Items */}
       <List sx={{ p: 0 }}>
         {siteConfig.navLinks.map((link) => {
-          const linkPath = `/${path}/${link.href}`;
+          //const linkPath = `/${path}/${link.href}`;
+          const linkPath = link.isTopLevel ? `/${link.href}` : `/${path}/${link.href}`;
           return (
             <Tooltip
               key={link.label}

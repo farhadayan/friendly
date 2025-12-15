@@ -5,7 +5,10 @@ export interface SiteConfig {
     name: string;
     logo: string;
     primaryColor: string;
-    navLinks: { label: string; href: string, icon: string }[];
+    navLinks: {
+        label: string; href: string, icon: string, isTopLevel?: boolean;
+
+    }[];
     heroTitle: string;
     heroSubtitle: string;
 
@@ -24,11 +27,11 @@ export const sites: Record<SiteKey, SiteConfig> = {
         primaryColor: '#757575',
 
         navLinks: [
-            { label: 'Home', href: 'home', icon: 'Home' },
-            { label: 'About Us', href: 'about', icon: 'Info' },
-            { label: 'Services', href: 'services', icon: 'Devices' },
-            { label: 'Facilities', href: 'facilities', icon: 'Business' },
-            { label: 'Contact', href: 'contact', icon: 'Mail' },
+            { label: 'Home', href: 'home', icon: 'Home', isTopLevel: false },
+            { label: 'About Us', href: 'about', icon: 'Info', isTopLevel: false },
+            { label: 'Services', href: 'services', icon: 'Devices', isTopLevel: false },
+            { label: 'Facilities', href: 'facilities', icon: 'Business', isTopLevel: false },
+            { label: 'Contact', href: 'contact', icon: 'Mail', isTopLevel: false },
         ],
         heroTitle: 'Innovative Software Solutions for Your Business',
         heroSubtitle: 'Custom software development, cloud services, and digital transformation.',
@@ -46,11 +49,11 @@ export const sites: Record<SiteKey, SiteConfig> = {
         primaryColor: '#757575', // blue
 
         navLinks: [
-            { label: 'Home', href: 'home', icon: 'Home' },
-            { label: 'Requirements', href: 'require', icon: 'Checklist' },
-            { label: 'Facilities', href: 'facilities', icon: 'Business' },
-            { label: 'About Us', href: 'about', icon: 'Info' },
-            { label: 'Contact', href: 'contact', icon: 'Mail' },
+            { label: 'Home', href: 'home', icon: 'Home', isTopLevel: false },
+            { label: 'Requirements', href: 'require', icon: 'Checklist', isTopLevel: false },
+            { label: 'Facilities', href: 'facilities', icon: 'Business', isTopLevel: false },
+            { label: 'About Us', href: 'about', icon: 'Info', isTopLevel: false },
+            { label: 'Contact', href: 'contact', icon: 'Mail', isTopLevel: false },
         ],
         heroTitle: 'Study and Build Your Future in Denmark',
         heroSubtitle: 'Guidance for admission, visa, and job opportunities.',
@@ -66,14 +69,14 @@ export const sites: Record<SiteKey, SiteConfig> = {
     itsupport: {
         name: 'Where Technology Meets Reliability',
         logo: process.env.PUBLIC_URL + '/logos/nordisk.png',
-        primaryColor: '#3c3c3c', 
+        primaryColor: '#3c3c3c',
         navLinks: [
-            { label: 'Home', href: 'home', icon: 'Home' },
-            { label: 'IT Support', href: 'itservices', icon: 'Computer' },
-            { label: 'Software Solutions', href: 'swservices', icon: 'Code' },
-            { label: 'Data Engineering', href: 'dataservices', icon: 'Storage' },
-            { label: 'Contact', href: 'contact', icon: 'Mail' },
-            { label: 'About Us', href: 'about', icon: 'Info' },
+            { label: 'Home', href: 'home', icon: 'Home', isTopLevel: true },
+            { label: 'IT Support', href: 'itservices', icon: 'Computer', isTopLevel: true },
+            { label: 'Software Solutions', href: 'swservices', icon: 'Code', isTopLevel: true },
+            { label: 'Data Engineering', href: 'dataservices', icon: 'Storage', isTopLevel: true },
+            { label: 'Contact', href: 'contact', icon: 'Mail', isTopLevel: true },
+            { label: 'About Us', href: 'about', icon: 'Info', isTopLevel: true },
         ],
         heroTitle: 'Professional IT & Network Support',
         heroSubtitle: 'Reliable, affordable, and fast tech support for your business.',
@@ -83,7 +86,7 @@ export const sites: Record<SiteKey, SiteConfig> = {
         headerBgShade: 'cadetblue',
         logoWidth: 85,
         logoHeight: 85,
-        
+
         sidebarColor: 'white',
     },
 
@@ -92,10 +95,10 @@ export const sites: Record<SiteKey, SiteConfig> = {
         logo: process.env.PUBLIC_URL + '/logos/nordisklogo.png',
         primaryColor: '#0D9488', // blue
         navLinks: [
-            { label: 'Home', href: 'home', icon: 'Home' },
-            { label: 'Services', href: 'services', icon: 'Devices' },
-            { label: 'About', href: 'about', icon: 'Info' },
-            { label: 'Contact', href: 'contact', icon: 'Mail' },
+            { label: 'Home', href: 'home', icon: 'Home', isTopLevel: false },
+            { label: 'Services', href: 'services', icon: 'Devices', isTopLevel: false },
+            { label: 'About', href: 'about', icon: 'Info', isTopLevel: false },
+            { label: 'Contact', href: 'contact', icon: 'Mail', isTopLevel: false },
         ],
         heroTitle: 'Restaurant & Facility Hygiene Operations',
         heroSubtitle: 'Professional dishwashing, cleaning, and back-of-house flow support.',
