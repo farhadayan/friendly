@@ -178,8 +178,9 @@ export default function Home() {
             <Button
               variant="outlined"
               size="large"
-              component={Link}
-              to="/itservices"
+              component="a"
+              href="#our-services-section"
+
               sx={{
                 backgroundColor: "white",
                 borderColor: "#000",
@@ -219,7 +220,7 @@ export default function Home() {
       </Box>
 
       {/* Services Section */}
-      <Container maxWidth="lg" sx={{ py: 5 }}>
+      <Container maxWidth="lg" sx={{ py: 5 }} id="our-services-section">
         <Typography
           variant="h2"
           textAlign="center"
@@ -380,8 +381,8 @@ export default function Home() {
           <Button
             variant="outlined"
             size="large"
-            component={Link}
-            to="/itservices"
+            component="a"
+            href="#our-services-section"
             startIcon={<BuildIcon />}
             sx={{
               px: 4,
