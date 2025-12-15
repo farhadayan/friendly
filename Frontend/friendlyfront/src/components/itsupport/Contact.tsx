@@ -410,7 +410,7 @@ export default function Contact() {
               letterSpacing: "0.5px",
             }}
           >
-            📞 Phone: +45 4222 8426 |{" "} 📧 Email: farhadayan@gmail.com
+            📞 Phone: +45  123 (-HELP)|{" "} 📧 Email: customercare@nordisksupport.com
 
           </Typography>
         </Stack>
