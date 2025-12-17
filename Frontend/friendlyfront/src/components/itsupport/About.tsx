@@ -90,29 +90,19 @@ export default function About() {
             linear-gradient(270deg, #f8fafc 0%, transparent 25%),
             linear-gradient(180deg, cadetblue 0%, transparent 90%)
           `,
-          py: { xs: 4, md: 8 },
+          py: { xs: 2, md: 8 },
           textAlign: "center",
         }}
       >
         <Container maxWidth="lg">
           <Typography
             variant="h2"
-            sx={{
-              fontWeight: "bold",
-              mb: 2,
-              fontSize: { xs: "2rem", md: "3rem" },
-            }}
           >
             Nordisk Support
           </Typography>
           <Typography
             variant="h6"
-            sx={{
-              maxWidth: "700px",
-              mx: "auto",
-              opacity: 0.9,
-              lineHeight: 1.6,
-            }}
+
           >
             deliver professional IT services that drive business efficiency.
             Our core purpose is to eliminate technology as a barrier, providing
@@ -123,19 +113,20 @@ export default function About() {
       </Box>
 
       {/* Mission & Vision Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container sx={{ py: { xs: 1, md: 4 } }}>
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 6 }}>
             <Card
               sx={{
-                p: 4,
+                textAlign: "center",
+                p: { xs: 2, md: 4 },
                 height: "100%",
                 borderRadius: 2,
                 boxShadow: 3
 
               }}
             >
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Typography variant="h4">
                 Our Mission
               </Typography>
               <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
@@ -148,13 +139,14 @@ export default function About() {
           <Grid size={{ xs: 12, md: 6 }}>
             <Card
               sx={{
-                p: 4,
+                textAlign: "center",
+                p: { xs: 2, md: 4 },
                 height: "100%",
                 borderRadius: 2,
                 boxShadow: 3,
               }}
             >
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Typography variant="h4">
                 Our Vision
               </Typography>
               <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
@@ -178,8 +170,8 @@ export default function About() {
           }}>
 
             {/* Left side: Text */}
-            <Box sx={{ flex: 1 }}>
-              <Typography variant="h3" fontWeight="bold" sx={{ mb: 4 }}>
+            <Box sx={{ backgroundColor: "transparent", py: { xs: 4, md: 8 } }}>
+              <Typography variant="h3" >
                 What Makes Us Different
               </Typography>
 
@@ -218,8 +210,8 @@ export default function About() {
       </Box>
 
       {/* Call to Action */}
-      <Container maxWidth="lg" sx={{ py: 8, textAlign: "center" }}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom>
+      <Container sx={{ py: { xs: 1, md: 8 }, textAlign: "center" }}>
+        <Typography variant="h4">
           Work With Nordisk Support
         </Typography>
         <Typography

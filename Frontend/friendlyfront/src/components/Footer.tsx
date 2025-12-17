@@ -18,7 +18,7 @@ export default function Footer() {
     <Box sx={{
       background: "linear-gradient(90deg, #fff 0%, cadetblue 30%)",
       color: "white",
-      py: 2,
+      py: 1,
     }}>
       <Container maxWidth="lg">
         <Grid
@@ -73,7 +73,8 @@ export default function Footer() {
               sx={{
                 fontWeight: 300,
                 fontSize: { xs: "0.6rem", md: "0.85rem" },
-                lineHeight: 1.4
+                pl: 5,
+                lineHeight: 1.1
               }}
             >
               ©2025 Nordisk Support. All rights reserved.

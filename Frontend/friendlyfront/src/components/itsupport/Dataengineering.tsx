@@ -84,29 +84,28 @@ export default function Dataengineering() {
           flex: 1,
           m: 0,
           p: { xs: 0, md: 4 },
-          
+
           backdropFilter: "blur(10px)",
           background: `
             linear-gradient(90deg, #f8fafc 0%, transparent 25%),
             linear-gradient(270deg, #f8fafc 0%, transparent 25%),
             linear-gradient(180deg, cadetblue 0%, transparent 80%)
           `,
-          minHeight: "200px",
-          maxHeight: "200px",
+          height: { xs: "100px", md: "200px" },
           textAlign: "center",
 
         }}
       >
-        <Typography variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
+        <Typography variant="h2">
           Data Engineering
         </Typography>
         <Typography
-          variant="h6" sx={{ maxWidth: "800px", mx: "auto", opacity: 0.9 }}>
+          variant="h6" >
           Helping businesses use data properly
         </Typography>
       </Box>
 
-      <Container sx={{ py: 6 }}>
+      <Container sx={{ py: { xs: 1, md: 4 } }}>
         <Grid container spacing={4}>
           {services.map((service, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -118,8 +117,8 @@ export default function Dataengineering() {
                 }}
               >
                 <CardContent sx={{ textAlign: "center" }}>
-                  <Box sx={{ mb: 2 }}>{service.icon}</Box>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  <Box sx={{ mb: { xs: 1, md: 2 } }}>{service.icon}</Box>
+                  <Typography variant="h5">
                     {service.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -133,18 +132,18 @@ export default function Dataengineering() {
       </Container>
 
       {/* Why Choose Us Section */}
-      <Box sx={{ backgroundColor: "transparent", py: 8 }}>
+      <Box sx={{ backgroundColor: "transparent", py: { xs: 4, md: 8 } }}>
         <Container maxWidth="lg">
           <Box sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            gap: 6
+
           }}>
 
             {/* Left side: Text */}
             <Box sx={{ flex: 1 }}>
-              <Typography variant="h3" fontWeight="bold" sx={{ mb: 4 }}>
+              <Typography variant="h3" >
                 Our Data Service
               </Typography>
 

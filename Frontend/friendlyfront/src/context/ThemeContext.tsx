@@ -27,6 +27,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Add new theme class
     const themeClass = `theme-${site}`;
+    
+    
     document.body.classList.add(themeClass);
 
     // If site config exists, set CSS variables for dynamic styling

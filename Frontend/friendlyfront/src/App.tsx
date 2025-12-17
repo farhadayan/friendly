@@ -4,6 +4,7 @@ import "./styles/global.css";
 import "./styles/themes/software.css";
 
 import { ThemeProvider, ThemeContext } from './context/ThemeContext';
+
 import { Divider, Box } from "@mui/material";
 import { Routes, Route, BrowserRouter, Navigate, useLocation } from "react-router-dom";
 import Header from './components/Header';
@@ -33,6 +34,9 @@ import SwContact from './components/softwaresolution/SwContact';
 import Footer from './components/Footer';
 import Dataengineering from './components/itsupport/Dataengineering';
 import Chat from './components/itsupport/chat';
+import muiTheme from './context/theme'; // Your Material-UI theme file
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 function AppRoutes() {
   const { setSite } = useContext(ThemeContext);
@@ -103,30 +107,33 @@ function App() {
   const sidebarClosedWidth = 56;
 
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Header />
-        <SidebarMenu open={isSidebarOpen} onClose={handleSidebarToggle} />
-        <Divider />
+    <MuiThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <ThemeProvider>
+        <BrowserRouter>
+          <Header />
+          <SidebarMenu open={isSidebarOpen} onClose={handleSidebarToggle} />
+          <Divider />
 
-        {/* Main content dynamically shifted by sidebar width */}
-        <Box
-          component="main"
-          sx={{
-            transition: 'margin-left 0.3s ease-in-out',
-            ml: isSidebarOpen ? `${sidebarOpenWidth}px` : `${sidebarClosedWidth}px`, // sidebar widths
-            //paddingTop: 'var(--header-height, 64px)',
-            px: 2,
-            pr: 0,
-            backgroundColor: 'var(--body-bg, #f7f7f7)',
-            minHeight: '100vh',
-          }}
-        >
-          <AppRoutes />
-        </Box>
-        <Footer />
-      </BrowserRouter>
-    </ThemeProvider>
+          {/* Main content dynamically shifted by sidebar width */}
+          <Box
+            component="main"
+            sx={{
+              transition: 'margin-left 0.3s ease-in-out',
+              ml: isSidebarOpen ? `${sidebarOpenWidth}px` : `${sidebarClosedWidth}px`, // sidebar widths
+              //paddingTop: 'var(--header-height, 64px)',
+              px: 2,
+              pr: 0,
+              backgroundColor: 'var(--body-bg, #f7f7f7)',
+              minHeight: '100vh',
+            }}
+          >
+            <AppRoutes />
+          </Box>
+          <Footer />
+        </BrowserRouter>
+      </ThemeProvider>
+    </MuiThemeProvider>
   );
 }
 

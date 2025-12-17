@@ -1,4 +1,4 @@
-import React from "react";
+import React, { act } from "react";
 import Grid from '@mui/material/Grid';
 import {
   Box,
@@ -41,6 +41,7 @@ export default function Home() {
       icon: <ComputerIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "IT Help Desk",
       link: "/itservices",
+      active: true,
       description:
         "Keep your business running smoothly with expert hardware, networking, and cybersecurity support.",
     },
@@ -48,12 +49,14 @@ export default function Home() {
       icon: <SoftwareIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Software Solutions",
       link: "/swservices",
+      active: true,
       description: "Scalable, efficient, and custom-built applications designed around your business needs.",
     },
     {
       icon: <StorageIcon sx={{ fontSize: 40, color: "#3b82f6" }} />,
       title: "Data Engineering",
       link: "/dataservices",
+      active: false,
       description: "Turn raw data into actionable insights with clean pipelines, optimized databases, and structured reporting systems.",
     }
   ];
@@ -89,11 +92,10 @@ export default function Home() {
           sx={{
             flex: 1,
             m: 0,
-            p: { xs: 3, md: 4 },
+            // p: { xs: 3, md: 4 },
             backdropFilter: "blur(10px)",
             background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
-            minHeight: isMobile ? "auto" : "500px",
-            maxHeight: isMobile ? "auto" : "500px",
+            height: isMobile ? "auto" : "500px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -105,9 +107,9 @@ export default function Home() {
             variant="h1"
             sx={{
               fontWeight: "bold",
-              mb: 4,
+              mb: isMobile ? 2 : 3,
               textAlign: "center",
-              fontSize: { xs: "1.2rem", md: "2.5rem", lg: "3.0rem" }
+
             }}
           >
             Reliable IT Solutions
@@ -127,14 +129,13 @@ export default function Home() {
           </Typography>
 
           <Typography
-            variant="h5"
-            component="p"
-            sx={{
+            variant="h6"
 
-              mb: 4,
+            sx={{
+              mb: isMobile ? 2 : 4,
               textAlign: "center",
-              opacity: 0.9,
-              fontSize: { xs: "0.8rem", md: "1.2rem" },
+              justifyContent: "center",
+              opacity: 0.7,
               lineHeight: 1.6,
             }}
           >
@@ -144,33 +145,24 @@ export default function Home() {
 
           <Box
             sx={{
-              display: "flex",
+              display: "inline-flex",
               gap: 2,
               justifyContent: "center",
               flexWrap: "wrap",
-              flexDirection: isMobile ? "column" : "row",
+              flexDirection: "row",
               alignItems: "center",
+
+
             }}
           >
             <Button
               variant="contained"
-              size="large"
               component={Link}
               to="/contact"
               sx={{
-                backgroundColor: "white",
-                borderColor: "#000",
-                color: "#0A0A0A",
-                px: 4,
-                py: 1.5,
-                fontSize: isMobile ? "0.9rem" : "1.1rem",
-                fontWeight: "bold",
-                minWidth: isMobile ? "120px" : "auto",
-                "&:hover": {
-                  backgroundColor: "#f8fafc",
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                },
+
+                px: 2,
+                py: 1,
                 transition: "all 0.3s ease",
               }}
             >
@@ -178,24 +170,12 @@ export default function Home() {
             </Button>
 
             <Button
-              variant="outlined"
-              size="large"
+              variant="contained"
               component="a"
               href="#our-services-section"
 
               sx={{
-                backgroundColor: "white",
-                borderColor: "#000",
-                color: "#0A0A0A",
-                px: 4,
-                py: 1.5,
-                fontSize: isMobile ? "0.9rem" : "1.1rem",
-                minWidth: isMobile ? "200px" : "auto",
-                "&:hover": {
-                  backgroundColor: "#f8fafc",
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                },
+                px: 2, py: 1,
                 transition: "all 0.3s ease",
               }}
             >
@@ -226,11 +206,7 @@ export default function Home() {
           variant="h2"
           textAlign="center"
           fontWeight="bold"
-
-          sx={{
-            fontSize: isMobile ? "1.2rem" : "2.5rem",
-            mb: 2
-          }}
+          sx={{ mb: isMobile ? 1 : 2 }}
         >
           Our Services
         </Typography>
@@ -240,7 +216,7 @@ export default function Home() {
           textAlign="center"
           sx={{
             mb: isMobile ? 2 : 6, maxWidth: "600px", mx: "auto",
-            fontSize: isMobile ? "0.9rem" : "1.1rem",
+            //fontSize: isMobile ? "0.9rem" : "1.1rem",
           }}
         >
           Everything you need to keep your business systems safe,
@@ -249,29 +225,16 @@ export default function Home() {
 
         <Grid container spacing={isMobile ? 1 : 3}>
           {services.map((service, index) => (
-            <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid key={index} size={{ sm: 6, md: 4 }}>
               <Link
                 to={service.link ?? "/"}
                 style={{ textDecoration: "none" }}
               >
-                <Card
-                  elevation={4}
-                  sx={{
-                    borderRadius: 4,
-                    height: "100%",
-                    transition: "all 0.3s ease",
-                    textDecoration: "none",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: "0 12px 20px rgba(0,0,0,0.1)",
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: isMobile ? 1 : 3, textAlign: "center", height: "100%" }}>
+                <Card>
+                  <CardContent sx={{ p: isMobile ? 1 : 2, textAlign: "center", height: "100%" }}>
                     <Box sx={{ mb: isMobile ? 0 : 2 }}>{service.icon}</Box>
-                    <Typography variant="h6" fontWeight="bold"
-                      sx={{ fontSize: { xs: "1.0rem", md: "2.5rem", lg: "3.0rem" } }}
-                    >
+                    <Typography
+                      variant="h6">
                       {service.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
@@ -286,7 +249,15 @@ export default function Home() {
       </Container>
 
       {/* Why Choose Us Section */}
-      <Box sx={{ backgroundColor: "transparent", py: isMobile ? 1 : 8 }}>
+      <Box sx={{
+        background: `
+                linear-gradient(90deg, #f8fafc 0%, transparent 25%),
+                linear-gradient(270deg, #f8fafc 0%, transparent 25%),
+                linear-gradient(180deg, cadetblue 0%, transparent 80%)
+              `,
+        py: isMobile ? 1 : 4,
+        borderRadius: 12,
+      }}>
         <Container maxWidth="lg">
           <Grid spacing={6} alignItems="center">
             <Grid size={{
@@ -305,7 +276,6 @@ export default function Home() {
               <Typography variant="h6" color="text.secondary" sx={{
                 mb: isMobile ? 0 : 4,
                 fontSize: { xs: "0.9rem", md: "1.1rem", lg: "1.2rem" }
-
               }}>
                 We focus on reliability, affordability, and fast response times
                 so you never face IT challenges alone.
