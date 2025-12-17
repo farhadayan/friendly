@@ -397,7 +397,7 @@ export default function Contact() {
 
 
     return (
-        <Box sx={{ backgroundColor: "#fff", overflow: "hidden" }}>
+        <Box sx={{ backgroundColor: "transparent", overflow: "hidden" }}>
             {/* ================= HERO ================= */}
             <Box
                 sx={{
@@ -425,7 +425,7 @@ export default function Contact() {
                         gap: 0,
 
                         overflow: 'hidden',
-                        //boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
+
                         backgroundColor: 'white',
 
                     }}
@@ -505,20 +505,13 @@ export default function Contact() {
 
                             <Box sx={{ mt: 4 }}>
                                 <Button
-                                    variant="contained"
+
                                     size="large"
                                     sx={{
                                         backgroundColor: 'white',
                                         color: '#2f6d70',
                                         fontWeight: 600,
-
                                         borderRadius: 2,
-                                        '&:hover': {
-                                            backgroundColor: '#f8f9fa',
-                                            transform: 'translateY(-2px)',
-                                            boxShadow: '0 10px 20px rgba(0,0,0,0.1)',
-                                        },
-                                        transition: 'all 0.3s ease',
                                     }}
                                 >
                                     Contact Us Now
@@ -560,7 +553,7 @@ export default function Contact() {
             </Box>
 
             {/* ================= CONTENT ================= */}
-            <Container maxWidth="lg" sx={{ my: 8 }}>
+            <Container maxWidth="lg" sx={{ py: { xs: 8 }, my: 8 }}>
                 <Stack
                     direction={{ xs: "column", md: "row" }}
                     spacing={{ xs: 5, md: 8 }}
@@ -597,7 +590,7 @@ export default function Contact() {
                                         <Link
                                             href={`mailto:${item.email}`}
                                             sx={{
-                                                fontSize: "18px",
+                                                fontSize: { xs: "12px", md: "18px" },
                                                 color: "#1e40af",
                                                 opacity: 0.8,
                                                 textDecoration: "none",
