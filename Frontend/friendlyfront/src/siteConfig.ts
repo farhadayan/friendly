@@ -35,7 +35,6 @@ export const sites: Record<SiteKey, SiteConfig> = {
         ],
         heroTitle: 'Innovative Software Solutions for Your Business',
         heroSubtitle: 'Custom software development, cloud services, and digital transformation.',
-
         headerHeight: 120,
         headerTextColor: '#FFFFFF',
         headerBgShade: '#616161',
@@ -76,7 +75,9 @@ export const sites: Record<SiteKey, SiteConfig> = {
             { label: 'Software Solutions', href: 'swservices', icon: 'Code', isTopLevel: true },
             { label: 'Data Engineering', href: 'dataservices', icon: 'Storage', isTopLevel: true },
             { label: 'Contact', href: 'contact', icon: 'Mail', isTopLevel: true },
-            { label: 'About Us', href: 'about', icon: 'Info', isTopLevel: true },
+            { label: 'Careers', href: 'careers', icon: 'Career', isTopLevel: true },
+            { label: 'About Us', href: 'about', icon: 'Info', isTopLevel: true }
+
         ],
         heroTitle: 'Professional IT & Network Support',
         heroSubtitle: 'Reliable, affordable, and fast tech support for your business.',

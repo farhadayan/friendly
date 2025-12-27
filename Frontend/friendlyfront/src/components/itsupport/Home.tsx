@@ -72,9 +72,7 @@ export default function Home() {
 
   return (
     <Box sx={{ overflow: "hidden", background: "transparent" }}>
-
-      {/* Hero Section */}
-
+      
       <Box
         sx={{
           flex: 1,

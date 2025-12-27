@@ -26,6 +26,7 @@ import About from './components/itsupport/About';
 import ItSupport from './components/itsupport/ItSupport';
 import WebDevelop from './components/softwaresolution/WebDevelop';
 import Contact from './components/itsupport/Contact';
+import Career from './components/itsupport/Career';
 
 import SwHome from './components/softwaresolution/SwHome';
 import SwAbout from './components/softwaresolution/SwAbout';
@@ -78,6 +79,7 @@ function AppRoutes() {
       <Route path="/itservices" element={<ItSupport />} />
       <Route path="/swservices" element={<SwServices />} />
       <Route path="/dataservices" element={<Dataengineering />} />
+      <Route path="/careers" element={<Career />} />
       <Route path="/contact" element={<Contact />} />
 
       {/* Flow Support */}

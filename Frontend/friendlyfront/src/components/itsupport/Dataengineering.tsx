@@ -96,13 +96,20 @@ export default function Dataengineering() {
 
         }}
       >
-        <Typography variant="h2">
-          Data Engineering
-        </Typography>
-        <Typography
-          variant="h6" >
-          Helping businesses use data properly
-        </Typography>
+        <Container maxWidth="lg">
+          <Typography variant="h2">
+            Data Engineering
+          </Typography>
+          <Typography
+            variant="h6" >
+            Data is one of the most valuable assets a business owns - but only if it is structured, reliable
+            and accessible. Our Data Engineering services help businesses collect, process, and transform data
+            into a solid foundation for analytics, reporting, and decision-making. We design and build robust
+            data pipelines that move data from multiple sources into centralized, secure and scalable data
+            platforms. From data cleaning and transformation to data warehousing and cloud-based solutions,
+            we ensure your data is accurate, consistent, and ready to use.
+          </Typography>
+        </Container>
       </Box>
 
       <Container sx={{ py: { xs: 1, md: 4 } }}>

@@ -77,11 +77,11 @@ const theme = createTheme({
 
         },
         h6: {
-            fontSize: '0.9rem',      // ~16px on mobile
+            fontSize: '0.8rem',      // ~16px on mobile
             opacity: 0.8,
             fontWeight: 400,
             [createTheme().breakpoints.up('md')]: {
-                fontSize: '1.125rem', // ~18px
+                fontSize: '1.0rem', // ~18px
             },
         },
 
@@ -89,7 +89,7 @@ const theme = createTheme({
             fontSize: '1rem',      // ~16px - Standard body text
             lineHeight: 1.6,
             [createTheme().breakpoints.up('md')]: {
-                fontSize: '1.125rem', // ~18px
+                fontSize: '1.15rem', // ~18px
                 lineHeight: 1.7,
             },
         },

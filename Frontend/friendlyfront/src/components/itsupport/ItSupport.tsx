@@ -101,7 +101,7 @@ export default function ITSupport() {
 
   return (
     <Box sx={{ overflow: "hidden", background: "transparent" }}>
-      {/* Hero Section */}
+
       <Box
         sx={{
           background: `
@@ -126,7 +126,11 @@ export default function ITSupport() {
             variant="h6"
           //sx={{ maxWidth: "800px", mx: "auto", opacity: 0.9 }}
           >
-            Reliable, affordable, and IT support for businesses. From device repairs to advanced maintenance, we’ve got
+            At Nordic Support, you get fast, personal, and reliable IT support that keeps your 
+            business running smoothly without unnecessary disruptions. We understand that IT 
+            issues cost both time and money, which is why we make sure you get the help you need,
+            when you need it - without long waiting times or complicated solutions. Reliable, affordable 
+            and IT support for businesses. From device repairs to advanced maintenance, we’ve got
             you covered 24/7.
           </Typography>
         </Container>

@@ -13,6 +13,7 @@ import {
   useTheme,
   useMediaQuery
 } from '@mui/material';
+
 import {
   Close as CloseIcon,
   Home as HomeIcon,
@@ -24,8 +25,12 @@ import {
   Devices as DevicesIcon,
   Checklist as ChecklistIcon,
   Storage as StorageIcon,
-  Business as BusinessIcon
+  Business as BusinessIcon,
+  PeopleAlt as CareerIcon
 } from '@mui/icons-material';
+
+//import WorkOutlineIcon from "@mui/icons-material/PeopleAlt";
+
 import { SiteConfig, sites } from '../siteConfig';
 import Chat from './itsupport/chat';
 
@@ -156,8 +161,9 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                           link.icon === 'Mail' ? <MailIcon /> :
                             link.icon === 'Devices' ? <DevicesIcon /> :
                               link.icon === 'Checklist' ? <ChecklistIcon /> :
-                                link.icon === 'Storage' ? <StorageIcon /> :
-                                  link.icon === 'Business' ? <BusinessIcon /> : null}
+                                link.icon === 'Career' ? <CareerIcon /> :
+                                  link.icon === 'Storage' ? <StorageIcon /> :
+                                    link.icon === 'Business' ? <BusinessIcon /> : null}
                 </ListItemIcon>
                 <ListItemText primary={open ? link.label : ''} />
               </ListItem>

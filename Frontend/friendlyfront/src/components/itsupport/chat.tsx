@@ -147,7 +147,7 @@ const Chat: React.FC = () => {
         {
           id: Date.now().toString(),
           sender: "bot",
-          text: "Sorry, I encountered an error. Please try again.",
+          text: "I am under training, I am excited that soon I will assist you. You can call +45 66 77 69 51 for live agent or you can email customercare@nordisksupport.com",
           timestamp: new Date(),
         },
       ]);
@@ -315,7 +315,7 @@ const styles = `
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
   background: transparent;
 }
 

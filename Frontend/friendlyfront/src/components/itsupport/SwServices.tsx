@@ -54,28 +54,28 @@ export default function SwServices() {
 
       <Box
         sx={{
-          flex: 1,
-          m: 0,
-          p: { xs: 0, md: 4 },
-
-          backdropFilter: "blur(10px)",
           background: `
                 linear-gradient(90deg, #f8fafc 0%, transparent 25%),
                 linear-gradient(270deg, #f8fafc 0%, transparent 25%),
                 linear-gradient(180deg, cadetblue 0%, transparent 80%)
               `,
-          height: { xs: "100px", md: "200px" },
-          textAlign: "center",
 
+          backdropFilter: "blur(10px)",
+          py: { xs: 1, md: 4 },
+          textAlign: "center",
         }}
       >
-        <Typography variant="h2">
-          Software Solutions
-        </Typography>
-        <Typography
-          variant="h6" >
-          Helping companies make smarter, data-driven decisions
-        </Typography>
+        <Container maxWidth="lg">
+          <Typography variant="h2">
+            Software Solutions
+          </Typography>
+          <Typography variant="h6">
+            At Nordic Support, we design and develop software solutions that turn data into 
+            actionable insights. We help businesses streamline processes, improve efficiency, 
+            and make informed decisions by building reliable, scalable, and secure digital systems 
+            tailored to their needs.
+          </Typography>
+        </Container>
       </Box>
       <Container>
         <Grid container spacing={4}>

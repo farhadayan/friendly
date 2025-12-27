@@ -1,650 +1,1019 @@
-
-import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
-import { countryCodes } from "../../dummy-data/country_codes";
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
 import {
-    Box, Stack, Typography, useTheme, useMediaQuery, Container,
-
-    Link,
+    Box,
+    Container,
+    Typography,
     Button,
-
-} from "@mui/material";
+    GridLegacy as Grid,
+    Card,
+    CardContent,
+    TextField,
+    useTheme,
+    Stack,
+    Divider,
+    Alert,
+    IconButton,
+    Snackbar,
+    CircularProgress,
+    Paper,
+    Link,
+    Chip,
+    Avatar,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+} from '@mui/material';
 import {
-
+    Email,
+    Phone,
+    LocationOn,
     AccessTime,
-    CheckCircle as CheckCircleIcon,
     SupportAgent,
-} from "@mui/icons-material";
+    ContentCopy,
+    CheckCircle,
+    WhatsApp,
+    LinkedIn,
+    Twitter,
+    Facebook,
+    Send,
+    OpenInNew,
+    Chat,
+    Business,
+    Person,
+    Close,
+} from '@mui/icons-material';
 
-interface FormData {
-    clientfname: string;
-    clientlname: string;
-    email: string;
-    countrycode: string;
-    mobile: string;
-    query: string;
-    website_source: string;
-}
-
-interface CountryCode {
-    code: string;
+interface ContactFormData {
     name: string;
+    email: string;
+    subject: string;
+    message: string;
+    category: string;
 }
 
-interface EmailStatus {
-    checking: boolean;
-    exists: boolean | null;
-    valid: boolean;
-    error?: string;
-}
-
-export default function Contact() {
-    const location = useLocation();
-    // Extract website source from URL 
-    // Example: /guidance/contact → "guidance"
-
-    const getWebsiteSource = useCallback((): string => {
-        const pathnameLower = location.pathname.toLowerCase(); // Use location.pathname directly
-        const segments = pathnameLower.split('/').filter(segment => segment);
-
-        // Split the path and get the first segment after /
-        if (segments.length > 0) {
-            const firstSegment = segments[0];
-
-            // Map URL segments to database keys
-            if (firstSegment.includes('itsupport') || firstSegment.includes('it-support')) {
-                return 'itsupport';
-            } else if (firstSegment.includes('software')) {
-                return 'software';
-            } else if (firstSegment.includes('guidance')) {
-                return 'guidance';
-            }
-
-            // Return the segment as is (it will be mapped on backend)
-            return firstSegment;
-        }
-        // Default to guidance
-        return 'itsupport';
-    }, [location.pathname]);
-
-    const getPageTitle = (source: string): string => {
-        switch (source) {
-            case 'itsupport': return 'IT Support Contact';
-            case 'software': return 'Software Solutions Contact';
-            case 'guidance': return 'Guidance Contact';
-            default: return 'Contact Us';
-        }
-    };
-
-    // Initialize form state with memorized initial website source
-    const initialState = useMemo((): FormData => ({
-        clientfname: "",
-        clientlname: "",
-        email: "",
-        countrycode: "+45",
-        mobile: "",
-        query: "",
-        website_source: getWebsiteSource(),
-    }), [getWebsiteSource]);
-
-    const [form, setForm] = useState<FormData>(initialState);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [message, setMessage] = useState('');
-
-
-    const [emailStatus, setEmailStatus] = useState<EmailStatus>({
-        checking: false,
-        exists: null,
-        valid: false
+const Contact: React.FC = () => {
+    const theme = useTheme();
+    const [formData, setFormData] = useState<ContactFormData>({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        category: 'general',
     });
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success' as 'success' | 'error' | 'info' | 'warning'
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [previewOpen, setPreviewOpen] = useState(false);
 
-    const [showAllFields, setShowAllFields] = useState(true);
-    const debounceTimer = useRef<NodeJS.Timeout | null>(null);
-    const contacts = [
-        {
-            name: "Customer Care",
-            role: "",
-            avatar: "/images/team/sophia.jpg",
-            email: "customercare@nordisksupport.com",
-        },
-        {
-            name: "Sales Inquiries",
-            role: "",
-            avatar: "/images/team/alice.jpg",
-            email: "sales@nordisksupport.com",
-        },
-        {
-            name: "Technical Support",
-            role: "",
-            avatar: "/images/team/michael.jpg",
-            email: "techteam@nordisksupport.com",
-        }
+    const CONTACT_EMAIL = 'info@nordisksupport.com';
+    const SUPPORT_EMAIL = 'support@nordisksupport.com';
+    const SALES_EMAIL = 'sales@nordisksupport.com';
+    const CAREERS_EMAIL = 'careers@nordisksupport.com';
+    const PHONE_NUMBER = '+45 66 77 69 51';
+    const WHATSAPP_NUMBER = '+4566776951';
+    const ADDRESS = 'Copenhagen, Denmark';
 
+    const contactCategories = [
+        { value: 'general', label: 'General Inquiry', email: CONTACT_EMAIL },
+        { value: 'support', label: 'Technical Support', email: SUPPORT_EMAIL },
+        { value: 'sales', label: 'Sales & Business', email: SALES_EMAIL },
+        { value: 'careers', label: 'Careers', email: CAREERS_EMAIL },
     ];
 
-    // Update website source when component mounts or URL changes
-    useEffect(() => {
-        const source = getWebsiteSource();
-        setForm(prev => ({
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
             ...prev,
-            website_source: source
+            [name]: value
         }));
-    }, [getWebsiteSource, location]);
+    };
 
-    // Watch for email changes and reset field visibility
-    useEffect(() => {
-        const email = form.email.trim();
+    const handleCategoryChange = (category: string) => {
+        setFormData(prev => ({
+            ...prev,
+            category
+        }));
+    };
 
-        if (!email || !email.includes('@') || !email.includes('.')) {
-            setShowAllFields(true);
+    const getCurrentEmail = () => {
+        const category = contactCategories.find(cat => cat.value === formData.category);
+        return category ? category.email : CONTACT_EMAIL;
+    };
+
+    const generateEmailContent = () => {
+        const { name, email, subject, message, category } = formData;
+        const categoryLabel = contactCategories.find(cat => cat.value === category)?.label || 'General Inquiry';
+
+        const emailSubject = subject
+            ? `${subject} (${categoryLabel})`
+            : `${categoryLabel} - ${name || 'Website Visitor'}`;
+
+        const emailBody = `Dear Nordisk Support Team,
+
+${message || 'I would like to get in touch with your team.'}
+
+---
+Contact Information:
+Name: ${name || 'Not provided'}
+Email: ${email || 'Not provided'}
+Category: ${categoryLabel}
+Submitted: ${new Date().toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })}
+---
+            
+This message was sent via the contact form on nordisksupport.com.
+            
+Best regards,
+${name || 'Website Visitor'}
+${email ? `Email: ${email}` : ''}`.trim();
+
+        return {
+            subject: emailSubject,
+            body: emailBody,
+            toEmail: getCurrentEmail(),
+            encodedSubject: encodeURIComponent(emailSubject),
+            encodedBody: encodeURIComponent(emailBody),
+            mailtoLink: `mailto:${getCurrentEmail()}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
+        };
+    };
+
+    const openEmailClient = () => {
+        const { mailtoLink } = generateEmailContent();
+
+        // Method 1: Create a temporary form (most reliable for new tab)
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = mailtoLink;
+        form.target = '_blank';
+        form.style.display = 'none';
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+
+        return true;
+    };
+
+    const handleEmailSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        if (!formData.message.trim()) {
+            setSnackbar({
+                open: true,
+                message: 'Please enter your message.',
+                severity: 'error'
+            });
+            return;
         }
-    }, [form.email]);
 
-    // Real-time email checking with debounce and website source
-    useEffect(() => {
-        const checkEmail = async () => {
-            const email = form.email.trim();
+        setIsSubmitting(true);
 
-            if (!email || !email.includes('@') || !email.includes('.')) {
-                return;
-            }
+        try {
+            // Open email client in new tab
+            const success = openEmailClient();
 
-            setEmailStatus(prev => ({ ...prev, checking: true }));
-
-            try {
-                // Add website_source as query parameter
-                const params = new URLSearchParams();
-                if (form.website_source) {
-                    params.append('website_source', form.website_source);
-                }
-
-                const queryString = params.toString() ? `?${params.toString()}` : '';
-
-                const response = await fetch(`http://localhost:5000/api/check-email/${encodeURIComponent(email)}${queryString}`);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const exists = Boolean(data.exists);
-
-                setEmailStatus({
-                    checking: false,
-                    exists: exists,
-                    valid: true,
-                    error: data.error
+            if (success) {
+                setSnackbar({
+                    open: true,
+                    message: 'Opening email client in new tab...',
+                    severity: 'info'
                 });
 
-                if (exists) {
-                    setShowAllFields(false);
-                }
-
-            } catch (error) {
-                console.error('Email check error:', error);
-                setEmailStatus({
-                    checking: false,
-                    exists: null,
-                    valid: false,
-                    error: 'Email check failed. Please try again.'
-                });
+                // Reset form after successful submission
+                setTimeout(() => {
+                    setFormData({
+                        name: '',
+                        email: '',
+                        subject: '',
+                        message: '',
+                        category: 'general',
+                    });
+                    setIsSubmitting(false);
+                }, 1000);
             }
-        };
-
-        if (debounceTimer.current) {
-            clearTimeout(debounceTimer.current);
-        }
-
-        if (form.email && form.email.includes('@') && form.email.includes('.') && form.email.length > 5) {
-            debounceTimer.current = setTimeout(checkEmail, 500);
-        }
-
-        return () => {
-            if (debounceTimer.current) {
-                clearTimeout(debounceTimer.current);
-            }
-        };
-    }, [form.email, form.website_source]);
-
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    //   const { name, value } = e.target;
-
-    //   if (name === "email") {
-    //     setEmailStatus({ checking: false, exists: null, valid: false });
-    //     setShowAllFields(true);
-    //   }
-
-    //   setForm({ ...form, [name]: value });
-    // };
-
-    // const handleSubmit = async (e: React.FormEvent) => {
-    //   e.preventDefault();
-
-    //   if (!emailStatus.valid || emailStatus.checking) {
-    //     setMessage("Please enter a valid email address");
-    //     return;
-    //   }
-
-    //   setIsSubmitting(true);
-    //   setMessage('');
-
-    //   try {
-    //     // Determine what data to send
-    //     const dataToSend = emailStatus.exists
-    //       ? {
-    //         email: form.email,
-    //         query: form.query,
-    //         website_source: form.website_source
-    //       }
-    //       : { ...form };
-
-    //     const res = await fetch("http://127.0.0.1:5000/api/client", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(dataToSend)
-    //     });
-
-    //     const data = await res.json();
-
-    //     if (res.ok) {
-    //       const successMessage = emailStatus.exists
-    //         ? "Thank you! Your additional query has been submitted."
-    //         : "Thank you! Your registration is complete.";
-
-    //       setMessage(successMessage);
-
-    //       if (emailStatus.exists) {
-    //         setForm({
-    //           ...form,
-    //           query: ""
-    //         });
-    //       } else {
-    //         setForm({
-    //           ...initialState,
-    //           website_source: form.website_source // Preserve website source
-    //         });
-    //         setEmailStatus({ checking: false, exists: null, valid: false });
-    //         setShowAllFields(true);
-    //       }
-
-    //       setTimeout(() => setMessage(''), 5000);
-    //     } else {
-    //       // Handle FastAPI validation errors
-    //       let errorMessage = 'Something went wrong. Please try again.';
-
-    //       if (data.detail) {
-    //         // FastAPI returns validation errors in detail
-    //         if (Array.isArray(data.detail)) {
-    //           // Multiple validation errors
-    //           errorMessage = data.detail.map((err: any) =>
-    //             `${err.loc ? err.loc.join('.') + ': ' : ''}${err.msg}`
-    //           ).join(', ');
-    //         } else if (typeof data.detail === 'string') {
-    //           // Single error message
-    //           errorMessage = data.detail;
-    //         } else if (data.detail.message) {
-    //           // Error object with message property
-    //           errorMessage = data.detail.message;
-    //         }
-    //       } else if (data.error) {
-    //         errorMessage = data.error;
-    //       } else if (data.message) {
-    //         errorMessage = data.message;
-    //       }
-    //       setEmailStatus({
-    //         checking: false,
-    //         exists: null,
-    //         valid: false,
-    //         error: errorMessage
-    //       });
-    //     }
-
-    //   } catch (err) {
-    //     console.error("Submission error:", err);
-    //     setMessage('Network error. Please try again.');
-    //   } finally {
-    //     setIsSubmitting(false);
-    //   }
-    // };
-
-    // Get page title based on website source
-    const pageTitle = getPageTitle(form.website_source);
-
-    // Styles
-    const styles = {
-        container: {
-            display: "flex" as const,
-            flexDirection: "column" as const,
-            alignItems: "center" as const,
-            justifyContent: "center" as const,
-            minHeight: "100vh",
-            background: "linear-gradient(0deg, #f6f6f6 0%, #e0f2fe 100%)",
-            padding: "20px"
-        },
-
-        title: {
-            color: form.website_source === 'itsupport' ? "#22543d" :
-                form.website_source === 'software' ? "#7b341e" : "#1E3A8A",
-            fontSize: "3rem",
-            marginBottom: "30px",
-            fontFamily: "Arial, sans-serif",
-            textShadow: "2px 2px 5px rgba(0,0,0,0.3)"
-        },
-        form: {
-            display: "flex" as const,
-            flexDirection: "column" as const,
-            gap: "15px",
-            backgroundColor: "white",
-            padding: "30px",
-            borderRadius: "12px",
-            boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-            width: "100%",
-            maxWidth: "400px"
-        },
-        input: {
-            padding: "12px 15px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-            outline: "none",
-            transition: "0.3s",
-            width: "100%",
-            boxSizing: "border-box" as const,
-        },
-        textarea: {
-            padding: "12px 15px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-            outline: "none",
-            minHeight: "120px",
-            resize: "vertical" as const,
-            transition: "0.3s",
-            width: "100%",
-            boxSizing: "border-box" as const,
-        },
-        button: {
-            padding: "12px",
-            borderRadius: "8px",
-            border: "none",
-            color: "white",
-            fontSize: "1rem",
-            fontWeight: "bold" as const,
-            cursor: "pointer",
-            transition: "0.3s",
-            width: "100%"
-        },
-        statusIndicator: {
-            display: "flex" as const,
-            alignItems: "center" as const,
-            gap: "5px",
-            fontSize: "0.85rem",
-            marginTop: "5px",
-            flexWrap: "wrap" as const
+        } catch (error) {
+            console.error('Error opening email client:', error);
+            setSnackbar({
+                open: true,
+                message: 'Unable to open email client. Please try copying the email content.',
+                severity: 'error'
+            });
+            setIsSubmitting(false);
         }
     };
 
+    const copyEmailContent = () => {
+        const { subject, body, toEmail } = generateEmailContent();
+        const emailContent = `To: ${toEmail}
+Subject: ${subject}
 
-    // Determine border color based on email status
-    const getEmailBorderColor = () => {
-        if (emailStatus.exists) return "#28a745";
-        if (emailStatus.valid) return "#2575fc";
-        if (form.email) return "#dc3545";
-        return "#ccc";
+${body}`;
+
+        navigator.clipboard.writeText(emailContent)
+            .then(() => {
+                setCopied(true);
+                setSnackbar({
+                    open: true,
+                    message: 'Email content copied to clipboard!',
+                    severity: 'success'
+                });
+                setTimeout(() => setCopied(false), 3000);
+            })
+            .catch(err => {
+                setSnackbar({
+                    open: true,
+                    message: 'Failed to copy. Please try again.',
+                    severity: 'error'
+                });
+            });
     };
 
+    const openWhatsApp = () => {
+        const message = `Hello Nordisk Support,\n\nI would like to get in touch regarding: ${formData.category}\n\nName: ${formData.name || 'Not provided'}\nEmail: ${formData.email || 'Not provided'}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, '')}?text=${encodedMessage}`;
+        window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+    };
+
+    const teamContacts = [
+        {
+            name: 'Customer Care',
+            role: '',
+            email: 'customercare@nordisksupport.com',
+            phone: '+45 66 77 69 52',
+            avatar: '/team/sarah.jpg',
+        },
+        {
+            name: 'Sales Team',
+            role: '',
+            email: 'sales@nordisksupport.com',
+            phone: '+45 66 77 69 53',
+            avatar: '/team/mikael.jpg',
+        },
+        {
+            name: 'Technical Team',
+            role: '',
+            email: 'techteam@nordisksupport.com',
+            phone: '+45 66 77 69 54',
+            avatar: '/team/emma.jpg',
+        },
+    ];
+
+    // const quickTemplates = [
+    //     {
+    //         title: 'Support Request',
+    //         category: 'support',
+    //         subject: 'Technical Support Needed',
+    //         message: 'Hello,\n\nI need technical support with the following issue:\n\n[Please describe your issue here]\n\nSystem/Software:\nError Message:\nSteps to Reproduce:\n\nThank you.',
+    //         icon: <SupportAgent />,
+    //     },
+    //     {
+    //         title: 'Business Inquiry',
+    //         category: 'sales',
+    //         subject: 'Business Partnership Inquiry',
+    //         message: 'Hello,\n\nI am interested in exploring business opportunities with Nordisk Support.\n\nCompany:\nServices Needed:\nProject Timeline:\nBudget Range:\n\nPlease contact me to discuss further.',
+    //         icon: <Business />,
+    //     },
+    //     {
+    //         title: 'General Question',
+    //         category: 'general',
+    //         subject: 'General Inquiry',
+    //         message: 'Hello,\n\nI have a question about your services:\n\n[Please write your question here]\n\nI would appreciate more information about:\n- [Topic 1]\n- [Topic 2]\n\nThank you.',
+    //         icon: <Chat />,
+    //     },
+    // ];
+
+    // const applyTemplate = (template: typeof quickTemplates[0]) => {
+    //     setFormData(prev => ({
+    //         ...prev,
+    //         category: template.category,
+    //         subject: template.subject,
+    //         message: template.message
+    //     }));
+    // };
 
     return (
-        <Box sx={{ backgroundColor: "transparent", overflow: "hidden" }}>
-            {/* ================= HERO ================= */}
+        <Box sx={{ overflow: 'hidden', background: "transparent" }}>
+            {/* Hero Section */}
             <Box
                 sx={{
-                    width: '100vw',
-                    height: { xs: 250, md: 350 },
-                    position: 'relative',
-                    left: '50%',
-                    right: '50%',
-                    marginLeft: '-50vw',
-                    marginRight: '-50vw',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    background: 'linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%)',
-                    px: { xs: 2, md: 4 }, // Add padding directly to the Box instead
+                    flex: 1,
+                    m: 0,
+                    p: 0,
+                    px: 0,
+                    py: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                 }}
             >
 
                 <Box
                     sx={{
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' },
-                        justifyContent: 'center',
-
-                        gap: 0,
-
-                        overflow: 'hidden',
-
-                        backgroundColor: 'white',
+                        flex: 1,
+                        m: 0,
+                        // p: { xs: 3, md: 4 },
+                        backdropFilter: "blur(10px)",
+                        background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
+                        height: { xs: 'auto', md: '350px' },
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
 
                     }}
                 >
+                    <Typography
+                        variant="h1"
+                        sx={{
+                            fontWeight: "bold",
+                            textAlign: "center",
+                        }}  >
+                        Contact Nordisk Support
+
+                    </Typography>
+
+                    <Typography
+                        variant="h6"
+
+                        sx={{
+
+                            textAlign: "center",
+                            justifyContent: "center",
+                            opacity: 0.7,
+                            lineHeight: 1.6,
+                        }}
+                    >
+                        Get in touch with our team. We love to hear from you.
+                    </Typography>
 
                     <Box
                         sx={{
-                            flex: 1,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: { xs: 'center', md: 'flex-start' },
-                            textAlign: { xs: 'center', md: 'left' },
-                            background: 'linear-gradient(270deg, transparent 0%, #2f6d70 70%)',
-                            color: 'white',
-                            p: { xs: 4, md: 8 },
-                            position: 'relative',
-                            '&::before': {
-                                content: '""',
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
-                                background: 'url(/patterns/dots.svg)',
-                                opacity: 0.1,
-                            }
+                            display: "inline-flex",
+                            gap: 2,
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                            flexDirection: "row",
+                            alignItems: "center",
+
+
                         }}
                     >
-                        <Stack spacing={3} sx={{ position: 'relative', zIndex: 1 }}>
-                            <Typography variant="h2" >
-                                Love To Hear You
-                            </Typography>
-
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    fontSize: '1.1rem',
-                                    opacity: 0.95,
-                                    lineHeight: 1.6,
-                                    maxWidth: '90%',
-                                }}
-                            >
-                                Need IT support, software solutions, or expert guidance?
-                                Our team is ready to help you move forward with innovative solutions.
-                            </Typography>
-
-                            <Box sx={{ mt: 2 }}>
-                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
-                                    <AccessTime sx={{ mr: 2, fontSize: '1.2rem' }} />
-                                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                                        Mon–Fri · 8:00 AM – 4:00 PM
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
-                                    <SupportAgent sx={{ mr: 2, fontSize: '1.2rem' }} />
-                                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                                        24/7 IT Support Available
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
-                                    <Link href="tel:+4566776951" sx={{
-                                        fontSize: { xs: '1rem', md: '1.125rem' },
-                                        color: '#fff',
-                                        fontWeight: 600,
-                                        textDecoration: 'none',
-                                        '&:hover': {
-                                            textDecoration: 'underline'
-                                        }
-                                    }}>
-
-                                        📞 +45 66 77 69 51
-                                    </Link>
-                                </Box>
-                            </Box>
-
-                            <Box sx={{ mt: 4 }}>
-                                <Button
-
-                                    size="large"
-                                    sx={{
-                                        backgroundColor: 'white',
-                                        color: '#2f6d70',
-                                        fontWeight: 600,
-                                        borderRadius: 2,
-                                    }}
-                                >
-                                    Contact Us Now
-                                </Button>
-                            </Box>
-                        </Stack>
-                    </Box>
-
-                    {/* Image Section */}
-                    <Box
-                        sx={{
-                            flex: 1,
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            position: 'relative',
-                            overflow: 'hidden',
-                            backgroundColor: '#f5f5f5',
-                        }}
-                    >
-                        <Box
-                            component="img"
-                            src="/logos/contactbanner.jpg"
-                            alt="Nordisk contact"
+                        <Button
+                            variant="contained"
+                            size="large"
+                            startIcon={<Phone />}
                             sx={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                objectPosition: 'center center',
-                                display: 'block',
-                                transition: 'transform 0.5s ease',
+                                backgroundColor: 'white',
+                                color: theme.palette.primary.main,
+                                fontWeight: 600,
+                                px: 4,
+                                py: 1.5,
                                 '&:hover': {
-                                    transform: 'scale(1.05)',
+                                    backgroundColor: '#f8f9fa',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 8px 25px rgba(0,0,0,0.2)'
                                 },
+                                transition: 'all 0.3s ease'
                             }}
-                        />
+                            href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+                        >
+                            Call Us: {PHONE_NUMBER}
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            startIcon={<WhatsApp />}
+                            sx={{
+                                borderColor: 'white',
+                                color: 'white',
+                                fontWeight: 600,
+                                px: 4,
+                                py: 1.5,
+                                '&:hover': {
+                                    borderColor: '#25D366',
+                                    backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                                    transform: 'translateY(-2px)'
+                                },
+                                transition: 'all 0.3s ease'
+                            }}
+                            onClick={openWhatsApp}
+                        >
+                            WhatsApp Chat
+                        </Button>
                     </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        flex: 1,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        display: { xs: "none", md: "flex" }
+                    }}
+                >
+                    <img
+                        src="/logos/contact.webp"
+                        alt="IT Support Illustration"
+                        style={{ width: "100%", height: "350px", objectFit: "cover" }}
+                    />
                 </Box>
             </Box>
 
-            {/* ================= CONTENT ================= */}
-            <Container maxWidth="lg" sx={{ py: { xs: 8 }, my: 8 }}>
-                <Stack
-                    direction={{ xs: "column", md: "row" }}
-                    spacing={{ xs: 5, md: 8 }}
-                    sx={{ py: { xs: 6, md: 10 } }}
-                >
-                    {/* ===== LEFT: CONTACT DETAILS ===== */}
-                    <Box flex={1}>
-                        <Stack spacing={4}>
-                            <Typography
-                                variant="h5"
-                                sx={{ fontWeight: 600 }}
-                            >
-                                Write To Us
-                            </Typography>
-
-                            <Stack spacing={3}>
-                                {contacts.map((item) => (
-                                    <Box
-                                        key={item.email}
-                                        sx={{
-                                            p: 2,
-                                            borderRadius: 2,
-                                            backgroundColor: "#ffffff",
-                                            border: "1px solid #e5e7eb",
-                                            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-
-
-                                        }}
-                                    >
-                                        <Typography variant="body2" >
-                                            {item.name}
-                                        </Typography>
-
-                                        <Link
-                                            href={`mailto:${item.email}`}
-                                            sx={{
-                                                fontSize: { xs: "12px", md: "18px" },
-                                                color: "#1e40af",
-                                                opacity: 0.8,
-                                                textDecoration: "none",
-                                                "&:hover": { color: 'primary.main', textDecoration: "underline" },
-                                            }}>
-                                            {item.email}
-
-                                        </Link>
-
-                                    </Box>
-                                ))}
-                            </Stack>
-                        </Stack>
-                    </Box>
-
-                    {/* ===== RIGHT: IMAGE + TRUST ===== */}
+            {/* <Box sx={{
+                flex: 1,
+                m: 0,
+                p: 0,
+                px: 0,
+                py: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                <Container maxWidth="lg">
                     <Box
-                        flex={1}
                         sx={{
-                            display: { xs: "none", md: "flex" },
-                            flexDirection: "column",
+                            flex: 1,
+                            m: 0,
+                            // p: { xs: 3, md: 4 },
+                            backdropFilter: "blur(10px)",
+                            background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
+                            height: 'auto',
+                            display: "flex",
+                            flexDirection: "row",
                             justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
-                        <form>
-                            <Box sx={{ mb: 4 }}>
-                                <Typography
-                                    variant="h5"
-                                    sx={{ fontWeight: 600, mb: 2 }}
-                                >
-                                    Contact Form
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                    Please fill out the form on the left to get in touch with us. We look forward to assisting you!
-                                </Typography>
-                            </Box>
-                        </form>
-                        {/* <Box
-                            component="img"
-                            src="/logos/contact.webp"
-                            alt="Nordisk Support contact"
-                            sx={{
-                                width: "100%",
-                                //maxWidth: 520,
-                                borderRadius: 3,
-                                boxShadow: "0 30px 60px rgba(0,0,0,0.12)",
-                            }}
-                        /> */}
+                        
+            <Box
+                sx={{
+                    flex: 1,
+                    position: 'relative',
+                    height: { xs: 300, md: 500 },
+                    width: '100%',
+                    borderRadius: { xs: 2, md: 0 },
+                    overflow: 'hidden',
+                    boxShadow: { xs: '0 4px 20px rgba(0,0,0,0.2)', md: 'none' },
+                }}
+            >
+                <img
+                    src="/logos/contact.webp"
+                    alt="IT Support Illustration"
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block"
+                    }}
+                />
+            </Box>
 
+            
+            <Box
+                sx={{
+                    flex: 1,
+                    background: 'linear-gradient(90deg, transparent 0%, cadetblue 70%)',
+                    py: { xs: 4, md: 6 },
+                    px: { xs: 3, md: 6 },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    minHeight: { xs: 'auto', md: 500 },
+                    position: 'relative',
+                }}
+            >
+                <Stack spacing={4} alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }}>
+                    <Typography
+                        variant="h2"
+                        sx={{
+                            fontSize: { xs: '2.5rem', md: '3rem' },
+                            fontWeight: 800,
+                            textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+                        }}
+                    >
+                        Contact Nordisk Support
+                    </Typography>
+
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            opacity: 0.9,
+                            fontWeight: 300,
+                            maxWidth: 600,
+                        }}
+                    >
+                        Get in touch with our team. We love to hear from you.
+                    </Typography>
+
+                    <Box sx={{
+                        display: 'flex',
+                        gap: 2,
+                        flexWrap: 'wrap',
+                        justifyContent: { xs: 'center', md: 'flex-start' }
+                    }}>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            startIcon={<Phone />}
+                            sx={{
+                                backgroundColor: 'white',
+                                color: theme.palette.primary.main,
+                                fontWeight: 600,
+                                px: 4,
+                                py: 1.5,
+                                '&:hover': {
+                                    backgroundColor: '#f8f9fa',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 8px 25px rgba(0,0,0,0.2)'
+                                },
+                                transition: 'all 0.3s ease'
+                            }}
+                            href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+                        >
+                            Call Us: {PHONE_NUMBER}
+                        </Button>
+
+                        <Button
+                            variant="outlined"
+                            size="large"
+                            startIcon={<WhatsApp />}
+                            sx={{
+                                borderColor: 'white',
+                                color: 'white',
+                                fontWeight: 600,
+                                px: 4,
+                                py: 1.5,
+                                '&:hover': {
+                                    borderColor: '#25D366',
+                                    backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                                    transform: 'translateY(-2px)'
+                                },
+                                transition: 'all 0.3s ease'
+                            }}
+                            onClick={openWhatsApp}
+                        >
+                            WhatsApp Chat
+                        </Button>
                     </Box>
                 </Stack>
-            </Container>
+            </Box>
         </Box>
+                </Container >
+            </Box > 
+            */}
+
+            {/* Main Content */}
+            <Container maxWidth="lg" sx={{ py: 8 }}>
+                <Grid container spacing={6}>
+                    {/* Left Column: Contact Info & Quick Actions */}
+                    <Grid item xs={12} md={4}>
+                        <Stack spacing={4}>
+                            {/* Contact Card */}
+                            <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+                                <Typography variant="h5" gutterBottom fontWeight={600} color="primary">
+                                    Contact Information
+                                </Typography>
+
+                                <List>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Phone color="primary" />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Phone"
+                                            secondary={
+                                                <Link href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}>
+                                                    {PHONE_NUMBER}
+                                                </Link>
+                                            }
+                                        />
+                                    </ListItem>
+
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <Email color="primary" />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="General Email"
+                                            secondary={
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    <Link href={`mailto:${CONTACT_EMAIL}`}>
+                                                        {CONTACT_EMAIL}
+                                                    </Link>
+                                                    <IconButton
+                                                        size="small"
+                                                        onClick={() => navigator.clipboard.writeText(CONTACT_EMAIL)}
+                                                    >
+                                                        <ContentCopy fontSize="small" />
+                                                    </IconButton>
+                                                </Box>
+                                            }
+                                        />
+                                    </ListItem>
+
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <LocationOn color="primary" />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Address"
+                                            secondary={ADDRESS}
+                                        />
+                                    </ListItem>
+
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <AccessTime color="primary" />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary="Business Hours"
+                                            secondary={
+                                                <>
+                                                    24/7 Support Available
+                                                    <br />
+                                                    Mon-Fri: 8:00 AM - 6:00 PM
+                                                </>
+                                            }
+                                        />
+                                    </ListItem>
+                                </List>
+                            </Paper>
+
+                            {/* Quick Templates */}
+                            {/* <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+                                <Typography variant="h6" gutterBottom fontWeight={600}>
+                                    Quick Templatess
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" paragraph>
+                                    Pre-fill your message with a template:
+                                </Typography>
+
+                                <Stack spacing={2}>
+                                    {quickTemplates.map((template, index) => (
+                                        <Card
+                                            key={index}
+                                            variant="outlined"
+                                            sx={{
+                                                cursor: 'pointer',
+                                                '&:hover': {
+                                                    borderColor: 'primary.main',
+                                                    backgroundColor: 'action.hover'
+                                                }
+                                            }}
+                                            onClick={() => applyTemplate(template)}
+                                        >
+                                            <CardContent sx={{ p: 2 }}>
+                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                                    <Avatar sx={{ bgcolor: 'primary.light' }}>
+                                                        {template.icon}
+                                                    </Avatar>
+                                                    <Box>
+                                                        <Typography variant="subtitle2" fontWeight={600}>
+                                                            {template.title}
+                                                        </Typography>
+                                                        <Typography variant="caption" color="text.secondary">
+                                                            Click to apply
+                                                        </Typography>
+                                                    </Box>
+                                                </Box>
+                                            </CardContent>
+                                        </Card>
+                                    ))}
+                                </Stack>
+                            </Paper> */}
+
+                            {/* Team Contacts */}
+                            <Paper elevation={2} sx={{ p: 2, borderRadius: 3 }}>
+
+
+                                <Stack spacing={2}>
+                                    {teamContacts.map((person, index) => (
+                                        <Box key={index}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
+                                                {<Avatar
+                                                    src={person.avatar}
+                                                    sx={{ width: 40, height: 40 }}
+                                                >
+                                                    {person.name.charAt(0)}
+                                                </Avatar>}
+                                                <Box>
+                                                    <Typography variant="subtitle1" fontWeight={600}>
+                                                        {person.name}
+                                                    </Typography>
+                                                    <Typography variant="caption" color="text.secondary">
+                                                        {person.role}
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                            <Box sx={{ pl: 7 }}>
+                                                <Typography variant="body2">
+                                                    <Link href={`mailto:${person.email}`} sx={{ mr: 2 }}>
+                                                        {person.email}
+                                                    </Link>
+                                                </Typography>
+                                                <Typography variant="body2">
+                                                    <Link href={`tel:${person.phone.replace(/\s/g, '')}`}>
+                                                        {person.phone}
+                                                    </Link>
+                                                </Typography>
+                                            </Box>
+                                            {index < teamContacts.length - 1 && <Divider sx={{ my: 2 }} />}
+                                        </Box>
+                                    ))}
+                                </Stack>
+                            </Paper>
+                        </Stack>
+                    </Grid>
+
+                    {/* Right Column: Contact Form */}
+                    <Grid item xs={12} md={8}>
+                        <Paper elevation={3} sx={{ p: { xs: 3, md: 6 }, borderRadius: 3 }}>
+                            <Typography variant="h4" gutterBottom fontWeight={700}>
+                                Send Us a Message
+                            </Typography>
+
+
+                            <form onSubmit={handleEmailSubmit}>
+                                <Stack spacing={2}>
+                                    {/* Category Selection */}
+                                    <Box>
+                                        <Typography variant="subtitle2" gutterBottom>
+                                            Select Category
+                                        </Typography>
+                                        <Stack direction="row" spacing={1} flexWrap="wrap">
+                                            {contactCategories.map((category) => (
+                                                <Chip
+                                                    key={category.value}
+                                                    label={category.label}
+                                                    onClick={() => handleCategoryChange(category.value)}
+                                                    color={formData.category === category.value ? "primary" : "default"}
+                                                    variant={formData.category === category.value ? "filled" : "outlined"}
+                                                    sx={{ mb: 1 }}
+                                                />
+                                            ))}
+                                        </Stack>
+                                    </Box>
+
+                                    <Grid container >
+                                        <Grid item sx={{ pr: 1 }} xs={8} sm={6}>
+                                            <TextField
+                                                fullWidth
+                                                label="Your Name"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                                placeholder="Enter your name"
+                                                variant="outlined"
+
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                fullWidth
+                                                label="Email Address"
+                                                name="email"
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                                placeholder="you@example.com"
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                    </Grid>
+
+                                    <TextField
+                                        fullWidth
+                                        label="Subject"
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        placeholder="How can we help you?"
+                                        variant="outlined"
+                                    />
+
+                                    <Box>
+                                        <TextField
+                                            fullWidth
+                                            label="Your Message"
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            multiline
+                                            rows={1}
+                                            variant="outlined"
+                                            placeholder="Please describe your inquiry in detail..."
+                                            required
+                                            InputProps={{
+                                                sx: {
+                                                    '& textarea': {
+                                                        resize: 'vertical',
+                                                        minHeight: '150px'
+                                                    }
+                                                }
+                                            }}
+                                        />
+                                        <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
+                                            {formData.message.length} characters
+                                        </Typography>
+                                    </Box>
+
+                                    <Box sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 2,
+                                        flexWrap: 'wrap',
+                                        pt: 2
+                                    }}>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            size="large"
+                                            startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <OpenInNew />}
+                                            disabled={isSubmitting || !formData.message.trim()}
+                                            sx={{
+                                                px: 4,
+                                                py: 1.5,
+                                                fontWeight: 600,
+                                                fontSize: '1.1rem',
+                                                minWidth: 200
+                                            }}
+                                        >
+                                            {isSubmitting ? 'Opening...' : 'Open Email Client'}
+                                        </Button>
+
+                                        <Button
+                                            variant="outlined"
+                                            size="large"
+                                            startIcon={copied ? <CheckCircle /> : <ContentCopy />}
+                                            onClick={copyEmailContent}
+                                        >
+                                            {copied ? 'Copied!' : 'Copy Content'}
+                                        </Button>
+
+                                        <Button
+                                            variant="text"
+                                            size="large"
+                                            onClick={() => setPreviewOpen(true)}
+                                        >
+                                            Preview Email
+                                        </Button>
+
+                                        <Typography variant="caption" color="text.secondary" sx={{ ml: 'auto' }}>
+                                            Will open in new tab
+                                        </Typography>
+                                    </Box>
+
+                                    <Alert severity="success" sx={{ mt: 2 }}>
+                                        <Typography variant="body2">
+                                            <strong>Tip:</strong> Your email client (Gmail, Outlook, Apple Mail, etc.) will open in a new tab or window.
+                                            If nothing happens, check your pop-up blocker settings.
+                                        </Typography>
+                                    </Alert>
+                                </Stack>
+                            </form>
+
+                            {/* Alternative Contact Methods */}
+                            <Box sx={{ mt: 6, pt: 4, borderTop: 1, borderColor: 'divider' }}>
+                                <Typography variant="h6" gutterBottom>
+                                    Alternative Contact Methods
+                                </Typography>
+                                <Stack direction="row" spacing={2} flexWrap="wrap">
+                                    <Button
+                                        startIcon={<WhatsApp />}
+                                        variant="outlined"
+                                        onClick={openWhatsApp}
+                                        sx={{
+                                            borderColor: '#25D366',
+                                            color: '#25D366',
+                                            '&:hover': {
+                                                borderColor: '#128C7E',
+                                                backgroundColor: 'rgba(37, 211, 102, 0.1)'
+                                            }
+                                        }}
+                                    >
+                                        WhatsApp
+                                    </Button>
+
+                                    <Button
+                                        startIcon={<LinkedIn />}
+                                        variant="outlined"
+                                        href="https://linkedin.com/company/nordisk-support"
+                                        target="_blank"
+                                    >
+                                        LinkedIn
+                                    </Button>
+
+                                    <Button
+                                        startIcon={<SupportAgent />}
+                                        variant="outlined"
+                                        href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+                                    >
+                                        Call Now
+                                    </Button>
+
+                                    <Button
+                                        startIcon={<Email />}
+                                        variant="outlined"
+                                        href={`mailto:${CONTACT_EMAIL}`}
+                                    >
+                                        Direct Email
+                                    </Button>
+                                </Stack>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
+
+            {/* Preview Dialog */}
+            <Dialog
+                open={previewOpen}
+                onClose={() => setPreviewOpen(false)}
+                maxWidth="md"
+                fullWidth
+            >
+                <DialogTitle>
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Typography variant="h6">Email Preview</Typography>
+                        <IconButton onClick={() => setPreviewOpen(false)} size="small">
+                            <Close />
+                        </IconButton>
+                    </Box>
+                </DialogTitle>
+                <DialogContent dividers>
+                    {(() => {
+                        const { subject, body, toEmail } = generateEmailContent();
+                        return (
+                            <Box sx={{ fontFamily: 'monospace', fontSize: '0.875rem' }}>
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography variant="caption" color="text.secondary">To:</Typography>
+                                    <Typography variant="body2" sx={{ fontWeight: 600 }}>{toEmail}</Typography>
+                                </Box>
+
+                                <Box sx={{ mb: 2 }}>
+                                    <Typography variant="caption" color="text.secondary">Subject:</Typography>
+                                    <Typography variant="body2" sx={{ fontWeight: 600 }}>{subject}</Typography>
+                                </Box>
+
+                                <Divider sx={{ my: 2 }} />
+
+                                <Box sx={{ whiteSpace: 'pre-wrap', maxHeight: 400, overflow: 'auto', p: 1, bgcolor: 'grey.50', borderRadius: 1 }}>
+                                    {body}
+                                </Box>
+                            </Box>
+                        );
+                    })()}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setPreviewOpen(false)}>
+                        Close
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={() => {
+                            setPreviewOpen(false);
+                            openEmailClient();
+                        }}
+                        startIcon={<Send />}
+                    >
+                        Open in Email Client
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Snackbar */}
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={6000}
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert
+                    severity={snackbar.severity}
+                    sx={{ width: '100%' }}
+                    onClose={() => setSnackbar({ ...snackbar, open: false })}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
+        </Box >
     );
+};
 
-
-}
+export default Contact;
