@@ -30,6 +30,7 @@ import {
     CheckCircle,
     Phone,
     Language,
+    Gradient,
 } from '@mui/icons-material';
 
 interface JobPosition {
@@ -214,7 +215,11 @@ const Career: React.FC = () => {
         <Box sx={{ width: '100%' }}>
             {/* Hero Section */}
             <Box sx={{
-                background: 'linear-gradient(90deg, transparent 0%, cadetblue 70%)',
+                background: `            
+                linear-gradient(45deg, transparent 45%, #ddd 51%),
+                linear-gradient(182deg, cadetblue 45%, transparent 50%),
+                linear-gradient(220deg, cadetblue 45%, #ddd 100%)
+                `,
                 color: 'white',
                 py: { xs: 4, md: 6 },
                 textAlign: 'center',
@@ -222,28 +227,13 @@ const Career: React.FC = () => {
                 overflow: 'hidden'
             }}>
                 <Container maxWidth="lg">
-                    <Typography
-                        variant="h1"
-                        sx={{
-                            fontWeight: 800,
-                            mb: 3,
-                            fontSize: { xs: '2.5rem', md: '3.5rem' },
-                            textShadow: '0 2px 10px rgba(0,0,0,0.2)'
-                        }}
-                    >
-                        Join Nordisk Support
+                    <Typography variant="h2" sx={{ color: "black" }}>
+                        Join Our Team
                     </Typography>
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            opacity: 0.9,
-                            mb: 4,
-                            maxWidth: 800,
-                            mx: 'auto',
-                            fontWeight: 300
-                        }}
-                    >
-                        Build your career with a team that values innovation, collaboration, and growth
+                    <Typography variant="h6" sx={{ color: "black" }}>
+                        Build your career with a team that values innovation, collaboration, and growth. Nordisk Support is
+                        an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive
+                        environment for all employees.
                     </Typography>
 
                     <Box sx={{
@@ -258,7 +248,9 @@ const Career: React.FC = () => {
                             size="large"
                             startIcon={<Email />}
                             sx={{
-                                backgroundColor: 'white',
+                                backgroundColor: 'transparent',
+                                boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+                                border: '1px solid cadetblue',
                                 color: '#2c3e50',
                                 fontWeight: 600,
                                 px: 4,
@@ -291,19 +283,21 @@ const Career: React.FC = () => {
                         </Button>
 
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             size="large"
                             sx={{
-                                borderColor: 'white',
-                                color: 'white',
+                                backgroundColor: 'transparent',
+                                boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+                                color: '#2c3e50',
+                                border: '1px solid cadetblue',
                                 fontWeight: 600,
                                 px: 4,
                                 py: 1.5,
                                 fontSize: '1.1rem',
                                 '&:hover': {
-                                    borderColor: '#f8f9fa',
-                                    backgroundColor: 'rgba(255,255,255,0.1)',
-                                    transform: 'translateY(-2px)'
+                                    backgroundColor: '#f8f9fa',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
                                 },
                                 transition: 'all 0.3s ease'
                             }}
@@ -682,18 +676,16 @@ const Career: React.FC = () => {
             {/* Footer Note */}
             <Box sx={{
                 py: 4,
-                backgroundColor: theme.palette.primary.dark,
-                color: 'white',
+
+                color: 'black',
                 textAlign: 'center'
             }}>
-                <Container maxWidth="lg">
+                {/* <Container maxWidth="lg">
                     <Typography variant="body2">
                         Nordisk Support is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.
                     </Typography>
-                    <Typography variant="caption" sx={{ display: 'block', mt: 2, opacity: 0.8 }}>
-                        © {new Date().getFullYear()} Nordisk Support. All rights reserved.
-                    </Typography>
-                </Container>
+
+                </Container> */}
             </Box>
         </Box>
     );

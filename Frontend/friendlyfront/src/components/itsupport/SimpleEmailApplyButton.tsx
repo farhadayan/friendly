@@ -44,10 +44,10 @@ const SimpleEmailApplyButton: React.FC<SimpleEmailApplyButtonProps> = ({
 }) => {
     const HR_EMAIL = 'careers@nordisksupport.com';
     const [showFallback, setShowFallback] = useState(false);
-    const [snackbar, setSnackbar] = useState({ 
-        open: false, 
-        message: '', 
-        severity: 'success' as 'success' | 'error' | 'info' | 'warning' 
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'success' as 'success' | 'error' | 'info' | 'warning'
     });
     const [isLoading, setIsLoading] = useState(false);
     const [copied, setCopied] = useState(false);
@@ -91,18 +91,18 @@ Best regards,
     // Method to open email in new tab
     const openEmailInNewTab = () => {
         const { mailtoLink } = generateEmailContent();
-        
+
         // Create a form and submit it to open in new tab
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = mailtoLink;
         form.target = '_blank';
         form.style.display = 'none';
-        
+
         document.body.appendChild(form);
         form.submit();
         document.body.removeChild(form);
-        
+
         return true;
     };
 
@@ -118,7 +118,7 @@ Best regards,
         try {
             // Try method 1: Form submission (most reliable for new tab)
             const success = openEmailInNewTab();
-            
+
             if (success) {
                 setSnackbar({
                     open: true,
@@ -185,8 +185,8 @@ ${body}`;
                 textArea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
-                setSnackbar({ 
-                    open: true, 
+                setSnackbar({
+                    open: true,
                     message: 'Copied to clipboard!',
                     severity: 'success'
                 });
@@ -217,7 +217,7 @@ Note: This is an application for the "${jobTitle}" position.`;
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        
+
         setSnackbar({
             open: true,
             message: 'Email template downloaded!',
@@ -237,9 +237,13 @@ Note: This is an application for the "${jobTitle}" position.`;
                         onClick={handleEmailApply}
                         disabled={isLoading}
                         sx={{
-                            backgroundColor: variant === 'contained' ? '#2196f3' : 'transparent',
+                            //backgroundColor: variant === 'contained' ? '#2196f3' : 'transparent',
+                            background: "linear-gradient(90deg, transparent 0%, #1e40af 100%)",
                             '&:hover': {
-                                backgroundColor: variant === 'contained' ? '#1976d2' : 'rgba(33, 150, 243, 0.08)',
+                                //backgroundColor: variant === 'outlined' ? '#1976d2' : 'rgba(33, 150, 243, 0.08)',
+                                background: "linear-gradient(180deg, transparent 0%, #1e40af 100%)",
+
+
                             }
                         }}
                     >
@@ -247,18 +251,18 @@ Note: This is an application for the "${jobTitle}" position.`;
                     </Button>
                 </Tooltip>
 
-                <Box sx={{ 
-                    display: 'flex', 
-                    justifyContent: 'center', 
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
                     gap: 1,
-                    flexWrap: 'wrap' 
+                    flexWrap: 'wrap'
                 }}>
                     <Tooltip title="Copy email content">
                         <IconButton
                             size="small"
                             onClick={copyEmailContent}
-                            sx={{ 
-                                fontSize: '0.875rem', 
+                            sx={{
+                                fontSize: '0.875rem',
                                 color: copied ? 'success.main' : 'text.secondary'
                             }}
                         >
@@ -346,13 +350,13 @@ Note: This is an application for the "${jobTitle}" position.`;
                     </Box>
                 </DialogContent>
                 <DialogActions sx={{ justifyContent: 'space-between' }}>
-                    <Button 
+                    <Button
                         onClick={() => {
                             const { subject, body } = generateEmailContent();
                             const emailContent = `To: ${HR_EMAIL}\nSubject: ${subject}\n\n${body}`;
                             navigator.clipboard.writeText(emailContent);
-                            setSnackbar({ 
-                                open: true, 
+                            setSnackbar({
+                                open: true,
                                 message: 'Full email content copied!',
                                 severity: 'success'
                             });
@@ -383,8 +387,8 @@ Note: This is an application for the "${jobTitle}" position.`;
                 onClose={() => setSnackbar({ ...snackbar, open: false })}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
-                <Alert 
-                    severity={snackbar.severity} 
+                <Alert
+                    severity={snackbar.severity}
                     sx={{ width: '100%' }}
                     onClose={() => setSnackbar({ ...snackbar, open: false })}
                 >
