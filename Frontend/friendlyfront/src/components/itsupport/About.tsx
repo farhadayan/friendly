@@ -90,7 +90,7 @@ export default function About() {
             linear-gradient(270deg, #f8fafc 0%, transparent 25%),
             linear-gradient(180deg, cadetblue 0%, transparent 90%)
           `,
-          py: { xs: 2, md: 8 },
+          py: { xs: 1, md: 5 },
           textAlign: "center",
         }}
       >
@@ -104,7 +104,7 @@ export default function About() {
             variant="h6"
 
           >
-            deliver professional IT services that drive business efficiency.
+            Deliver professional IT services that drive business efficiency.
             Our core purpose is to eliminate technology as a barrier, providing
             robust and proactive support that allows you to dedicate your energy to
             what matters most—your vision and your bottom line

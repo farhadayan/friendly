@@ -21,23 +21,20 @@ export default function SwServices() {
     {
       icon: <LanguageIcon color="primary" fontSize="large" />,
       title: "Web Development",
-      desc: "Modern responsive websites & apps."
+      desc: "Designing, Building and Maintaining responsive and user-friendly websites and web applications tailored to business needs. Delivering secure, scalable and performance solutions using modern technologies"
     },
     {
       icon: <PhoneIphoneIcon color="primary" fontSize="large" />,
       title: "Mobile Apps",
-      desc: "iOS and Android solutions tailored to your needs."
+      desc: "Applications for iOS and Android platforms. End-to-End solutions including development, testing and deployment, ensuring apps are secure, scalable, and optimized for an engaging user experience."
     },
-    {
-      icon: <CloudDownloadIcon color="primary" fontSize="large" />,
-      title: "Cloud Solutions",
-      desc: "Scalable cloud-based systems & migrations."
-    },
+
     {
       icon: <PsychologyIcon color="primary" fontSize="large" />,
       title: "Software Consulting",
-      desc: "Strategy, architecture & tech guidance."
+      desc: "Consulting services, plan and implement technology solutions. Expert guidance on software strategy, architecture, system integration and process optimization, ensuring solutions are aligned with business goals"
     },
+
   ];
 
   const benefits = [
@@ -61,7 +58,7 @@ export default function SwServices() {
               `,
 
           backdropFilter: "blur(10px)",
-          py: { xs: 1, md: 4 },
+          py: { xs: 1, md: 6 },
           textAlign: "center",
         }}
       >
@@ -70,9 +67,9 @@ export default function SwServices() {
             Software Solutions
           </Typography>
           <Typography variant="h6">
-            At Nordic Support, we design and develop software solutions that turn data into 
-            actionable insights. We help businesses streamline processes, improve efficiency, 
-            and make informed decisions by building reliable, scalable, and secure digital systems 
+            At Nordisk Support, we design and develop software solutions that turn data into
+            actionable insights. We help businesses streamline processes, improve efficiency,
+            and make informed decisions by building reliable, scalable, and secure digital systems
             tailored to their needs.
           </Typography>
         </Container>

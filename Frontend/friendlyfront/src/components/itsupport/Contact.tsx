@@ -254,57 +254,26 @@ ${body}`;
             name: 'Customer Care',
             role: '',
             email: 'customercare@nordisksupport.com',
-            phone: '+45 66 77 69 52',
+            phone: '+45 66 77 69 51',
             avatar: '/team/sarah.jpg',
         },
         {
             name: 'Sales Team',
             role: '',
             email: 'sales@nordisksupport.com',
-            phone: '+45 66 77 69 53',
+            phone: '+45 66 77 69 51',
             avatar: '/team/mikael.jpg',
         },
         {
             name: 'Technical Team',
             role: '',
             email: 'techteam@nordisksupport.com',
-            phone: '+45 66 77 69 54',
+            phone: '+45 66 77 69 51',
             avatar: '/team/emma.jpg',
         },
     ];
 
-    // const quickTemplates = [
-    //     {
-    //         title: 'Support Request',
-    //         category: 'support',
-    //         subject: 'Technical Support Needed',
-    //         message: 'Hello,\n\nI need technical support with the following issue:\n\n[Please describe your issue here]\n\nSystem/Software:\nError Message:\nSteps to Reproduce:\n\nThank you.',
-    //         icon: <SupportAgent />,
-    //     },
-    //     {
-    //         title: 'Business Inquiry',
-    //         category: 'sales',
-    //         subject: 'Business Partnership Inquiry',
-    //         message: 'Hello,\n\nI am interested in exploring business opportunities with Nordisk Support.\n\nCompany:\nServices Needed:\nProject Timeline:\nBudget Range:\n\nPlease contact me to discuss further.',
-    //         icon: <Business />,
-    //     },
-    //     {
-    //         title: 'General Question',
-    //         category: 'general',
-    //         subject: 'General Inquiry',
-    //         message: 'Hello,\n\nI have a question about your services:\n\n[Please write your question here]\n\nI would appreciate more information about:\n- [Topic 1]\n- [Topic 2]\n\nThank you.',
-    //         icon: <Chat />,
-    //     },
-    // ];
 
-    // const applyTemplate = (template: typeof quickTemplates[0]) => {
-    //     setFormData(prev => ({
-    //         ...prev,
-    //         category: template.category,
-    //         subject: template.subject,
-    //         message: template.message
-    //     }));
-    // };
 
     return (
         <Box sx={{ overflow: 'hidden', background: "transparent" }}>
@@ -343,7 +312,7 @@ ${body}`;
                             fontWeight: "bold",
                             textAlign: "center",
                         }}  >
-                        Contact Nordisk Support
+                        Contact Us
 
                     </Typography>
 
@@ -356,6 +325,7 @@ ${body}`;
                             justifyContent: "center",
                             opacity: 0.7,
                             lineHeight: 1.6,
+                            pb:4
                         }}
                     >
                         Get in touch with our team. We love to hear from you.

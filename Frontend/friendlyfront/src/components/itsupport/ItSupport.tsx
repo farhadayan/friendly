@@ -46,29 +46,11 @@ export default function ITSupport() {
     },
     {
       icon: <CloudIcon color="primary" fontSize="large" />,
-      title: "Cloud Services",
+      title: "Dispose Devices",
       description:
-        "Migration to the cloud, cloud backups, Microsoft 365 and Google Workspace support, and ongoing cloud infrastructure management.",
+        "Decommissioning hardware, recycling and follow methods in compliance with company policies and environmental regulations. We track the status of device disposal and ensure sensitive information is wipe before disposal.",
     },
-
-    {
-      icon: <StorageIcon color="primary" fontSize="large" />,
-      title: "Server Setup",
-      description:
-        "Server setup & configuration completed. Server ready for deployment. Server configured and operational."
-    },
-    {
-      icon: <StorageIcon color="primary" fontSize="large" />,
-      title: "Data Recovery",
-      description:
-        "Emergency recovery for hard drives, SSDs, USB drives, and cloud storage with a high success rate.",
-    },
-    {
-      icon: <SupportIcon color="primary" fontSize="large" />,
-      title: "24/7 IT Support",
-      description:
-        "Round-the-clock IT helpdesk for urgent issues. Remote and onsite support options available.",
-    },
+    
   ];
 
   const benefits = [
@@ -126,11 +108,11 @@ export default function ITSupport() {
             variant="h6"
           //sx={{ maxWidth: "800px", mx: "auto", opacity: 0.9 }}
           >
-            At Nordic Support, you get fast, personal, and reliable IT support that keeps your 
+            At Nordisk Support, you get fast, personal, and reliable IT support that keeps your 
             business running smoothly without unnecessary disruptions. We understand that IT 
             issues cost both time and money, which is why we make sure you get the help you need,
             when you need it - without long waiting times or complicated solutions. Reliable, affordable 
-            and IT support for businesses. From device repairs to advanced maintenance, we’ve got
+            and IT support for businesses. From device dispose to advanced maintenance, we’ve got
             you covered 24/7.
           </Typography>
         </Container>

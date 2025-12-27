@@ -76,11 +76,11 @@ const Career: React.FC = () => {
     const jobOpenings: JobPosition[] = [
         {
             id: 1,
-            title: "Senior Full Stack Developer",
-            department: "Engineering",
-            location: "Stockholm, Sweden",
+            title: "Full Stack Developer",
+            department: "Software",
+            location: "Copenhagen, Denmark",
             type: "Full-time",
-            description: "Join our engineering team to build scalable web applications using React, Node.js, and cloud technologies. You'll work on cutting-edge projects and collaborate with a talented team.",
+            description: "Join our software developer team to build scalable web applications using React, Node.js, and cloud technologies. You'll work on cutting-edge projects and collaborate with a talented team.",
             responsibilities: [
                 "Design and develop responsive web applications",
                 "Collaborate with cross-functional teams",
@@ -88,13 +88,13 @@ const Career: React.FC = () => {
                 "Write clean, maintainable code and conduct code reviews"
             ],
             requirements: [
-                "5+ years of experience with JavaScript/TypeScript",
-                "Expertise in React and Node.js",
+                "5+ years of experience with React, TypeScript, Python and Node.js",
+                "REST & GraphQL APIs, Knowledge on JWT, OAuth2, SSO",
                 "Experience with AWS or Azure cloud services",
                 "Strong problem-solving and communication skills"
             ],
-            closingDate: "2024-12-15",
-            salary: "Competitive + Benefits",
+            closingDate: "2026-02-01",
+            salary: "Competitive",
             remote: true,
             urgent: true
         },
@@ -102,8 +102,8 @@ const Career: React.FC = () => {
             id: 2,
             title: "IT Support Specialist",
             department: "Support",
-            location: "Remote",
-            type: "Full-time",
+            location: "Onsite",
+            type: "Contract",
             description: "Provide technical support and troubleshooting for our clients' IT infrastructure. Be the first point of contact for technical issues.",
             responsibilities: [
                 "Handle tier 2/3 support tickets",
@@ -117,8 +117,8 @@ const Career: React.FC = () => {
                 "Networking fundamentals",
                 "Excellent communication skills"
             ],
-            closingDate: "2024-12-10",
-            salary: "Market rate",
+            closingDate: "2026-02-01",
+            salary: "Competitive",
             remote: true,
             urgent: false
         },
@@ -126,7 +126,7 @@ const Career: React.FC = () => {
             id: 3,
             title: "DevOps Engineer",
             department: "Engineering",
-            location: "Oslo, Norway",
+            location: "Hybrid",
             type: "Full-time",
             description: "Optimize our deployment processes and infrastructure automation. Build and maintain our cloud infrastructure.",
             responsibilities: [
@@ -141,7 +141,7 @@ const Career: React.FC = () => {
                 "CI/CD pipeline development",
                 "3+ years in DevOps role"
             ],
-            closingDate: "2024-12-20",
+            closingDate: "2026-02-01",
             salary: "Competitive",
             remote: false,
             urgent: true
@@ -149,7 +149,7 @@ const Career: React.FC = () => {
         {
             id: 4,
             title: "UX/UI Designer",
-            department: "Design",
+            department: "Software",
             location: "Remote",
             type: "Part-time",
             description: "Create beautiful and functional user interfaces for our products. Work closely with development team and stakeholders.",
@@ -165,7 +165,7 @@ const Career: React.FC = () => {
                 "Understanding of user-centered design",
                 "2+ years in UI/UX design"
             ],
-            closingDate: "2024-12-05",
+            closingDate: "2026-02-01",
             salary: "Negotiable",
             remote: true,
             urgent: false
@@ -173,9 +173,8 @@ const Career: React.FC = () => {
     ];
 
     const benefits = [
-        "Competitive salary and bonus structure",
-        "Flexible working hours and remote options",
-        "Health and wellness benefits",
+        "Competitive salary",
+        "Flexible working hours",
         "Professional development budget",
         "Latest tech equipment",
         "Team building activities",
@@ -516,7 +515,7 @@ const Career: React.FC = () => {
                                     window.open(mailto, '_blank');
                                 }}
                             >
-                                Submit General Application
+                                Submit Resume
                             </Button>
 
                             <Button
