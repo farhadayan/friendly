@@ -489,7 +489,7 @@ ${email ? `Email: ${email}` : ''}`.trim();
                                         style={{ width: "100%", height: "500px", objectFit: "cover" }}
                                     />
                                 </Box>
-                                
+
                             </Paper>
                         </Stack>
                     </Grid>
@@ -666,7 +666,7 @@ ${email ? `Email: ${email}` : ''}`.trim();
                                     <Button
                                         startIcon={<LinkedIn />}
                                         variant="outlined"
-                                        href="https://linkedin.com/company/nordisk-support"
+                                        href="https://linkedin.com/company/nordisk-support-7142983a2"
                                         target="_blank"
                                     >
                                         LinkedIn
@@ -680,13 +680,13 @@ ${email ? `Email: ${email}` : ''}`.trim();
                                         Call Now
                                     </Button>
 
-                                    <Button
+                                    {/* <Button
                                         startIcon={<Email />}
                                         variant="outlined"
                                         href={`mailto:${CONTACT_EMAIL}`}
                                     >
                                         Direct Email
-                                    </Button>
+                                    </Button> */}
                                 </Stack>
                             </Box>
                         </Paper>
