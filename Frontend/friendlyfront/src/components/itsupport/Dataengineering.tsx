@@ -83,7 +83,7 @@ export default function Dataengineering() {
         sx={{
           flex: 1,
           m: 0,
-          p: { xs: 2, md: 4 },
+          p: { xs: 1, md: 2 },
 
           backdropFilter: "blur(10px)",
           background: `
@@ -96,12 +96,11 @@ export default function Dataengineering() {
 
         }}
       >
-        <Container maxWidth="lg">
-          <Typography variant="h2" sx={{pb:{xs:2}}}>
+        <Container maxWidth="lg" sx={{ pb: 3 }}>
+          <Typography variant="h2" sx={{ pb: { xs: 2 } }}>
             Data Engineering
           </Typography>
-          <Typography
-            variant="h6" >
+          <Typography variant="h6">
             Data is one of the most valuable assets a business owns - but only if it is structured, reliable
             and accessible. Our Data Engineering services help businesses collect, process, and transform data
             into a solid foundation for analytics, reporting, and decision-making. We design and build robust
@@ -112,7 +111,7 @@ export default function Dataengineering() {
         </Container>
       </Box>
 
-      <Container sx={{ pt: { xs: 32, md: 4 }, pb:{xs:4} }}>
+      <Container sx={{ pt: { xs: 32, md: 4 }, pb: { xs: 4 } }}>
         <Grid container spacing={4}>
           {services.map((service, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -125,7 +124,7 @@ export default function Dataengineering() {
               >
                 <CardContent sx={{ textAlign: "center" }}>
                   <Box sx={{ mb: { xs: 1, md: 2 } }}>{service.icon}</Box>
-                  <Typography variant="h5" sx={{pb:1}}>
+                  <Typography variant="h5" sx={{ pb: 1 }}>
                     {service.title}
                   </Typography>
                   <Typography variant="h6" color="text.secondary" lineHeight={1.8}>
