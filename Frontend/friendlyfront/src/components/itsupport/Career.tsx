@@ -51,7 +51,7 @@ interface JobPosition {
 const Career: React.FC = () => {
     const theme = useTheme();
     const HR_EMAIL = 'careers@nordisksupport.com';
-    const HR_PHONE = '+46 8 123 4567';
+    const HR_PHONE = '+45 66 77 69 51';
 
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
@@ -211,7 +211,7 @@ const Career: React.FC = () => {
     ];
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%' , pl:0}}>
             {/* Hero Section */}
             <Box sx={{
                 background: `            
@@ -278,7 +278,7 @@ const Career: React.FC = () => {
                                 document.body.removeChild(form);
                             }}
                         >
-                            Send General Application
+                            Send Application
                         </Button>
 
                         <Button
@@ -329,7 +329,7 @@ const Career: React.FC = () => {
 
 
             {/* Open Positions */}
-            <Box id="open-positions" sx={{ py: 10, backgroundColor: '#f8f9fa' }}>
+            <Box id="open-positions" sx={{ py: 2, backgroundColor: '#f8f9fa' }}>
                 <Container maxWidth="lg">
                     <Typography
                         variant="h2"
@@ -534,7 +534,7 @@ const Career: React.FC = () => {
             </Box>
 
             {/* Hiring Process */}
-            <Container maxWidth="lg" sx={{ py: 10 }}>
+            <Container maxWidth="lg" sx={{ py: 8 }}>
                 <Typography variant="h2" sx={{ textAlign: 'center', mb: 6, fontWeight: 700 }}>
                     Our Hiring Process
                 </Typography>
@@ -578,114 +578,6 @@ const Career: React.FC = () => {
                 </Grid>
             </Container>
 
-            {/* Contact & Alternative Methods */}
-            <Box sx={{
-                py: 10,
-                backgroundColor: theme.palette.grey[100],
-                borderTop: `1px solid ${theme.palette.divider}`
-            }}>
-                <Container maxWidth="lg">
-                    <Typography variant="h2" sx={{ textAlign: 'center', mb: 6, fontWeight: 700 }}>
-                        Contact Our HR Team
-                    </Typography>
-
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{
-                                p: 4,
-                                height: '100%',
-                                textAlign: 'center',
-                                borderRadius: 3,
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-                            }}>
-                                <Email sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
-                                <Typography variant="h6" gutterBottom>
-                                    Email Application
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" paragraph>
-                                    Send your application to our HR team
-                                </Typography>
-                                <Button
-                                    variant="contained"
-                                    fullWidth
-                                    onClick={() => {
-                                        window.location.href = `mailto:${HR_EMAIL}`;
-                                    }}
-                                >
-                                    {HR_EMAIL}
-                                </Button>
-                            </Card>
-                        </Grid>
-
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{
-                                p: 4,
-                                height: '100%',
-                                textAlign: 'center',
-                                borderRadius: 3,
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-                            }}>
-                                <LinkedIn sx={{ fontSize: 48, color: '#0077b5', mb: 2 }} />
-                                <Typography variant="h6" gutterBottom>
-                                    LinkedIn
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" paragraph>
-                                    Connect with our recruiters
-                                </Typography>
-                                <Button
-                                    variant="contained"
-                                    fullWidth
-                                    sx={{ backgroundColor: '#0077b5', '&:hover': { backgroundColor: '#00669c' } }}
-                                    onClick={() => window.open('https://linkedin.com/company/nordisk-support', '_blank')}
-                                >
-                                    Visit LinkedIn Page
-                                </Button>
-                            </Card>
-                        </Grid>
-
-                        <Grid item xs={12} md={4}>
-                            <Card sx={{
-                                p: 4,
-                                height: '100%',
-                                textAlign: 'center',
-                                borderRadius: 3,
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-                            }}>
-                                <Phone sx={{ fontSize: 48, color: 'success.main', mb: 2 }} />
-                                <Typography variant="h6" gutterBottom>
-                                    Phone Inquiry
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" paragraph>
-                                    Call our HR department
-                                </Typography>
-                                <Button
-                                    variant="contained"
-                                    fullWidth
-                                    sx={{ backgroundColor: 'success.main' }}
-                                    onClick={() => window.location.href = `tel:${HR_PHONE}`}
-                                >
-                                    {HR_PHONE}
-                                </Button>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Box>
-
-            {/* Footer Note */}
-            <Box sx={{
-                py: 4,
-
-                color: 'black',
-                textAlign: 'center'
-            }}>
-                {/* <Container maxWidth="lg">
-                    <Typography variant="body2">
-                        Nordisk Support is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.
-                    </Typography>
-
-                </Container> */}
-            </Box>
         </Box>
     );
 };

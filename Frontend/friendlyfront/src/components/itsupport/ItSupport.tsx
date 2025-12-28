@@ -77,12 +77,12 @@ export default function ITSupport() {
     },
     {
       q: "Do you work with small businesses?",
-      a: "Yes, we specialize in providing cost-effective IT solutions for small to mid-sized businesses.",
+      a: "Yes, we specialize in providing cost-effective IT solutions for small to large-sized businesses.",
     },
   ];
 
   return (
-    <Box sx={{ overflow: "hidden", background: "transparent" }}>
+    <Box sx={{ overflow: "hidden", background: "transparent", pl:0 }}>
 
       <Box
         sx={{
@@ -93,20 +93,20 @@ export default function ITSupport() {
           `,
 
           backdropFilter: "blur(10px)",
-          py: { xs: 1, md: 4 },
+          py: { xs: 3, md: 4 },
           textAlign: "center",
         }}>
         <Container maxWidth="lg">
           <Typography
             variant="h2"
             fontWeight="bold"
-
+            sx={{pb:2}}
           >
             IT Help Desk
           </Typography>
           <Typography
             variant="h6"
-          //sx={{ maxWidth: "800px", mx: "auto", opacity: 0.9 }}
+          sx={{ mx: "auto", opacity: 0.9 }}
           >
             At Nordisk Support, you get fast, personal, and reliable IT support that keeps your 
             business running smoothly without unnecessary disruptions. We understand that IT 
@@ -133,10 +133,10 @@ export default function ITSupport() {
               >
                 <CardContent sx={{ textAlign: "center" }}>
                   <Box sx={{ mb: 2 }}>{service.icon}</Box>
-                  <Typography variant="h5">
+                  <Typography variant="h5" sx={{pb:1}}>
                     {service.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" lineHeight={1.8}>
                     {service.description}
                   </Typography>
                 </CardContent>
@@ -213,38 +213,7 @@ export default function ITSupport() {
           ))}
         </Box>
       </Container>
-
-      {/* CTA Section */}
-      {/* <Box sx={{ background: "linear-gradient(135deg, #D3D3D3 0%, #1e40af 100%)", color: "white", py: 8, textAlign: "center" }}>
-        <Container maxWidth="md">
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Ready to Get Expert IT Support?
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}
-          >
-            Contact us today for a free consultation and let’s resolve your IT
-            issues quickly and effectively.
-          </Typography>
-          <Button
-            variant="contained"
-            component={Link}
-            to="/contact"
-            startIcon={<BuildIcon />}
-            sx={{
-              px: 4,
-              py: 1.5,
-              fontSize: "1.1rem",
-              backgroundColor: "white",
-              color: "#1e40af",
-              "&:hover": { backgroundColor: "#f8fafc" },
-            }}
-          >
-            Contact Us Now
-          </Button>
-        </Container>
-      </Box> */}
+      
     </Box>
   );
 }

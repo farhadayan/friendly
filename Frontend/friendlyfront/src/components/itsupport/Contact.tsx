@@ -168,6 +168,9 @@ ${email ? `Email: ${email}` : ''}`.trim();
         return true;
     };
 
+    const isValidEmail = (email: string) =>
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
     const handleEmailSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -180,10 +183,18 @@ ${email ? `Email: ${email}` : ''}`.trim();
             return;
         }
 
+        if (!isValidEmail(formData.email)) {
+            setSnackbar({
+                open: true,
+                message: 'Please enter a valid email address.',
+                severity: 'error'
+            });
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
-            // Open email client in new tab
             const success = openEmailClient();
 
             if (success) {
@@ -193,7 +204,6 @@ ${email ? `Email: ${email}` : ''}`.trim();
                     severity: 'info'
                 });
 
-                // Reset form after successful submission
                 setTimeout(() => {
                     setFormData({
                         name: '',
@@ -216,12 +226,13 @@ ${email ? `Email: ${email}` : ''}`.trim();
         }
     };
 
+
     const copyEmailContent = () => {
         const { subject, body, toEmail } = generateEmailContent();
         const emailContent = `To: ${toEmail}
-Subject: ${subject}
+        Subject: ${subject}
 
-${body}`;
+        ${body}`;
 
         navigator.clipboard.writeText(emailContent)
             .then(() => {
@@ -276,7 +287,7 @@ ${body}`;
 
 
     return (
-        <Box sx={{ overflow: 'hidden', background: "transparent" }}>
+        <Box sx={{ overflow: 'hidden', background: "transparent", pl: 0 }}>
             {/* Hero Section */}
             <Box
                 sx={{
@@ -325,7 +336,7 @@ ${body}`;
                             justifyContent: "center",
                             opacity: 0.7,
                             lineHeight: 1.6,
-                            pb:4
+                            pb: 4
                         }}
                     >
                         Get in touch with our team. We love to hear from you.
@@ -362,7 +373,7 @@ ${body}`;
                             }}
                             href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
                         >
-                            Call Us: {PHONE_NUMBER}
+                            {PHONE_NUMBER}
                         </Button>
 
                         <Button
@@ -405,149 +416,6 @@ ${body}`;
                 </Box>
             </Box>
 
-            {/* <Box sx={{
-                flex: 1,
-                m: 0,
-                p: 0,
-                px: 0,
-                py: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}>
-                <Container maxWidth="lg">
-                    <Box
-                        sx={{
-                            flex: 1,
-                            m: 0,
-                            // p: { xs: 3, md: 4 },
-                            backdropFilter: "blur(10px)",
-                            background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
-                            height: 'auto',
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-                        
-            <Box
-                sx={{
-                    flex: 1,
-                    position: 'relative',
-                    height: { xs: 300, md: 500 },
-                    width: '100%',
-                    borderRadius: { xs: 2, md: 0 },
-                    overflow: 'hidden',
-                    boxShadow: { xs: '0 4px 20px rgba(0,0,0,0.2)', md: 'none' },
-                }}
-            >
-                <img
-                    src="/logos/contact.webp"
-                    alt="IT Support Illustration"
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        display: "block"
-                    }}
-                />
-            </Box>
-
-            
-            <Box
-                sx={{
-                    flex: 1,
-                    background: 'linear-gradient(90deg, transparent 0%, cadetblue 70%)',
-                    py: { xs: 4, md: 6 },
-                    px: { xs: 3, md: 6 },
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    minHeight: { xs: 'auto', md: 500 },
-                    position: 'relative',
-                }}
-            >
-                <Stack spacing={4} alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }}>
-                    <Typography
-                        variant="h2"
-                        sx={{
-                            fontSize: { xs: '2.5rem', md: '3rem' },
-                            fontWeight: 800,
-                            textShadow: '0 2px 10px rgba(0,0,0,0.3)'
-                        }}
-                    >
-                        Contact Nordisk Support
-                    </Typography>
-
-                    <Typography
-                        variant="h5"
-                        sx={{
-                            opacity: 0.9,
-                            fontWeight: 300,
-                            maxWidth: 600,
-                        }}
-                    >
-                        Get in touch with our team. We love to hear from you.
-                    </Typography>
-
-                    <Box sx={{
-                        display: 'flex',
-                        gap: 2,
-                        flexWrap: 'wrap',
-                        justifyContent: { xs: 'center', md: 'flex-start' }
-                    }}>
-                        <Button
-                            variant="contained"
-                            size="large"
-                            startIcon={<Phone />}
-                            sx={{
-                                backgroundColor: 'white',
-                                color: theme.palette.primary.main,
-                                fontWeight: 600,
-                                px: 4,
-                                py: 1.5,
-                                '&:hover': {
-                                    backgroundColor: '#f8f9fa',
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 8px 25px rgba(0,0,0,0.2)'
-                                },
-                                transition: 'all 0.3s ease'
-                            }}
-                            href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
-                        >
-                            Call Us: {PHONE_NUMBER}
-                        </Button>
-
-                        <Button
-                            variant="outlined"
-                            size="large"
-                            startIcon={<WhatsApp />}
-                            sx={{
-                                borderColor: 'white',
-                                color: 'white',
-                                fontWeight: 600,
-                                px: 4,
-                                py: 1.5,
-                                '&:hover': {
-                                    borderColor: '#25D366',
-                                    backgroundColor: 'rgba(37, 211, 102, 0.1)',
-                                    transform: 'translateY(-2px)'
-                                },
-                                transition: 'all 0.3s ease'
-                            }}
-                            onClick={openWhatsApp}
-                        >
-                            WhatsApp Chat
-                        </Button>
-                    </Box>
-                </Stack>
-            </Box>
-        </Box>
-                </Container >
-            </Box > 
-            */}
-
             {/* Main Content */}
             <Container maxWidth="lg" sx={{ py: 8 }}>
                 <Grid container spacing={6}>
@@ -575,27 +443,6 @@ ${body}`;
                                         />
                                     </ListItem>
 
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <Email color="primary" />
-                                        </ListItemIcon>
-                                        <ListItemText
-                                            primary="General Email"
-                                            secondary={
-                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                                    <Link href={`mailto:${CONTACT_EMAIL}`}>
-                                                        {CONTACT_EMAIL}
-                                                    </Link>
-                                                    <IconButton
-                                                        size="small"
-                                                        onClick={() => navigator.clipboard.writeText(CONTACT_EMAIL)}
-                                                    >
-                                                        <ContentCopy fontSize="small" />
-                                                    </IconButton>
-                                                </Box>
-                                            }
-                                        />
-                                    </ListItem>
 
                                     <ListItem>
                                         <ListItemIcon>
@@ -625,88 +472,24 @@ ${body}`;
                                 </List>
                             </Paper>
 
-                            {/* Quick Templates */}
-                            {/* <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-                                <Typography variant="h6" gutterBottom fontWeight={600}>
-                                    Quick Templatess
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary" paragraph>
-                                    Pre-fill your message with a template:
-                                </Typography>
-
-                                <Stack spacing={2}>
-                                    {quickTemplates.map((template, index) => (
-                                        <Card
-                                            key={index}
-                                            variant="outlined"
-                                            sx={{
-                                                cursor: 'pointer',
-                                                '&:hover': {
-                                                    borderColor: 'primary.main',
-                                                    backgroundColor: 'action.hover'
-                                                }
-                                            }}
-                                            onClick={() => applyTemplate(template)}
-                                        >
-                                            <CardContent sx={{ p: 2 }}>
-                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                                    <Avatar sx={{ bgcolor: 'primary.light' }}>
-                                                        {template.icon}
-                                                    </Avatar>
-                                                    <Box>
-                                                        <Typography variant="subtitle2" fontWeight={600}>
-                                                            {template.title}
-                                                        </Typography>
-                                                        <Typography variant="caption" color="text.secondary">
-                                                            Click to apply
-                                                        </Typography>
-                                                    </Box>
-                                                </Box>
-                                            </CardContent>
-                                        </Card>
-                                    ))}
-                                </Stack>
-                            </Paper> */}
-
                             {/* Team Contacts */}
-                            <Paper elevation={2} sx={{ p: 2, borderRadius: 3 }}>
+                            <Paper elevation={1} >
 
-
-                                <Stack spacing={2}>
-                                    {teamContacts.map((person, index) => (
-                                        <Box key={index}>
-                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-                                                {<Avatar
-                                                    src={person.avatar}
-                                                    sx={{ width: 40, height: 40 }}
-                                                >
-                                                    {person.name.charAt(0)}
-                                                </Avatar>}
-                                                <Box>
-                                                    <Typography variant="subtitle1" fontWeight={600}>
-                                                        {person.name}
-                                                    </Typography>
-                                                    <Typography variant="caption" color="text.secondary">
-                                                        {person.role}
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                            <Box sx={{ pl: 7 }}>
-                                                <Typography variant="body2">
-                                                    <Link href={`mailto:${person.email}`} sx={{ mr: 2 }}>
-                                                        {person.email}
-                                                    </Link>
-                                                </Typography>
-                                                <Typography variant="body2">
-                                                    <Link href={`tel:${person.phone.replace(/\s/g, '')}`}>
-                                                        {person.phone}
-                                                    </Link>
-                                                </Typography>
-                                            </Box>
-                                            {index < teamContacts.length - 1 && <Divider sx={{ my: 2 }} />}
-                                        </Box>
-                                    ))}
-                                </Stack>
+                                <Box
+                                    sx={{
+                                        flex: 1,
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        display: { xs: "none", md: "flex" }
+                                    }}
+                                >
+                                    <img
+                                        src="/logos/chatmodel.png"
+                                        alt="IT Support Illustration"
+                                        style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                                    />
+                                </Box>
+                                
                             </Paper>
                         </Stack>
                     </Grid>
@@ -724,9 +507,9 @@ ${body}`;
                                     {/* Category Selection */}
                                     <Box>
                                         <Typography variant="subtitle2" gutterBottom>
-                                            Select Category
+                                            Select Team
                                         </Typography>
-                                        <Stack direction="row" spacing={1} flexWrap="wrap">
+                                        <Stack direction={{ xs: "column", md: "row" }} spacing={1} flexWrap="wrap">
                                             {contactCategories.map((category) => (
                                                 <Chip
                                                     key={category.value}
@@ -741,7 +524,7 @@ ${body}`;
                                     </Box>
 
                                     <Grid container >
-                                        <Grid item sx={{ pr: 1 }} xs={8} sm={6}>
+                                        <Grid item xs={12} sm={6} sx={{ pb: { xs: 2 } }}>
                                             <TextField
                                                 fullWidth
                                                 label="Your Name"
@@ -863,7 +646,7 @@ ${body}`;
                                 <Typography variant="h6" gutterBottom>
                                     Alternative Contact Methods
                                 </Typography>
-                                <Stack direction="row" spacing={2} flexWrap="wrap">
+                                <Stack direction={{ xs: "column", md: "row" }} spacing={2} flexWrap="wrap">
                                     <Button
                                         startIcon={<WhatsApp />}
                                         variant="outlined"

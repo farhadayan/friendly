@@ -237,10 +237,10 @@ Note: This is an application for the "${jobTitle}" position.`;
                         onClick={handleEmailApply}
                         disabled={isLoading}
                         sx={{
-                            //backgroundColor: variant === 'contained' ? '#2196f3' : 'transparent',
+
                             background: "linear-gradient(90deg, transparent 0%, #1e40af 100%)",
                             '&:hover': {
-                                //backgroundColor: variant === 'outlined' ? '#1976d2' : 'rgba(33, 150, 243, 0.08)',
+
                                 background: "linear-gradient(180deg, transparent 0%, #1e40af 100%)",
 
 

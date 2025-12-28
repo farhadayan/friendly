@@ -71,8 +71,8 @@ export default function Home() {
   ];
 
   return (
-    <Box sx={{ overflow: "hidden", background: "transparent" }}>
-      
+    <Box sx={{ overflow: "hidden", background: "transparent", pl: 0 }}>
+
       <Box
         sx={{
           flex: 1,
@@ -90,7 +90,7 @@ export default function Home() {
           sx={{
             flex: 1,
             m: 0,
-            // p: { xs: 3, md: 4 },
+            p: { xs: 3, md: 4 },
             backdropFilter: "blur(10px)",
             background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)",
             height: isMobile ? "auto" : "500px",

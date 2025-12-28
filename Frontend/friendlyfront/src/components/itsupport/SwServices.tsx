@@ -47,7 +47,7 @@ export default function SwServices() {
   ]
 
   return (
-    <Box sx={{ overflow: "hidden", background: "transparent" }}>
+    <Box sx={{ overflow: "hidden", background: "transparent", pl: 0 }}>
 
       <Box
         sx={{
@@ -58,12 +58,12 @@ export default function SwServices() {
               `,
 
           backdropFilter: "blur(10px)",
-          py: { xs: 1, md: 6 },
+          py: { xs: 2, md: 6 },
           textAlign: "center",
         }}
       >
         <Container maxWidth="lg">
-          <Typography variant="h2">
+          <Typography variant="h2" sx={{pb:2}}>
             Software Solutions
           </Typography>
           <Typography variant="h6">
@@ -87,10 +87,10 @@ export default function SwServices() {
               >
                 <CardContent sx={{ textAlign: "center" }}>
                   <Box sx={{ mb: { xs: 1, md: 2 } }}>{service.icon}</Box>
-                  <Typography variant="h5">
+                  <Typography variant="h5" sx={{pb:1}}>
                     {service.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="h6" color="text.secondary" lineHeight={1.8}>
                     {service.desc}
                   </Typography>
                 </CardContent>
@@ -141,7 +141,7 @@ export default function SwServices() {
                   maxWidth: "600px",
                   height: "auto",
                   borderRadius: "12px",
-                  //background: "linear-gradient(90deg, transparent 0%, cadetblue 100%)"
+
                 }}
               />
             </Box>
