@@ -428,7 +428,7 @@ ${email ? `Email: ${email}` : ''}`.trim();
                                     <ListItem>
                                         <ListItemText
                                             secondary={<>
-                                                Mon–Fri: 8:30 AM – 5:30 PM
+                                                Mon–Fri: 8:30 – 17:30
                                                 <br />
                                                 Sat–Sun: 10:00–15:00
                                             </>}

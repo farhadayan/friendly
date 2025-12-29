@@ -96,13 +96,13 @@ export default function About() {
       >
         <Container maxWidth="lg">
           <Typography
-            variant="h2" sx={{pb:{xs:2}}}
+            variant="h2" sx={{ pb: { xs: 2 } }}
           >
             About us
           </Typography>
           <Typography
             variant="body2"
-
+            textAlign={"justify"}
           >
             Deliver professional IT services that drive business efficiency.
             Our core purpose is to eliminate technology as a barrier, providing
@@ -129,7 +129,7 @@ export default function About() {
               <Typography variant="h4">
                 Our Mission
               </Typography>
-              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+              <Typography variant="body2" sx={{ lineHeight: 1.8, textAlign: 'justify', pl: 1 }}>
                 To provide fast, reliable, and affordable IT support to our
                 clients. We aim to minimize downtime, secure data, and ensure
                 technology works seamlessly for everyone we serve.
@@ -149,7 +149,7 @@ export default function About() {
               <Typography variant="h4">
                 Our Vision
               </Typography>
-              <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+              <Typography variant="body2" sx={{ lineHeight: 1.8, textAlign: 'justify', pl: 1 }}>
                 To be the most trusted IT solution partner for businesses and
                 individuals, delivering innovative solutions, expert guidance,
                 and exceptional customer service.
@@ -160,7 +160,7 @@ export default function About() {
       </Container>
 
       {/* Team Section */}
-      <Box sx={{ backgroundColor: "transparent", py: {xs:2,md:8} }}>
+      <Box sx={{ backgroundColor: "transparent", py: { xs: 2, md: 8 } }}>
         <Container maxWidth="lg">
           <Box sx={{
             display: "flex",
@@ -211,13 +211,13 @@ export default function About() {
 
       {/* Call to Action */}
       <Container sx={{ py: { xs: 1, md: 8 }, textAlign: "center" }}>
-        <Typography variant="h4" sx={{pb:2}}>
+        <Typography variant="h4" sx={{ pb: 2 }}>
           Work With Nordisk Support
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{ mb: 4, maxWidth: "600px", mx: "auto", lineHeight:1.8 }}
+          sx={{ mb: 4, maxWidth: "600px", mx: "auto", lineHeight: 1.8 }}
         >
           Ready to get professional support for your business? Our
           experts are standing by to help you with fast and reliable solutions.
