@@ -318,13 +318,9 @@ ${email ? `Email: ${email}` : ''}`.trim();
                     }}
                 >
                     <Typography
-                        variant="h1"
-                        sx={{
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}  >
+                        variant="h2"
+                        sx={{ textAlign: "center" }} >
                         Contact Us
-
                     </Typography>
 
                     <Typography
@@ -339,7 +335,7 @@ ${email ? `Email: ${email}` : ''}`.trim();
                             pb: 4
                         }}
                     >
-                        Get in touch with our team. We love to hear from you.
+                        Get in touch with our team. We love to hear you.
                     </Typography>
 
                     <Box
@@ -424,19 +420,34 @@ ${email ? `Email: ${email}` : ''}`.trim();
                         <Stack spacing={4}>
                             {/* Contact Card */}
                             <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-                                <Typography variant="h5" gutterBottom fontWeight={600} color="primary">
+                                <Typography variant="h5" textAlign={'center'} >
                                     Contact Information
                                 </Typography>
 
                                 <List>
                                     <ListItem>
-                                        <ListItemIcon>
+                                        <ListItemText
+                                            secondary={<>
+                                                Mon–Fri: 8:30 AM – 5:30 PM
+                                                <br />
+                                                Sat–Sun: 10:00–15:00
+                                            </>}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon sx={{ minWidth: '36px' }}>
                                             <Phone color="primary" />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary="Phone"
+
                                             secondary={
-                                                <Link href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}>
+                                                <Link
+                                                    href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+                                                    sx={{
+                                                        whiteSpace: 'nowrap',
+                                                        display: 'inline-block',
+                                                    }}
+                                                >
                                                     {PHONE_NUMBER}
                                                 </Link>
                                             }
@@ -445,28 +456,24 @@ ${email ? `Email: ${email}` : ''}`.trim();
 
 
                                     <ListItem>
-                                        <ListItemIcon>
+                                        <ListItemIcon sx={{ minWidth: '36px' }}>
                                             <LocationOn color="primary" />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary="Address"
+                                            // primary="Address"
                                             secondary={ADDRESS}
                                         />
                                     </ListItem>
 
                                     <ListItem>
-                                        <ListItemIcon>
+                                        <ListItemIcon sx={{ minWidth: '36px' }}>
                                             <AccessTime color="primary" />
                                         </ListItemIcon>
                                         <ListItemText
-                                            primary="Business Hours"
-                                            secondary={
-                                                <>
-                                                    24/7 Support Available
-                                                    <br />
-                                                    Mon-Fri: 8:00 AM - 6:00 PM
-                                                </>
-                                            }
+
+                                            secondary="24/7 Support Available "
+
+
                                         />
                                     </ListItem>
                                 </List>

@@ -82,7 +82,7 @@ export default function ITSupport() {
   ];
 
   return (
-    <Box sx={{ overflow: "hidden", background: "transparent", pl:0 }}>
+    <Box sx={{ overflow: "hidden", background: "transparent"}}>
 
       <Box
         sx={{
@@ -106,7 +106,7 @@ export default function ITSupport() {
           </Typography>
           <Typography
             variant="h6"
-          sx={{ mx: "auto", opacity: 0.9 }}
+          sx={{ mx: "auto", opacity: 0.9, textAlign:"justify"  }}
           >
             At Nordisk Support, you get fast, personal, and reliable IT support that keeps your 
             business running smoothly without unnecessary disruptions. We understand that IT 
@@ -136,7 +136,7 @@ export default function ITSupport() {
                   <Typography variant="h5" sx={{pb:1}}>
                     {service.title}
                   </Typography>
-                  <Typography variant="h6" color="text.secondary" lineHeight={1.8}>
+                  <Typography variant="h6" color="text.secondary" textAlign={"justify"} pb={2} pl={2} lineHeight={1.8}>
                     {service.description}
                   </Typography>
                 </CardContent>

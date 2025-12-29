@@ -82,8 +82,9 @@ export default function Dataengineering() {
       <Box
         sx={{
           flex: 1,
-          m: 0,
-          p: { xs: 1, md: 2 },
+          pt: { xs: 1, md: 2 },
+          mb: {xs:12, md:4},
+
 
           backdropFilter: "blur(10px)",
           background: `
@@ -96,11 +97,11 @@ export default function Dataengineering() {
 
         }}
       >
-        <Container maxWidth="lg" sx={{ pb: 3 }}>
+        <Container maxWidth="lg">
           <Typography variant="h2" sx={{ pb: { xs: 2 } }}>
             Data Engineering
           </Typography>
-          <Typography variant="h6">
+          <Typography variant="body2" textAlign={"justify"} pl={2}>
             Data is one of the most valuable assets a business owns - but only if it is structured, reliable
             and accessible. Our Data Engineering services help businesses collect, process, and transform data
             into a solid foundation for analytics, reporting, and decision-making. We design and build robust
@@ -127,7 +128,7 @@ export default function Dataengineering() {
                   <Typography variant="h5" sx={{ pb: 1 }}>
                     {service.title}
                   </Typography>
-                  <Typography variant="h6" color="text.secondary" lineHeight={1.8}>
+                  <Typography variant="h6" textAlign={"justify"} pb={2} pl={2} lineHeight={1.8}>
                     {service.desc}
                   </Typography>
                 </CardContent>

@@ -126,6 +126,7 @@ function App() {
               //paddingTop: 'var(--header-height, 64px)',
               px: 2,
               pr: 0,
+              pl:0,
               backgroundColor: 'var(--body-bg, #f7f7f7)',
               minHeight: '100vh',
             }}

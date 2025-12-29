@@ -211,7 +211,7 @@ const Career: React.FC = () => {
     ];
 
     return (
-        <Box sx={{ width: '100%' , pl:0}}>
+        <Box sx={{ width: '100%', pl: 0 }}>
             {/* Hero Section */}
             <Box sx={{
                 background: `            
@@ -226,10 +226,10 @@ const Career: React.FC = () => {
                 overflow: 'hidden'
             }}>
                 <Container maxWidth="lg">
-                    <Typography variant="h2" sx={{ color: "black" }}>
+                    <Typography variant="h2" sx={{ color: "black", pb: 1 }}>
                         Join Our Team
                     </Typography>
-                    <Typography variant="h6" sx={{ color: "black" }}>
+                    <Typography variant="h6" sx={{ color: "black", textAlign: 'justify', pl: 2 }}>
                         Build your career with a team that values innovation, collaboration, and growth. Nordisk Support is
                         an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive
                         environment for all employees.
@@ -336,7 +336,6 @@ const Career: React.FC = () => {
                         sx={{
                             textAlign: 'center',
                             mb: 2,
-                            fontWeight: 700,
                             color: theme.palette.primary.main
                         }}
                     >
@@ -501,7 +500,7 @@ const Career: React.FC = () => {
                         <Typography variant="h5" gutterBottom color="primary">
                             Don't See a Perfect Match?
                         </Typography>
-                        <Typography variant="body1" color="text.secondary" paragraph sx={{ mb: 4 }}>
+                        <Typography variant="body2" paragraph sx={{ mb: 4 }}>
                             We're always looking for talented individuals. Send us your resume for future opportunities.
                         </Typography>
 
@@ -510,6 +509,7 @@ const Career: React.FC = () => {
                                 variant="contained"
                                 size="large"
                                 startIcon={<Email />}
+                                sx={{ whiteSpace: 'nowrap' }}
                                 onClick={() => {
                                     const mailto = `mailto:${HR_EMAIL}?subject=General Application - Nordisk Support`;
                                     window.open(mailto, '_blank');
@@ -521,6 +521,7 @@ const Career: React.FC = () => {
                             <Button
                                 variant="outlined"
                                 size="large"
+                                sx={{ whiteSpace: 'nowrap' }}
                                 onClick={() => {
                                     navigator.clipboard.writeText(HR_EMAIL);
                                     alert(`Email address copied: ${HR_EMAIL}`);

@@ -64,7 +64,7 @@ export default function Home() {
 
   const features = [
     "Skilled and experienced IT specialists",
-    "Lightning-fast response times (average under 30 minutes)",
+    "Fast response times (average under 30 minutes)",
     "Affordable pricing, no hidden fees",
     "Remote and onsite support availability",
     "No long-term contracts required",
@@ -101,13 +101,11 @@ export default function Home() {
 
           }}
         >
-          <Typography
-            variant="h1"
+          <Typography variant="h2"
             sx={{
               fontWeight: "bold",
               mb: isMobile ? 2 : 3,
               textAlign: "center",
-
             }}
           >
             Reliable IT Solutions
@@ -131,7 +129,7 @@ export default function Home() {
 
             sx={{
               mb: isMobile ? 2 : 4,
-              textAlign: "center",
+              textAlign: "justify",
               justifyContent: "center",
               opacity: 0.7,
               lineHeight: 1.6,
@@ -201,7 +199,7 @@ export default function Home() {
       {/* Services Section */}
       <Container maxWidth="lg" sx={{ py: 5 }} id="our-services-section">
         <Typography
-          variant="h2"
+          variant="h3"
           textAlign="center"
           fontWeight="bold"
           sx={{ mb: isMobile ? 1 : 2 }}
@@ -209,13 +207,9 @@ export default function Home() {
           Our Services
         </Typography>
         <Typography
-          variant="h6"
-          color="text.secondary"
+          variant="body2"
           textAlign="center"
-          sx={{
-            mb: isMobile ? 2 : 6, maxWidth: "600px", mx: "auto",
-            //fontSize: isMobile ? "0.9rem" : "1.1rem",
-          }}
+          sx={{ mb: isMobile ? 2 : 6, maxWidth: "600px", mx: "auto", textAlign: "justify" }}
         >
           Everything you need to keep your business systems safe,
           secure, and running without interruption.
@@ -232,10 +226,10 @@ export default function Home() {
                   <CardContent sx={{ p: isMobile ? 1 : 2, textAlign: "center", height: "100%" }}>
                     <Box sx={{ mb: isMobile ? 0 : 2 }}>{service.icon}</Box>
                     <Typography
-                      variant="h6">
+                      variant="h5" pb={1}>
                       {service.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" textAlign={"justify"} pb={2} pl={2} lineHeight={1.8}>
                       {service.description}
                     </Typography>
                   </CardContent>
@@ -262,20 +256,14 @@ export default function Home() {
               xs: 12, md: 6
             }}>
               <Typography variant="h3" fontWeight="bold" gutterBottom
-                sx={{
-                  fontWeight: "bold",
-                  mb: isMobile ? 2 : 4,
-                  textAlign: "center",
-                  fontSize: { xs: "1.2rem", md: "2.5rem", lg: "3.0rem" }
-                }}
-              >
+                sx={{ mb: isMobile ? 2 : 4, textAlign: "center" }} >
                 Why Choose Us ?
               </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{
+              <Typography variant="body2" color="text.secondary" sx={{
                 mb: isMobile ? 0 : 4,
                 fontSize: { xs: "0.9rem", md: "1.1rem", lg: "1.2rem" }
               }}>
-                We focus on reliability, affordability, and fast response times
+                We focus on reliability, affordability and fast response times
                 so you never face IT challenges alone.
               </Typography>
 
@@ -287,7 +275,7 @@ export default function Home() {
                     </ListItemIcon>
                     <ListItemText
                       primary={feature}
-                      primaryTypographyProps={{ variant: "body1" }}
+                      primaryTypographyProps={{ variant: "h6" }}
                     />
                   </ListItem>
                 ))}
