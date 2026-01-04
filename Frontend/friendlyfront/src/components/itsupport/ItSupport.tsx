@@ -136,7 +136,7 @@ export default function ITSupport() {
                   <Typography variant="h5" sx={{pb:1}}>
                     {service.title}
                   </Typography>
-                  <Typography variant="h6" color="text.secondary" textAlign={"justify"} pb={2} pl={2} lineHeight={1.8}>
+                  <Typography variant="h6" color="text.secondary" textAlign={"justify"} pb={2} pl={2} pr={2} lineHeight={1.8}>
                     {service.description}
                   </Typography>
                 </CardContent>

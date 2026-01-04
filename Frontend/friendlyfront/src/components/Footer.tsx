@@ -46,7 +46,7 @@ export default function Footer() {
               </IconButton>
               <IconButton
                 component="a"
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/nordisksupport"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{ color: "white", '&:hover': { opacity: 0.8 } }}

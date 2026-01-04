@@ -115,7 +115,6 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
       {/* Menu Items */}
       <List sx={{ p: 0 }}>
         {siteConfig.navLinks.map((link) => {
-          //const linkPath = `/${path}/${link.href}`;
           const linkPath = link.isTopLevel ? `/${link.href}` : `/${path}/${link.href}`;
           return (
             <Tooltip
@@ -129,7 +128,7 @@ export default function SidebarMenu({ open, onClose }: SidebarMenuProps) {
                 to={linkPath}
                 sx={{
                   py: 1.5,
-                  px: open ? 3 : 1,
+                  px: open ? 2 : 1,
                   justifyContent: open ? 'flex-start' : 'center',
                   backgroundColor: isActivePath(linkPath) ? '#e0f2fe' : 'transparent',
                   borderLeft: isActivePath(linkPath)

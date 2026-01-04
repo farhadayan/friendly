@@ -66,7 +66,7 @@ export default function SwServices() {
           <Typography variant="h2" sx={{pb:2}}>
             Software Solutions
           </Typography>
-          <Typography variant="h6" textAlign={"justify"} pb={2} >
+          <Typography variant="h6" sx={{ mx: "auto", opacity: 0.9, textAlign:"justify"  }} pb={2} >
             At Nordisk Support, we design and develop software solutions that turn data into
             actionable insights. We help businesses streamline processes, improve efficiency,
             and make informed decisions by building reliable, scalable, and secure digital systems
@@ -90,7 +90,7 @@ export default function SwServices() {
                   <Typography variant="h5" sx={{pb:1}}>
                     {service.title}
                   </Typography>
-                  <Typography variant="h6" textAlign={"justify"} pb={2} pl={2} lineHeight={1.8}>
+                  <Typography variant="h6" textAlign={"justify"} pb={2} pl={2} pr={2} lineHeight={1.8}>
                     {service.desc}
                   </Typography>
                 </CardContent>
