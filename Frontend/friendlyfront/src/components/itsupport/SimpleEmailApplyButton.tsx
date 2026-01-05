@@ -157,15 +157,14 @@ Best regards,
                     }
                     label={
                         <Typography variant="caption">
-                            I agree to the processing of my personal data for recruitment
-                            purposes.{' '}
                             <Button
                                 size="small"
                                 variant="text"
                                 onClick={() => setGdprDialogOpen(true)}
                             >
-                                Read agreement
+                                Read Data Agreement
                             </Button>
+
                         </Typography>
                     }
                 />
