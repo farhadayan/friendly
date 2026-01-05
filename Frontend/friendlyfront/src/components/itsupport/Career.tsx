@@ -9,15 +9,12 @@ import {
     CardContent,
     Chip,
     useTheme,
-    Paper,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Divider,
+
     Accordion,
     AccordionSummary,
     AccordionDetails,
+
+    Tooltip,
 } from '@mui/material';
 import SimpleEmailApplyButton from './SimpleEmailApplyButton';
 import {
@@ -30,7 +27,7 @@ import {
     CheckCircle,
     Phone,
     Language,
-    Gradient,
+
 } from '@mui/icons-material';
 
 interface JobPosition {
@@ -47,6 +44,33 @@ interface JobPosition {
     remote: boolean;
     urgent: boolean;
 }
+
+const gdprDialog = (
+    <div style={{ maxWidth: 320 }}>
+        <Typography variant="subtitle2" gutterBottom>
+            Candidate Privacy Notice (GDPR)
+        </Typography>
+
+        <Typography variant="body2" paragraph>
+            Nordisk Support processes your personal data solely for recruitment and
+            hiring purposes.
+        </Typography>
+
+        <Typography variant="body2" paragraph>
+            Your data will be reviewed by our hiring team and retained for a maximum of
+            12 months.
+        </Typography>
+
+        <Typography variant="body2">
+            You may request access, correction, or deletion of your data at any time by
+            contacting:{' '}
+            <strong>data-privacy@nordisksupport.com</strong>
+        </Typography>
+    </div>
+)
+
+
+
 
 const Career: React.FC = () => {
     const theme = useTheme();
@@ -209,6 +233,7 @@ const Career: React.FC = () => {
             description: "Receive and discuss your offer package"
         }
     ];
+
 
     return (
         <Box sx={{ width: '100%', pl: 0 }}>
@@ -502,6 +527,16 @@ const Career: React.FC = () => {
                         </Typography>
                         <Typography variant="body2" paragraph sx={{ mb: 4 }}>
                             We're always looking for talented individuals. Send us your resume for future opportunities.
+                            <Tooltip
+                                title={gdprDialog}
+                                placement='right'
+                                arrow >
+                                <span>
+                                    <Button size="small" variant="text" >
+                                        Read Data Agreement
+                                    </Button>
+                                </span>
+                            </Tooltip>
                         </Typography>
 
                         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
