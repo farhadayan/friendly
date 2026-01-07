@@ -271,36 +271,10 @@ const Career: React.FC = () => {
                             variant="contained"
                             size="large"
                             startIcon={<Email />}
-                            sx={{
-                                backgroundColor: 'transparent',
-                                boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
-                                border: '1px solid cadetblue',
-                                color: '#2c3e50',
-                                fontWeight: 600,
-                                px: 4,
-                                py: 1.5,
-                                fontSize: '1.1rem',
-                                '&:hover': {
-                                    backgroundColor: '#f8f9fa',
-                                    transform: 'translateY(-2px)',
-                                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
-                                },
-                                transition: 'all 0.3s ease'
-                            }}
+                            sx={{ whiteSpace: 'nowrap' }}
                             onClick={() => {
-                                const subject = 'General Application - Nordisk Support';
-                                const body = `Dear Nordisk Support HR Team,\n\nI am interested in applying for a position at your company.\n\nPlease find my resume and cover letter attached.\n\nBest regards,\n[Your Name]`;
-                                const mailtoLink = `mailto:${HR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-                                // Open in new tab
-                                const form = document.createElement('form');
-                                form.method = 'POST';
-                                form.action = mailtoLink;
-                                form.target = '_blank';
-                                form.style.display = 'none';
-                                document.body.appendChild(form);
-                                form.submit();
-                                document.body.removeChild(form);
+                                const mailto = `mailto:${HR_EMAIL}?subject=General Application - Nordisk Support`;
+                                window.open(mailto, '_blank');
                             }}
                         >
                             Send Application
