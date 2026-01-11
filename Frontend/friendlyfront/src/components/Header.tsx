@@ -4,10 +4,13 @@ import {
   Box,
   Typography,
   AppBar,
-  Toolbar
+  Toolbar,
+  Button
 } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { SiteConfig, sites } from '../siteConfig';
+import { SupportAgent } from '@mui/icons-material';
+import { Phone, PhoneIcon } from 'lucide-react';
 
 export default function Header() {
   const location = useLocation();
@@ -15,6 +18,7 @@ export default function Header() {
   // Determine current site key
   const path = location.pathname.split('/')[1] as keyof typeof sites;
   const siteConfig: SiteConfig = sites[path] || sites.itsupport; // default site
+  const PHONE_NUMBER = '+45 66 77 69 51';
 
   // Apply dynamic CSS variables to body
   useEffect(() => {
@@ -103,7 +107,14 @@ export default function Header() {
 
                 }}
               >
-                Contact
+                <Button
+                  startIcon={<PhoneIcon />}
+                  variant="outlined"
+                  sx={{ color: 'var(--header-text)', borderColor: 'transparent' }}
+                >
+                  {PHONE_NUMBER}
+                </Button>
+                {' '} Contact
               </Typography>
             </Link>
 

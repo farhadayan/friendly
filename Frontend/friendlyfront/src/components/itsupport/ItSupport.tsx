@@ -113,7 +113,7 @@ export default function ITSupport() {
             issues cost both time and money, which is why we make sure you get the help you need,
             when you need it - without long waiting times or complicated solutions. Reliable, affordable 
             and IT support for businesses. From device dispose to advanced maintenance, we’ve got
-            you covered 24/7.
+            you covered 24/7. Call for quotation.
           </Typography>
         </Container>
       </Box>
